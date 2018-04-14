@@ -2,6 +2,12 @@
 <html>
 
 <head>
+    <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+    <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+    <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <html class="no-js">
+    <!--<![endif]-->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>机务段后台</title>
@@ -10,6 +16,9 @@
 </head>
 
 <body class="layui-layout-body">
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
     <div class="layui-layout layui-layout-admin">
         <!-- 内容 -->
         <div class="layui-header">
@@ -98,7 +107,7 @@
                 <div id="iframe_box">
                     <div class="loading"></div>
                     <div class="show-iframe">
-                        <iframe src="pages/announcement.html" name="myIframe"></iframe>
+                        <iframe src="pages/annoumcement/index_announce.html" name="myIframe"></iframe>
                     </div>
                 </div>
             </div>
