@@ -13,6 +13,7 @@
     <title>机务段后台</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="lib/layui/css/layui.css">
+    <script src="./lib/jQuery.js"></script>
 </head>
 
 <body class="layui-layout-body">
@@ -24,35 +25,21 @@
         <div class="layui-header">
             <div class="layui-logo">机务段</div>
             <!-- 头部区域（可配合layui已有的水平导航） -->
-            <ul class="layui-nav layui-layout-left">
-                <li class="layui-nav-item">
-                    <a href="">系统首页</a>
+            <ul class="layui-nav layui-layout-left" lay-filter="nav">
+                <li class="layui-nav-item layui-this">
+                    <a href="javascript:;" data-index='0'>系统首页</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="">培训管理</a>
+                    <a href="javascript:;" data-index='1'>培训管理</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="">基本信息</a>
+                    <a href="javascript:;" data-index='2'>基本信息</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="">考务管理</a>
+                    <a href="javascript:;" data-index='3'>考务管理</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;">其它系统</a>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="">题库制作</a>
-                        </dd>
-                        <dd>
-                            <a href="">台账管理</a>
-                        </dd>
-                        <dd>
-                            <a href="">错题管理</a>
-                        </dd>
-                        <dd>
-                            <a href="">权限管理</a>
-                        </dd>
-                    </dl>
+                    <a href="javascript:;" data-index='4'>其它系统</a>
                 </li>
             </ul>
             <ul class="layui-nav layui-layout-right">
@@ -78,24 +65,13 @@
         <div class="layui-side layui-bg-black">
             <div class="layui-side-scroll">
                 <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-                <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                    <li class="layui-nav-item layui-nav-itemed">
-                        <a class="" href="javascript:;">分类</a>
+
+                <ul class="layui-nav layui-nav-tree sideNav" lay-filter="test">
+                    <li class='layui-nav-item'>
+                        <a href='' target=''>发布公告</a>
                     </li>
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">分类</a>
-                    </li>
-                    <li class="layui-nav-item">
-                        <a href="javscript:;">分类</a>
-                    </li>
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">分类</a>
-                    </li>
-                    <li class="layui-nav-item">
-                        <a href="pages/announcement.html" target="myIframe">t1</a>
-                    </li>
-                    <li class="layui-nav-item">
-                        <a href="pages/announcement.html" target="myIframe">t2</a>
+                    <li class='layui-nav-item'>
+                        <a href='' target=''>公告查询</a>
                     </li>
                 </ul>
             </div>
@@ -121,9 +97,35 @@
     <script src="lib/layui/layui.js"></script>
     <script>
         //JavaScript代码区域
-        layui.use('element', function () {
-            var element = layui.element;
+        var dataArray = [
+            [{
+                'item': '发布公告',
+                'target': ''
+            }, {
+                'item': '公告查询',
+                'target': ''
+            }],
+            [{
+                'item': '发布培训任务',
+                'target': ''
+            }, {
+                'item': '培训任务查询',
+                'target': ''
+            }]
+        ]
 
+        layui.use('element', function() {
+            var element = layui.element;
+            element.on('nav(nav)', function(data) {
+                console.log(data[0].dataset.index);
+                $(".sideNav").empty();
+                for (var i = 0; i < dataArray[data[0].dataset.index].length; i++) {
+                    var template = "<li class='layui-nav-item'><a href='' target='" +
+                        dataArray[data[0].dataset.index][i].target + "'>" +
+                        dataArray[data[0].dataset.index][i].item + "</a></li>";
+                    $(".sideNav").append(template);
+                }
+            })
         });
     </script>
 </body>
