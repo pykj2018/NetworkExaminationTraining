@@ -83,10 +83,10 @@
                         <a href="javascript:;">分类</a>
                     </li>
                     <li class="layui-nav-item">
-                        <a href="frame/1.html" target="iframe_a">t1</a>
+                        <a href="pages/announcement.html" target="myIframe">t1</a>
                     </li>
                     <li class="layui-nav-item">
-                        <a href="frame/2.html" target="iframe_a">t2</a>
+                        <a href="pages/announcement.html" target="myIframe">t2</a>
                     </li>
                 </ul>
             </div>
@@ -95,9 +95,12 @@
         <div class="layui-body">
             <!-- 内容主体区域 -->
             <div style="padding: 15px;">
-                <frameset cols="100,*">
-                    <iframe src="frame/1.html" name="iframe_a"></iframe>
-                </frameset>
+                <div id="iframe_box">
+                    <div class="loading"></div>
+                    <div class="show-iframe">
+                        <iframe src="pages/announcement.html" name="myIframe"></iframe>
+                    </div>
+                </div>
             </div>
         </div>
 
