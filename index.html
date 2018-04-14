@@ -67,15 +67,7 @@
                 <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
 
                 <ul class="layui-nav layui-nav-tree sideNav" lay-filter="test">
-                    <li class='layui-nav-item'>
-                        <a href='' target=''>公告首页</a>
-                    </li>
-                    <li class='layui-nav-item'>
-                        <a href='' target=''>发布公告</a>
-                    </li>
-                    <li class='layui-nav-item'>
-                        <a href='' target=''>公告查询</a>
-                    </li>
+                    <!-- js渲染区 -->
                 </ul>
             </div>
         </div>
@@ -131,20 +123,29 @@
                 'href': 'pages/train/questionnaire.html'
             }]
         ]
-
-        layui.use('element', function () {
+        window.onload = function() {
+            render(0);
+        }
+        layui.use('element', function() {
             var element = layui.element;
-            element.on('nav(nav)', function (data) {
+            element.on('nav(nav)', function(data) {
                 console.log(data[0].dataset.index);
-                $(".sideNav").empty();
-                for (var i = 0; i < dataArray[data[0].dataset.index].length; i++) {
-                    var template = "<li class='layui-nav-item'><a target='myIframe' href='" +
-                        dataArray[data[0].dataset.index][i].href + "'>" +
-                        dataArray[data[0].dataset.index][i].item + "</a></li>";
-                    $(".sideNav").append(template);
-                }
+                //加载侧边导航
+                render(data[0].dataset.index);
             })
         });
+
+        //侧边导航渲染
+        function render(e) {
+            console.log(e);
+            $(".sideNav").empty();
+            for (var i = 0; i < dataArray[e].length; i++) {
+                var template = "<li class='layui-nav-item'><a target='myIframe' href='" +
+                    dataArray[e][i].href + "'>" +
+                    dataArray[e][i].item + "</a></li>";
+                $(".sideNav").append(template);
+            }
+        }
     </script>
 </body>
 
