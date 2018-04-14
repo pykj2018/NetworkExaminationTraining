@@ -68,6 +68,9 @@
 
                 <ul class="layui-nav layui-nav-tree sideNav" lay-filter="test">
                     <li class='layui-nav-item'>
+                        <a href='' target=''>公告首页</a>
+                    </li>
+                    <li class='layui-nav-item'>
                         <a href='' target=''>发布公告</a>
                     </li>
                     <li class='layui-nav-item'>
@@ -99,29 +102,44 @@
         //JavaScript代码区域
         var dataArray = [
             [{
+                'item': '公告首页',
+                'href': 'pages/annoumcement/index_announce.html'
+            }, {
                 'item': '发布公告',
-                'target': ''
+                'href': 'pages/annoumcement/push_announce.html'
             }, {
                 'item': '公告查询',
-                'target': ''
+                'href': 'pages/annoumcement/query_announce.html'
             }],
             [{
                 'item': '发布培训任务',
-                'target': ''
+                'href': 'pages/train/push_train.html'
             }, {
                 'item': '培训任务查询',
-                'target': ''
+                'href': 'pages/train/query_train.html'
+            }, {
+                'item': '学习资料库',
+                'href': 'pages/train/library.html'
+            }, {
+                'item': '发布考试任务',
+                'href': 'pages/train/push_exam.html'
+            }, {
+                'item': '考试影像分析',
+                'href': 'pages/train/analysis_video.html'
+            }, {
+                'item': '调查问卷管理',
+                'href': 'pages/train/questionnaire.html'
             }]
         ]
 
-        layui.use('element', function() {
+        layui.use('element', function () {
             var element = layui.element;
-            element.on('nav(nav)', function(data) {
+            element.on('nav(nav)', function (data) {
                 console.log(data[0].dataset.index);
                 $(".sideNav").empty();
                 for (var i = 0; i < dataArray[data[0].dataset.index].length; i++) {
-                    var template = "<li class='layui-nav-item'><a href='' target='" +
-                        dataArray[data[0].dataset.index][i].target + "'>" +
+                    var template = "<li class='layui-nav-item'><a target='myIframe' href='" +
+                        dataArray[data[0].dataset.index][i].href + "'>" +
                         dataArray[data[0].dataset.index][i].item + "</a></li>";
                     $(".sideNav").append(template);
                 }
