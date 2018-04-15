@@ -2,18 +2,172 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
-        <!--[if lt IE 7]>
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../lib/layui/css/layui.css">
+    <link rel="stylesheet" href="../../lib/laydate/theme/default/laydate.css">
+
+</head>
+
+<body>
+    <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        消息通知页面
-    </body>
+    <style>
+    </style>
+    <form action="">
+        <div class="layui-fluid layui-form">
+            <div class="layui-row layui-col-space10">
+                <!-- 公告标题和发布时间s  -->
+                <div class="layui-col-xs12 layui-col-md6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">公告主题</div>
+                        <div class="layui-card-body">
+                            <div class="layui-form-item">
+                                <div class="layui-input-inline" style="width: 100%;">
+                                    <input type="text" name="" placeholder="请输入公告主题" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-xs12 layui-col-md6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">发布时间</div>
+                        <div class="layui-card-body">
+                            <span>设置时间：</span>
+                            <div class="layui-form-item layui-inline">
+                                <div class="layui-input-inline">
+                                    <input type="text"  placeholder="开始时间" id="StartTime" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item layui-inline">
+                                <div class="layui-input-inline">
+                                    <input type="text"  placeholder="结束时间" id="EndTime" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 公告标题和发布时间e -->
+
+                <!-- 公告内容s -->
+                <div class="layui-col-xs12 layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">公告内容</div>
+                        <div class="layui-card-body">
+                            <textarea name="" placeholder="请输入" class="layui-textarea" style="margin-top: 0px; margin-bottom: 0px; height: 100px;"></textarea>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- 公告内容e -->
+
+                <!-- 底部部门选择和其他选项 -->
+                <div class="layui-col-xs12 layui-col-md12">
+                    <div class="layui-row layui-col-space10">
+                        <!-- 部门s -->
+                        <div class="layui-col-xs8 layui-col-md8">
+                            <div class="layui-card">
+                                <div class="layui-card-header">接收部门</div>
+                                <div class="layui-card-body">
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">接收部门</label>
+                                            <div class="layui-input-inline ">
+                                                <select name="postdepartment" lay-verify="">
+                                                    <option value="">选择接收部门</option>
+                                                    <option value="0">部们一</option>
+                                                    <option value="1">部门二</option>
+                                                    <option value="2">部门三</option>
+                                                    <option value="3">部门四</option>
+                                                    <option value="4">部门五</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">发送部门</label>
+                                            <div class="layui-input-inline">
+                                                <select name="getdepartment" lay-verify="">
+                                                    <option value="">选择接收部门</option>
+                                                    <option value="0">部们一</option>
+                                                    <option value="1">部门二</option>
+                                                    <option value="2">部门三</option>
+                                                    <option value="3">部门四</option>
+                                                    <option value="4">部门五</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">接收用户</label>
+                                            <div class="layui-input-inline">
+                                                <select name="getdepartment" lay-verify="" lay-search>
+                                                    <option value="">选择接收用户</option>
+                                                    <option value="0">用户一</option>
+                                                    <option value="1">用户二</option>
+                                                    <option value="2">用户三</option>
+                                                    <option value="3">用户四</option>
+                                                    <option value="4">用户五</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 部门e -->
+
+                        <!-- 其他选项s -->
+                        <div class="layui-col-xs4 layui-col-md4">
+                            <div class="layui-card">
+                                <div class="layui-card-header">其他选项</div>
+                                <div class="layui-card-body">
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <div class="layui-input-inline">
+                                                <input type="checkbox" name="" title="是否长期有效" lay-skin="primary" checked>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <div class="layui-input-inline">
+                                            <button class="layui-btn" lay-submit="" lay-filter="component-form-element">立即提交</button>
+                                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 其他选项e -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../lib/laydate/laydate.js"></script>
+    <script type="text/javascript" src="../../lib/layui/layui.all.js"></script>
+    <script>
+        laydate.render({
+            elem: '#StartTime',
+            type: 'datetime'
+        });
+        laydate.render({
+            elem: '#EndTime',
+            type: 'datetime'
+        });
+        layui.use('form', function () {
+            var form = layui.form;
+        });
+
+    </script>
+</body>
+
 </html>
