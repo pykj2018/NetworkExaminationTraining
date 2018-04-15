@@ -94,53 +94,55 @@
     layui.use('form', function() {
         var form = layui.form;
     });
-    layui.use('laytpl', function() {
-        var laytpl = layui.laytpl;
-        var data = {
-            "list": [{
-                "title": "内容设计",
-                "item": ["好", "较好", "一般", "需改进"]
-            }, {
-                "title": "教学方法",
-                "item": ["好", "较好", "一般", "需改进"]
-            }, {
-                "title": "表达能力",
-                "item": ["好", "较好", "一般", "需改进"]
-            }]
-        };
-        var data2 = {
-            "list": [{
-                "title": "您认为培训课程的安排",
-                "item": ["很合理", "合理", "较合理", "一般", "不合理"]
-            }, {
-                "title": "您认为培训课程的安排",
-                "item": ["很合理", "合理", "较合理", "一般", "不合理"]
-            }, {
-                "title": "您认为培训课程的安排",
-                "item": ["很合理", "合理", "较合理", "一般", "不合理"]
-            }, {
-                "title": "您认为培训课程的安排",
-                "item": ["很合理", "合理", "较合理", "一般", "不合理"]
-            }, {
-                "title": "您认为培训课程的安排",
-                "item": ["很合理", "合理", "较合理", "一般", "不合理"]
-            }, {
-                "title": "您认为培训课程的安排",
-                "item": ["很合理", "合理", "较合理", "一般", "不合理"]
-            }]
-        };
+    setTimeout(() => {
+        layui.use('laytpl', function() {
+            var laytpl = layui.laytpl;
+            var data = {
+                "list": [{
+                    "title": "内容设计",
+                    "item": ["好", "较好", "一般", "需改进"]
+                }, {
+                    "title": "教学方法",
+                    "item": ["好", "较好", "一般", "需改进"]
+                }, {
+                    "title": "表达能力",
+                    "item": ["好", "较好", "一般", "需改进"]
+                }]
+            };
+            var data2 = {
+                "list": [{
+                    "title": "您认为培训课程的安排",
+                    "item": ["很合理", "合理", "较合理", "一般", "不合理"]
+                }, {
+                    "title": "您认为培训课程的安排",
+                    "item": ["很合理", "合理", "较合理", "一般", "不合理"]
+                }, {
+                    "title": "您认为培训课程的安排",
+                    "item": ["很合理", "合理", "较合理", "一般", "不合理"]
+                }, {
+                    "title": "您认为培训课程的安排",
+                    "item": ["很合理", "合理", "较合理", "一般", "不合理"]
+                }, {
+                    "title": "您认为培训课程的安排",
+                    "item": ["很合理", "合理", "较合理", "一般", "不合理"]
+                }, {
+                    "title": "您认为培训课程的安排",
+                    "item": ["很合理", "合理", "较合理", "一般", "不合理"]
+                }]
+            };
 
-        var getTpl = site.innerHTML;
-        view = document.getElementById('view');
-        laytpl(getTpl).render(data, function(html) {
-            view.innerHTML = html;
-        });
+            var getTpl = site.innerHTML;
+            view = document.getElementById('view');
+            laytpl(getTpl).render(data, function(html) {
+                view.innerHTML = html;
+            });
 
-        view2 = document.getElementById('view2');
-        laytpl(getTpl).render(data2, function(html) {
-            view2.innerHTML = html;
-        });
-    })
+            view2 = document.getElementById('view2');
+            laytpl(getTpl).render(data2, function(html) {
+                view2.innerHTML = html;
+            });
+        })
+    }, 200);
 </script>
 <script id="site" type="text/html">
     {{# layui.each(d.list, function(index, item){ }}

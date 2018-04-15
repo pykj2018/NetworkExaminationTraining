@@ -73,18 +73,11 @@
 
         <div class="layui-body">
             <!-- 内容主体区域 -->
-            <<<<<<< HEAD <div class="layui-main">
+            <div class="layui-main">
                 <div id="iframe_box">
                     <div class="loading"></div>
                     <div class="show-iframe">
                         <iframe src="pages/annoumcement/index_announce.html" name="myIframe"></iframe>
-                    </div>
-                    =======
-                    <div id="iframe_box">
-                        <div class="loading"></div>
-                        <div class="show-iframe">
-                            <iframe src="pages/annoumcement/index_announce.html" name="myIframe"></iframe> >>>>>>> 培训管理页面
-                        </div>
                     </div>
                 </div>
 
@@ -92,36 +85,36 @@
                     <!-- 底部固定区域 -->
                     © layui.com - 底部固定区域
                 </div>
-        </div>
-        <script type="text/javascript" src="lib/layui/layui.js"></script>
-        <script type="text/javascript" src="../../lib/laydate/laydate.js"></script>
-        <script type="text/javascript" src="config/sidemenu.js"></script>
-        <script>
-            //JavaScript代码区域
-            window.onload = function() {
-                render(0);
-            }
-            layui.use('element', function() {
-                var element = layui.element;
-                element.on('nav(nav)', function(data) {
-                    console.log(data[0].dataset.index);
-                    //加载侧边导航
-                    render(data[0].dataset.index);
-                })
-            });
-
-            //侧边导航渲染
-            function render(e) {
-                // console.log(e);
-                $(".sideNav").empty();
-                for (var i = 0; i < dataArray[e].length; i++) {
-                    var template = "<li class='layui-nav-item'><a target='myIframe' href='" +
-                        dataArray[e][i].href + "'>" +
-                        dataArray[e][i].item + "</a></li>";
-                    $(".sideNav").append(template);
-                }
-            }
-        </script>
+            </div>
 </body>
+<script type="text/javascript" src="./lib/laydate/laydate.js"></script>
+<script type="text/javascript" src="lib/layui/layui.js"></script>
+<script type="text/javascript" src="config/sidemenu.js"></script>
+<script>
+    //JavaScript代码区域
+    window.onload = function() {
+        render(0);
+    }
+    layui.use('element', function() {
+        var element = layui.element;
+        element.on('nav(nav)', function(data) {
+            console.log(data[0].dataset.index);
+            //加载侧边导航
+            render(data[0].dataset.index);
+        })
+    });
+
+    //侧边导航渲染
+    function render(e) {
+        // console.log(e);
+        $(".sideNav").empty();
+        for (var i = 0; i < dataArray[e].length; i++) {
+            var template = "<li class='layui-nav-item'><a target='myIframe' href='" +
+                dataArray[e][i].href + "'>" +
+                dataArray[e][i].item + "</a></li>";
+            $(".sideNav").append(template);
+        }
+    }
+</script>
 
 </html>

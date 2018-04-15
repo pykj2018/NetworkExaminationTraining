@@ -141,6 +141,7 @@ table {
 
 .layui-main {
     height: 100%;
+    margin: 30px 15px !important;
 }
 
 #iframe_box {
