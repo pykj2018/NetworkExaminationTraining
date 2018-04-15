@@ -2,18 +2,151 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
-        <!--[if lt IE 7]>
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../lib/layui/css/layui.css">
+    <title>发布考试任务</title>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        发布考试消息
-    </body>
+    <form class="layui-form" action="">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">考试通知</label>
+            <div class="layui-btn-group">
+                <button class="layui-btn">上传考试通知</button>
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-row">
+            <div class="layui-col-md3">
+                <label class="layui-form-label">发布部门</label>
+                <div class="layui-input-block">
+                    <select name="city" lay-verify="required">
+                        <option value=""></option>
+                        <option value="0">北京</option>
+                        <option value="4">杭州</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-md3">
+                <label class="layui-form-label">签收部门</label>
+                <div class="layui-input-block">
+                    <select name="city" lay-verify="required">
+                        <option value=""></option>
+                        <option value="0">北京</option>
+                        <option value="4">杭州</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-row">
+            <div class="layui-col-md3">
+                <label class="layui-form-label">考试名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-col-md3">
+                <label class="layui-form-label">选择岗位</label>
+                <div class="layui-input-block">
+                    <select name="city" lay-verify="required">
+                        <option value=""></option>
+                        <option value="0">北京</option>
+                        <option value="1">上海</option>
+                        <option value="2">广州</option>
+                        <option value="3">深圳</option>
+                        <option value="4">杭州</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-row">
+            <div class="layui-col-md3">
+                <label class="layui-form-label">监考教师</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-row">
+            <div class="layui-col-md3">
+                <label class="layui-form-label">考试时间</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input" id="data1" placeholder="请选择日期">
+                </div>
+            </div>
+
+            <div class="layui-col-md3">
+                <label class="layui-form-label">填写调查比例</label>
+                <div class="layui-input-block">
+                    <select name="city" lay-verify="required">
+                            <option value=""></option>
+                            <option value="0">10%</option>
+                            <option value="0">20%</option>
+                            <option value="0">30%</option>
+                        </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-row">
+            <div class="layui-col-md3">
+                <label class="layui-form-label"></label>
+                <input type="checkbox" name="" title="是否发布考试" lay-skin="primary" checked>
+            </div>
+            <div class="layui-col-md3">
+                <label class="layui-form-label"></label>
+                <input type="checkbox" name="" title="是否留存培训影像资料" lay-skin="primary" checked>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</body>
+<script src="../../lib/laydate/laydate.js"></script>
+<script src="../../lib/layui/layui.js"></script>
+<script>
+    //Demo
+    layui.use('form', function() {
+        var form = layui.form;
+        //监听提交
+        form.on('submit(formDemo)', function(data) {
+            layer.confirm('提示消息', {
+                btn: ['确认', '取消'], //可以无限个按钮
+            }, function(index) {
+                //按钮【按钮一】的回调
+            }, function(index) {
+                //按钮【按钮二】的回调
+            });
+            return false;
+        });
+    });
+
+    //日期范围
+    laydate.render({
+        elem: '#data1',
+        range: true
+    });
+</script>
+
 </html>

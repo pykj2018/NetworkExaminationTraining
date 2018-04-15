@@ -2,18 +2,165 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
-        <!--[if lt IE 7]>
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../lib/layui/css/layui.css">
+    <title>调查问卷管理</title>
+    <style>
+        .h1 {
+            text-align: center;
+            font-size: 22px;
+        }
+        
+        .h2 {
+            font-size: 18px;
+        }
+        
+        .layui-form-radio {
+            margin-right: 50px;
+        }
+        
+        .progress {
+            display: flex;
+            align-items: center;
+            height: 30px;
+            line-height: 30px;
+            margin: 0 auto 30px;
+        }
+        
+        .button {
+            display: flex;
+            justify-content: space-evenly;
+        }
+    </style>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        调查问卷
-    </body>
+
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <h1 class="h1">使用培训调查问卷</h1>
+            <hr class="layui-bg-green">
+        </div>
+
+        <div class="layui-form-item">
+            <h2 class="h2">教学评价</h2>
+            <hr class="layui-bg-green">
+        </div>
+
+        <div id="view"></div>
+
+        <div class="layui-form-item">
+            <h2 class="h2">培训质量调查</h2>
+            <hr class="layui-bg-green">
+        </div>
+
+        <div id="view2"></div>
+
+        <div class="layui-row progress">
+            <div class="layui-col-md1 layui-col-md-offset1">请选择调查比例</div>
+            <div class="layui-progress layui-col-md6">
+                <div class="layui-progress-bar" lay-percent="10%"></div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block layui-col-md6 button">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">生成</button>
+                <button type="reset" class="layui-btn layui-btn-primary">修改</button>
+            </div>
+        </div>
+    </form>
+
+</body>
+<script src="../../lib/layui/layui.js"></script>
+<script src="../../lib/layui/lay/modules/laytpl.js"></script>
+
+<script>
+    layui.use('element', function() {
+        var element = layui.element;
+    });
+    layui.use('form', function() {
+        var form = layui.form;
+    });
+    layui.use('laytpl', function() {
+        var laytpl = layui.laytpl;
+        var data = {
+            "list": [{
+                "title": "内容设计",
+                "item": ["好", "较好", "一般", "需改进"]
+            }, {
+                "title": "教学方法",
+                "item": ["好", "较好", "一般", "需改进"]
+            }, {
+                "title": "表达能力",
+                "item": ["好", "较好", "一般", "需改进"]
+            }]
+        };
+        var data2 = {
+            "list": [{
+                "title": "您认为培训课程的安排",
+                "item": ["很合理", "合理", "较合理", "一般", "不合理"]
+            }, {
+                "title": "您认为培训课程的安排",
+                "item": ["很合理", "合理", "较合理", "一般", "不合理"]
+            }, {
+                "title": "您认为培训课程的安排",
+                "item": ["很合理", "合理", "较合理", "一般", "不合理"]
+            }, {
+                "title": "您认为培训课程的安排",
+                "item": ["很合理", "合理", "较合理", "一般", "不合理"]
+            }, {
+                "title": "您认为培训课程的安排",
+                "item": ["很合理", "合理", "较合理", "一般", "不合理"]
+            }, {
+                "title": "您认为培训课程的安排",
+                "item": ["很合理", "合理", "较合理", "一般", "不合理"]
+            }]
+        };
+
+        var getTpl = site.innerHTML;
+        view = document.getElementById('view');
+        laytpl(getTpl).render(data, function(html) {
+            view.innerHTML = html;
+        });
+
+        view2 = document.getElementById('view2');
+        laytpl(getTpl).render(data2, function(html) {
+            view2.innerHTML = html;
+        });
+    })
+</script>
+<script id="site" type="text/html">
+    {{# layui.each(d.list, function(index, item){ }}
+    <div class="layui-form-item">
+        <div class="layui-input-block layui-col-md3">
+            {{item.title}}
+        </div>
+        <div class="layui-col-md6">
+            <div class="layui-input-block layui-row">
+                {{# layui.each(d.list[index].item, function(index, itemp){ }}
+                <input type="radio" name="role" value="" title="{{itemp}}">
+                <div class="layui-unselect layui-form-radio layui-col-md2">
+                    <i class="layui-anim layui-icon"></i>
+                    <div>{{itemp}}</div>
+                </div>
+                {{# }); }} {{# if(d.list[index].title.length === 0){ }} 无数据 {{# } }}
+            </div>
+        </div>
+    </div>
+    {{# }); }} {{# if(d.list.length === 0){ }} 无数据 {{# } }}
+</script>
+
 </html>
