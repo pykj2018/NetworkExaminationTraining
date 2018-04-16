@@ -20,83 +20,82 @@
     <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-    <div class="layui-col-space5">
-        <form class="layui-form" action="">
-            <div class="layui-card" style="padding: 10px;">
+    <form class="layui-form" action="">
+        <div class="layui-card" style="padding: 10px">
 
-                <div class="layui-form-item layui-row">
-                    <div class="layui-col-md3">
-                        <label class="layui-form-label">发布部门</label>
-                        <div class="layui-input-block">
-                            <select name="city" lay-verify="required">
+            <div class="layui-form-item layui-row">
+                <div class="layui-col-md3">
+                    <label class="layui-form-label">发布部门</label>
+                    <div class="layui-input-block">
+                        <select name="city" lay-verify="required">
                                                 <option value=""></option>
                                                 <option value="0">10%</option>
                                                 <option value="0">20%</option>
                                                 <option value="0">30%</option>
                                             </select>
-                        </div>
                     </div>
-                    <div class="layui-col-md3">
-                        <label class="layui-form-label">接受部门</label>
-                        <div class="layui-input-block">
-                            <select name="city" lay-verify="required">
+                </div>
+                <div class="layui-col-md3">
+                    <label class="layui-form-label">接受部门</label>
+                    <div class="layui-input-block">
+                        <select name="city" lay-verify="required">
                                                 <option value=""></option>
                                                 <option value="0">10%</option>
                                                 <option value="0">20%</option>
                                                 <option value="0">30%</option>
                                             </select>
-                        </div>
-                    </div>
-                    <div class="layui-col-md3">
-                        <label class="layui-form-label">关键字搜索</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                        </div>
                     </div>
                 </div>
-
-                <div class="layui-form-item layui-row">
-                    <div class="layui-col-md3">
-                        <label class="layui-form-label">培训时间</label>
-                        <div class="layui-input-block">
-                            <input type="text" class="layui-input" id="data" placeholder="请选择日期">
-                        </div>
-                    </div>
-                    <div class="layui-col-md3">
-                        <label class="layui-form-label">签收人</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="layui-form-item layui-row">
-                    <div class="layui-col-md3">
-                        <label class="layui-form-label">培训负责人</label>
-                        <div class="layui-input-block">
-                            <input type="text" class="layui-input" id="data1" placeholder="请选择日期">
-                        </div>
-                    </div>
-                    <div class="layui-col-md3">
-                        <label class="layui-form-label">培训教师</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-col-md3">
-                        <label class="layui-form-label"></label>
-                        <button class="layui-btn">点击查询</button>
+                <div class="layui-col-md3">
+                    <label class="layui-form-label">关键字搜索</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
                     </div>
                 </div>
             </div>
-        </form>
-        <div class="layui-card" style="padding: 10px;">
-            <table class="layui-table">
-                <colgroup>
-                </colgroup>
-                <thead>
-                    <tr id="view1">
-                        <!-- <th>序号</th>
+
+            <div class="layui-form-item layui-row">
+                <div class="layui-col-md3">
+                    <label class="layui-form-label">培训时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" id="data" placeholder="请选择日期">
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <label class="layui-form-label">签收人</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item layui-row">
+                <div class="layui-col-md3">
+                    <label class="layui-form-label">培训负责人</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" id="data1" placeholder="请选择日期">
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <label class="layui-form-label">培训教师</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <label class="layui-form-label"></label>
+                    <button class="layui-btn">点击查询</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="layui-card" style="padding: 10px;">
+        <table class="layui-table">
+            <colgroup>
+            </colgroup>
+            <thead>
+                <tr id="view1">
+                    <!-- <th>序号</th>
                         <th>培训名称</th>
                         <th>发布部门</th>
                         <th>签收部门</th>
@@ -111,13 +110,12 @@
                         <th>培训教师</th>
                         <th>签收人</th>
                         <th>负责人</th> -->
-                    </tr>
-                </thead>
-                <tbody id="view2">
+                </tr>
+            </thead>
+            <tbody id="view2">
 
-                </tbody>
-            </table>
-        </div>
+            </tbody>
+        </table>
     </div>
 
 </body>
@@ -127,6 +125,21 @@
 <script>
     layui.use('element', function() {
         var element = layui.element;
+    });
+
+    layui.use('form', function() {
+        var form = layui.form;
+        //监听提交
+        form.on('submit(formDemo)', function(data) {
+            layer.confirm('提示消息', {
+                btn: ['确认', '取消'], //可以无限个按钮
+            }, function(index) {
+                //按钮【按钮一】的回调
+            }, function(index) {
+                //按钮【按钮二】的回调
+            });
+            return false;
+        });
     });
 
     //日期范围

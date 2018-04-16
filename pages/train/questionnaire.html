@@ -49,36 +49,38 @@
         <![endif]-->
 
     <form class="layui-form" action="">
-        <div class="layui-form-item">
-            <h1 class="h1">使用培训调查问卷</h1>
-            <hr class="layui-bg-green">
-        </div>
-
-        <div class="layui-form-item">
-            <h2 class="h2">教学评价</h2>
-            <hr class="layui-bg-green">
-        </div>
-
-        <div id="view"></div>
-
-        <div class="layui-form-item">
-            <h2 class="h2">培训质量调查</h2>
-            <hr class="layui-bg-green">
-        </div>
-
-        <div id="view2"></div>
-
-        <div class="layui-row progress">
-            <div class="layui-col-md1 layui-col-md-offset1">请选择调查比例</div>
-            <div class="layui-progress layui-col-md6">
-                <div class="layui-progress-bar" lay-percent="10%"></div>
+        <div class="layui-card" style="padding: 10px;">
+            <div class="layui-form-item">
+                <h1 class="h1">使用培训调查问卷</h1>
+                <hr class="layui-bg-green">
             </div>
-        </div>
 
-        <div class="layui-form-item">
-            <div class="layui-input-block layui-col-md6 button">
-                <button class="layui-btn" lay-submit lay-filter="formDemo">生成</button>
-                <button type="reset" class="layui-btn layui-btn-primary">修改</button>
+            <div class="layui-form-item">
+                <h2 class="h2">教学评价</h2>
+                <hr class="layui-bg-green">
+            </div>
+
+            <div id="view"></div>
+
+            <div class="layui-form-item">
+                <h2 class="h2">培训质量调查</h2>
+                <hr class="layui-bg-green">
+            </div>
+
+            <div id="view2"></div>
+
+            <div class="layui-row progress">
+                <div class="layui-col-md1 layui-col-md-offset1">请选择调查比例</div>
+                <div class="layui-progress layui-col-md6">
+                    <div class="layui-progress-bar" lay-percent="10%"></div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block layui-col-md6 button">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">生成</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">修改</button>
+                </div>
             </div>
         </div>
     </form>
@@ -150,13 +152,15 @@
         <div class="layui-input-block layui-col-md3">
             {{item.title}}
         </div>
-        <div class="layui-col-md6">
-            <div class="layui-input-block layui-row">
+        <div class="layui-col-md8">
+            <div class="layui-row">
                 {{# layui.each(d.list[index].item, function(index, itemp){ }}
-                <input type="radio" name="role" value="" title="{{itemp}}">
-                <div class="layui-unselect layui-form-radio layui-col-md2">
-                    <i class="layui-anim layui-icon"></i>
-                    <div>{{itemp}}</div>
+                <div class="layui-col-md2">
+                    <input type="radio" name="role" value="" title="{{itemp}}">
+                    <div class="layui-unselect layui-form-radio">
+                        <i class="layui-anim layui-icon"></i>
+                        <div>{{itemp}}</div>
+                    </div>
                 </div>
                 {{# }); }} {{# if(d.list[index].title.length === 0){ }} 无数据 {{# } }}
             </div>

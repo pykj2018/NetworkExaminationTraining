@@ -2,18 +2,112 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
-        <!--[if lt IE 7]>
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../lib/layui/css/layui.css">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        考试资料库
-    </body>
+    <form class="layui-form" action="">
+        <div class="layui-card" style="padding: 10px;">
+            <div class="layui-form-item layui-row">
+                <div class="layui-col-md3">
+                    <label class="layui-form-label">资料格式</label>
+                    <div class="layui-input-block">
+                        <select name="city" lay-verify="required">
+                                <option value=""></option>
+                                <option value="0">10%</option>
+                                <option value="0">20%</option>
+                                <option value="0">30%</option>
+                            </select>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <label class="layui-form-label">上传部门</label>
+                    <div class="layui-input-block">
+                        <select name="city" lay-verify="required">
+                                <option value=""></option>
+                                <option value="0">10%</option>
+                                <option value="0">20%</option>
+                                <option value="0">30%</option>
+                            </select>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <label class="layui-form-label">关键字搜索</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <button class="layui-btn">搜索</button>
+                </div>
+            </div>
+
+            <div class="layui-form-item layui-row">
+                <div class="layui-col-md3">
+                    <label class="layui-form-label">培训时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" id="data" placeholder="请选择日期">
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <label class="layui-form-label">资料类型</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <label class="layui-form-label">上传资料</label>
+                    <div class="layui-btn-group">
+                        <button class="layui-btn">搜索</button>
+                        <button class="layui-btn">下载</button>
+                        <button class="layui-btn">删除资料</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+<script src="../../lib/laydate/laydate.js"></script>
+<script src="../../lib/layui/layui.js"></script>
+<script src="../../lib/layui/lay/modules/laytpl.js"></script>
+<script>
+    layui.use('element', function() {
+        var element = layui.element;
+    });
+
+    layui.use('form', function() {
+        var form = layui.form;
+        //监听提交
+        form.on('submit(formDemo)', function(data) {
+            layer.confirm('提示消息', {
+                btn: ['确认', '取消'], //可以无限个按钮
+            }, function(index) {
+                //按钮【按钮一】的回调
+            }, function(index) {
+                //按钮【按钮二】的回调
+            });
+            return false;
+        });
+    });
+    //日期范围
+    laydate.render({
+        elem: '#data',
+        range: true
+    });
+</script>
+
 </html>
