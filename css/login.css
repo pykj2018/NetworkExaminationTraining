@@ -1,0 +1,76 @@
+.login-body {
+    /* position: relative; */
+    background-color: #F2F2F2;
+}
+.bg {
+    height: 200px;
+    background-image: url(../img/login_background.jpg);
+    background-position-y: 5%;
+    background-size: cover;
+
+}
+.login-box {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding-top: 140px;
+}
+
+.login-box-main {
+    width: 325px;
+    margin: 0 auto;
+    text-align: center;
+}
+.user-head-wrap {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    background-color: #fff; 
+    box-shadow: 1px 1px 1px #888;
+}
+.login-from-wrap {
+    color: #3B49FF;
+}
+
+.layui-form-item {
+    position: relative;
+}
+
+.login-box-main input {
+    width: 100%;
+    padding-left: 45px;
+}
+
+.login-box-main h2 {
+    margin: 20px 0;
+    font-weight: 700;
+}
+
+.layadmin-user-login-icon {
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    width: 38px;
+    border-right: 2px solid #F2F2F2;
+    line-height: 36px;
+    text-align: center;
+    color: #3B49FF;
+}
+
+.login-btn {
+    background: #3B49FF;
+    color: #fff;
+    border-radius: unset;
+    box-shadow: 0 0 2px #000
+}
+
+.sp-btn {
+    background: #fff;
+    color: #3B49FF;
+    border-radius: unset;
+    border: 1px solid #CBCACA;
+    box-shadow: 0 1px 1px #888;
+}
+.sp-btn:hover {
+    color: #3B49FF;
+}
