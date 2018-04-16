@@ -152,6 +152,7 @@ table {
     left: 0;
     right: 0;
     overflow: auto;
+    margin-top: 20px;
 }
 
 .show-iframe {
