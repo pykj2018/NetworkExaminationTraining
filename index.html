@@ -82,8 +82,8 @@
             </div>
 
             <!-- <div class="layui-footer"> -->
-                <!-- 底部固定区域 -->
-                <!-- © layui.com - 底部固定区域 -->
+            <!-- 底部固定区域 -->
+            <!-- © layui.com - 底部固定区域 -->
             <!-- </div> -->
             <!-- </div> -->
 </body>
@@ -92,16 +92,16 @@
 <script type="text/javascript" src="config/sidemenu.js"></script>
 <script>
     //JavaScript代码区域
-    window.onload = function() {
+    window.onload = function () {
         render(0);
-        $(document).on('click', '.layui-nav-item', function() {
+        $(document).on('click', '.layui-nav-item', function () {
             $(this).addClass('layui-this');
             $(this).siblings().removeClass('layui-this');
         })
     }
-    layui.use('element', function() {
+    layui.use('element', function () {
         var element = layui.element;
-        element.on('nav(nav)', function(data) {
+        element.on('nav(nav)', function (data) {
             // console.log(data[0].dataset.index);
             $("iframe[name=myIframe]").attr('src', dataArray[data[0].dataset.index][0].href);
             //加载侧边导航
