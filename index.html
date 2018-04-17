@@ -95,7 +95,6 @@
     window.onload = function () {
         render(0);
         $(document).on('click', '.layui-nav-item', function () {
-            console.log(1);
             $(this).addClass('layui-this');
             $(this).siblings().removeClass('layui-this'); 
         })
@@ -120,11 +119,6 @@
                 dataArray[e][i].item + "</a></li>";
             $(".sideNav").append(template);
         }
-    }
-    // 判断菜单选中状态
-    function isActive() {
-        console.log(1);
-
     }
 </script>
 
