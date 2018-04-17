@@ -169,3 +169,7 @@ table {
     height: 100%;
     bottom: 0;
 }
+.all-text-label {
+    float:left;
+    padding: 9px 11px;
+}

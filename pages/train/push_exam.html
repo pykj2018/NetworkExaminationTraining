@@ -22,104 +22,113 @@
         <![endif]-->
     <div class="layui-fluid">
         <form class="layui-form" action="">
-            <div class="layui-card" style="padding: 10px;">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">考试通知</label>
-                    <div class="layui-btn-group">
-                        <button class="layui-btn">上传考试通知</button>
-                    </div>
-                    <a href="./push_exam.1.html">push_exam.1.html</a>
-                    <a href="./push_exam.2.html">push_exam.2.html</a>
-                </div>
-
-                <div class="layui-form-item layui-row">
-                    <div class="layui-col-md3">
-                        <label class="layui-form-label">发布部门</label>
-                        <div class="layui-input-block">
-                            <select name="city" lay-verify="required">
-                                <option value=""></option>
-                                <option value="0">北京</option>
-                                <option value="4">杭州</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="layui-col-md3">
-                        <label class="layui-form-label">签收部门</label>
-                        <div class="layui-input-block">
-                            <select name="city" lay-verify="required">
-                                <option value=""></option>
-                                <option value="0">北京</option>
-                                <option value="4">杭州</option>
-                            </select>
-                        </div>
+            <div class="layui-card">
+                <div class="layui-card-header">上传考试通知</div>
+                <div class="layui-card-body">
+                    <div class="layui-upload">
+                        <button id="upload_1" type="button" class="layui-btn layui-btn-normal">选择文件</button>
+                        <input class="layui-upload-file" type="file" accept="" name="file">
+                        <span class="layui-inline layui-upload-choose"></span>
                     </div>
                 </div>
-
-                <div class="layui-form-item layui-row">
-                    <div class="layui-col-md3">
-                        <label class="layui-form-label">考试名称</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="title" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-col-md3">
-                        <label class="layui-form-label">选择岗位</label>
-                        <div class="layui-input-block">
-                            <select name="city" lay-verify="required">
-                                <option value=""></option>
-                                <option value="0">北京</option>
-                                <option value="1">上海</option>
-                                <option value="2">广州</option>
-                                <option value="3">深圳</option>
-                                <option value="4">杭州</option>
-                            </select>
+            </div>
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-xs12 layui-col-md8">
+                    <div class="layui-card">
+                        <div class="layui-card-header">主要选项</div>
+                        <div class="layui-card-body">
+                            <div class="layui-form-item layui-row">
+                                <div class="layui-col-xs12 layui-col-md6">
+                                    <label class="layui-form-label">发布部门</label>
+                                    <div class="layui-input-block">
+                                        <select name="city" lay-verify="required">
+                                            <option value=""></option>
+                                            <option value="0">北京</option>
+                                            <option value="4">杭州</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs12 layui-col-md6">
+                                    <label class="layui-form-label">签收部门</label>
+                                    <div class="layui-input-block">
+                                        <select name="city" lay-verify="required">
+                                            <option value=""></option>
+                                            <option value="0">北京</option>
+                                            <option value="4">杭州</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item layui-row">
+                                <div class="layui-col-xs12 layui-col-md6">
+                                    <label class="layui-form-label">考试名称</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="title" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs12 layui-col-md6">
+                                    <label class="layui-form-label">选择岗位</label>
+                                    <div class="layui-input-block">
+                                        <select name="city" lay-verify="required">
+                                            <option value=""></option>
+                                            <option value="0">北京</option>
+                                            <option value="1">上海</option>
+                                            <option value="2">广州</option>
+                                            <option value="3">深圳</option>
+                                            <option value="4">杭州</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item layui-row">
+                                <div class="layui-col-xs12 layui-col-md6">
+                                    <label class="layui-form-label">监考教师</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="title" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs12 layui-col-md6">
+                                    <label class="layui-form-label">考试时间</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" class="layui-input" id="data1" placeholder="请选择日期">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item layui-row">
+                                <div class="layui-col-xs12 layui-col-md6 layui-block">
+                                    <label class="all-text-label">填写调查比例</label>
+                                    <div class="layui-input-inline">
+                                        <select name="city" lay-verify="required">
+                                            <option value=""></option>
+                                            <option value="0">10%</option>
+                                            <option value="0">20%</option>
+                                            <option value="0">30%</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="layui-form-item layui-row">
-                    <div class="layui-col-md3">
-                        <label class="layui-form-label">监考教师</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="title" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                <div class="layui-col-xs12 layui-col-md4">
+                    <div class="layui-card ">
+                        <div class="layui-card-header">其他选项</div>
+                        <div class="layui-card-body">
+                            <div class="layui-form-item layui-row">
+                                <div class="layui-col-xs12 layui-col-md12">
+                                    <input type="checkbox" name="" title="是否发布考试" lay-skin="primary" checked>
+                                </div>
+                                <div class="layui-col-xs12 layui-col-md12">
+                                    <input type="checkbox" name="" title="是否留存培训影像资料" lay-skin="primary" checked>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="layui-form-item layui-row">
-                    <div class="layui-col-md3">
-                        <label class="layui-form-label">考试时间</label>
-                        <div class="layui-input-block">
-                            <input type="text" class="layui-input" id="data1" placeholder="请选择日期">
-                        </div>
-                    </div>
-
-                    <div class="layui-col-md3">
-                        <label class="layui-form-label">填写调查比例</label>
-                        <div class="layui-input-block">
-                            <select name="city" lay-verify="required">
-                                <option value=""></option>
-                                <option value="0">10%</option>
-                                <option value="0">20%</option>
-                                <option value="0">30%</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="layui-form-item layui-row">
-                    <div class="layui-col-md3 layui-col-md-offset1">
-                        <input type="checkbox" name="" title="是否发布考试" lay-skin="primary" checked>
-                    </div>
-                    <div class="layui-col-md3">
-                        <input type="checkbox" name="" title="是否留存培训影像资料" lay-skin="primary" checked>
-                    </div>
-                </div>
-
-                <div class="layui-form-item">
-                    <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
             </div>
@@ -143,7 +152,22 @@
             return false;
         });
     });
-
+    layui.use('upload', function () {
+        var upload = layui.upload;
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#upload_1'
+            , auto: false
+            , url: '/upload/' //上传接口
+            , done: function (res) {
+                //上传完毕回调
+            }
+            , accept: 'file'
+            , error: function () {
+                //请求异常回调
+            }
+        });
+    });
     //日期范围
     laydate.render({
         elem: '#data1',
