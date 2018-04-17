@@ -30,20 +30,20 @@
                                 <label class="layui-form-label">发布部门</label>
                                 <div class="layui-input-block">
                                     <select name="city" lay-verify="required">
-                                <option value=""></option>
-                                <option value="0">北京</option>
-                                <option value="4">杭州</option>
-                            </select>
+                                        <option value=""></option>
+                                        <option value="0">北京</option>
+                                        <option value="4">杭州</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="layui-col-md3">
                                 <label class="layui-form-label">参考部门</label>
                                 <div class="layui-input-block">
                                     <select name="city" lay-verify="required">
-                                <option value=""></option>
-                                <option value="0">北京</option>
-                                <option value="4">杭州</option>
-                            </select>
+                                        <option value=""></option>
+                                        <option value="0">北京</option>
+                                        <option value="4">杭州</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="layui-col-md3">
@@ -106,19 +106,19 @@
 <script src="../../lib/laydate/laydate.js"></script>
 <script src="../../lib/layui/layui.js"></script>
 <script>
-    layui.use('element', function() {
+    layui.use('element', function () {
         var element = layui.element;
     });
 
-    layui.use('form', function() {
+    layui.use('form', function () {
         var form = layui.form;
         //监听提交
-        form.on('submit(formDemo)', function(data) {
+        form.on('submit(formDemo)', function (data) {
             layer.confirm('提示消息', {
                 btn: ['确认', '取消'], //可以无限个按钮
-            }, function(index) {
+            }, function (index) {
                 //按钮【按钮一】的回调
-            }, function(index) {
+            }, function (index) {
                 //按钮【按钮二】的回调
             });
             return false;
@@ -132,7 +132,7 @@
     });
 
     setTimeout(() => {
-        layui.use('laytpl', function() {
+        layui.use('laytpl', function () {
             var laytpl = layui.laytpl;
             var data1 = {
                 "list": ["序号", "培训名称", "发布部门", "签收部门", "是否考试", "调查问卷", "调查比例", "失效时间", "应参培人数", "已参培人数", "补培人数", "签收情况", "培训教师", "签收人", "负责人"]
@@ -144,10 +144,10 @@
                 ]
             };
 
-            laytpl(site1.innerHTML).render(data1, function(html) {
+            laytpl(site1.innerHTML).render(data1, function (html) {
                 document.getElementById('view1').innerHTML = html;
             });
-            laytpl(site2.innerHTML).render(data2, function(html) {
+            laytpl(site2.innerHTML).render(data2, function (html) {
                 document.getElementById('view2').innerHTML = html;
             });
         })

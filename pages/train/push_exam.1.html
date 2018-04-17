@@ -201,19 +201,19 @@
 <script src="../../lib/laydate/laydate.js"></script>
 <script src="../../lib/layui/layui.js"></script>
 <script>
-    layui.use('element', function() {
+    layui.use('element', function () {
         var element = layui.element;
     });
 
-    layui.use('form', function() {
+    layui.use('form', function () {
         var form = layui.form;
         //监听提交
-        form.on('submit(formDemo)', function(data) {
+        form.on('submit(formDemo)', function (data) {
             layer.confirm('提示消息', {
                 btn: ['确认', '取消'], //可以无限个按钮
-            }, function(index) {
+            }, function (index) {
                 //按钮【按钮一】的回调
-            }, function(index) {
+            }, function (index) {
                 //按钮【按钮二】的回调
             });
             return false;

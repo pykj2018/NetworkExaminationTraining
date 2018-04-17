@@ -74,17 +74,17 @@
         <div class="layui-body">
             <!-- 内容主体区域 -->
             <!-- <div class="layui-main"> -->
-                <div id="iframe_box">
-                    <div class="loading"></div>
-                    <div class="show-iframe">
-                        <iframe src="pages/annoumcement/index_announce.html" name="myIframe"></iframe>
-                    </div>
+            <div id="iframe_box">
+                <div class="loading"></div>
+                <div class="show-iframe">
+                    <iframe src="pages/annoumcement/index_announce.html" name="myIframe"></iframe>
                 </div>
+            </div>
 
-                <div class="layui-footer">
-                    <!-- 底部固定区域 -->
-                    © layui.com - 底部固定区域
-                </div>
+            <div class="layui-footer">
+                <!-- 底部固定区域 -->
+                © layui.com - 底部固定区域
+            </div>
             <!-- </div> -->
 </body>
 <script type="text/javascript" src="./lib/laydate/laydate.js"></script>
@@ -92,15 +92,21 @@
 <script type="text/javascript" src="config/sidemenu.js"></script>
 <script>
     //JavaScript代码区域
-    window.onload = function() {
+    window.onload = function () {
         render(0);
+        $(document).on('click', '.layui-nav-item', function () {
+            console.log(1);
+            $(this).addClass('layui-this');
+            $(this).siblings().removeClass('layui-this'); 
+        })
     }
-    layui.use('element', function() {
+    layui.use('element', function () {
         var element = layui.element;
-        element.on('nav(nav)', function(data) {
+        element.on('nav(nav)', function (data) {
             console.log(data[0].dataset.index);
             //加载侧边导航
             render(data[0].dataset.index);
+
         })
     });
 
@@ -114,6 +120,11 @@
                 dataArray[e][i].item + "</a></li>";
             $(".sideNav").append(template);
         }
+    }
+    // 判断菜单选中状态
+    function isActive() {
+        console.log(1);
+
     }
 </script>
 
