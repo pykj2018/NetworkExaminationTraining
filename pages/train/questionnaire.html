@@ -19,11 +19,12 @@
             text-align: center;
             font-size: 22px;
         }
-        
+
         .h2 {
             font-size: 18px;
+            text-align: center;
         }
-        
+
         .progress {
             display: flex;
             align-items: center;
@@ -31,7 +32,7 @@
             line-height: 30px;
             margin: 0 auto 30px;
         }
-        
+
         .button {
             display: flex;
             justify-content: space-evenly;
@@ -48,23 +49,21 @@
             <div class="layui-card" style="padding: 10px;">
                 <div class="layui-form-item">
                     <h1 class="h1">使用培训调查问卷</h1>
-                    <hr class="layui-bg-green">
                 </div>
 
                 <div class="layui-form-item">
+                    <hr class="layui-bg-green">
                     <h2 class="h2">教学评价</h2>
                     <hr class="layui-bg-green">
                 </div>
 
                 <div id="view"></div>
-
                 <div class="layui-form-item">
+                    <hr class="layui-bg-green">
                     <h2 class="h2">培训质量调查</h2>
                     <hr class="layui-bg-green">
                 </div>
-
                 <div id="view2"></div>
-
                 <div class="layui-row progress">
                     <div class="layui-col-md2 layui-col-md-offset1">请选择调查比例</div>
                     <div class="layui-progress layui-col-md6">
@@ -72,8 +71,8 @@
                     </div>
                 </div>
 
-                <div class="layui-form-item">
-                    <div class="layui-input-block layui-col-md6 button">
+                <div class="layui-form-item layui-row">
+                    <div class="layui-input-block layui-col-md4 button" >
                         <button class="layui-btn" lay-submit lay-filter="formDemo">生成</button>
                         <button type="reset" class="layui-btn layui-btn-primary">修改</button>
                     </div>
@@ -86,14 +85,14 @@
 <script src="../../lib/layui/lay/modules/laytpl.js"></script>
 
 <script>
-    layui.use('element', function() {
+    layui.use('element', function () {
         var element = layui.element;
     });
-    layui.use('form', function() {
+    layui.use('form', function () {
         var form = layui.form;
     });
     setTimeout(() => {
-        layui.use('laytpl', function() {
+        layui.use('laytpl', function () {
             var laytpl = layui.laytpl;
             var data = {
                 "list": [{
@@ -131,12 +130,12 @@
 
             var getTpl = site.innerHTML;
             view = document.getElementById('view');
-            laytpl(getTpl).render(data, function(html) {
+            laytpl(getTpl).render(data, function (html) {
                 view.innerHTML = html;
             });
 
             view2 = document.getElementById('view2');
-            laytpl(getTpl).render(data2, function(html) {
+            laytpl(getTpl).render(data2, function (html) {
                 view2.innerHTML = html;
             });
         })
