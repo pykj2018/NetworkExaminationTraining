@@ -27,7 +27,7 @@
                 <div class="layui-card">
                     <div class="layui-card-header">筛选条件</div>
                     <div class="layui-card-body">
-                        <form action="">
+                        <!-- <form action=""> -->
                             <div class="layui-form-item">
                                 <div class="layui-inline">
                                     <label class="layui-form-label">接收部门</label>
@@ -88,11 +88,11 @@
                                     </div>
                                 </div>
                                 <div class="layui-inline">
-                                    <button class="layui-btn" lay-submit="" lay-filter="component-form-element">搜索</button>
+                                    <button class="layui-btn" id="search">搜索</button>
                                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                                 </div>
                             </div>
-                        </form>
+                        <!-- </form> -->
                     </div>
                 </div>
             </div>
@@ -100,8 +100,7 @@
                 <div class="layui-card">
                     <div class="layui-card-header">查询结果</div>
                     <div class="layui-card-body">
-                        <table id="searchAnnocTable"></table>
-                        <table  class="layui-table" lay-data="{ height:332, url:'../../config/table.js', page:true, id:'idTest'}" lay-filter="demo">
+                        <table class="layui-table" id="searchAnnocTable" lay-data="{ height:332, url:'../../config/table.js', page:true, id:'searchAnnocTable'}" lay-filter="demo">
                             <thead>
                                 <tr>
                                     <!-- <th lay-data="{type:'checkbox', fixed: 'left'}"></th> -->
@@ -128,6 +127,8 @@
     <script type="text/javascript" src="../../lib/laydate/laydate.js"></script>
     <script type="text/javascript" src="../../lib/layui/layui.all.js"></script>
     <script>
+       
+
         laydate.render({
             elem: '#StartTime',
             type: 'datetime'
@@ -141,6 +142,13 @@
         });
         layui.use('table', function () {
             var table = layui.table;
+            var searchBtn = $('#search');
+            searchBtn.on('click', function () {
+                table.reload('searchAnnocTable', {
+                    url: '../../config/table1.js'
+                    , where: {} //设定异步数据接口的额外参数
+                });
+            })
             //监听表格复选框选择
             table.on('checkbox(demo)', function (obj) {
                 console.log(obj)
@@ -159,12 +167,8 @@
                     layer.alert('编辑行：<br>' + JSON.stringify(data))
                 }
             });
-
-            $('.demoTable .layui-btn').on('click', function () {
-                var type = $(this).data('type');
-                active[type] ? active[type].call(this) : '';
-            });
         });
+
     </script>
 
 </body>

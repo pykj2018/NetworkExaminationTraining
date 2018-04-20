@@ -142,17 +142,6 @@
 
     layui.use('form', function () {
         var form = layui.form;
-        //监听提交
-        form.on('submit(formDemo)', function (data) {
-            layer.confirm('提示消息', {
-                btn: ['确认', '取消'], //可以无限个按钮
-            }, function (index) {
-                //按钮【按钮一】的回调
-            }, function (index) {
-                //按钮【按钮二】的回调
-            });
-            return false;
-        });
     });
     //日期范围
     laydate.render({

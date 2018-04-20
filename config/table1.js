@@ -1,0 +1,1 @@
+{ "code": 0, "msg": "", "count": 1000, "data": [{ "id": 10000, "title": "user-0", "sex": "女", "title": "城市-0", "sign": "签名-0", "experience": 255, "logins": 24, "wealth": 82830700, "classify": "作家", "score": 57 }] }
