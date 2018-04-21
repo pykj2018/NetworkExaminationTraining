@@ -22,6 +22,7 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <style>
+
     </style>
     <div class="layui-fluid">
         <div class="layui-row layui-col-space10">
@@ -33,7 +34,7 @@
                         <div class="layui-card-body">
                             <div class="layui-form-item">
                                 <div class="layui-input-inline" style="width: 100%;">
-                                    <input type="text" name="" placeholder="请输入公告主题" autocomplete="off" class="layui-input">
+                                    <input type="text" name="title" lay-verify="title|required" placeholder="请输入公告主题" autocomplete="off" class="layui-input">
                                 </div>
                             </div>
                         </div>
@@ -46,12 +47,12 @@
                             <span>设置时间：</span>
                             <div class="layui-form-item layui-inline">
                                 <div class="layui-input-inline">
-                                    <input type="text" placeholder="开始时间" id="StartTime" class="layui-input">
+                                    <input type="text" placeholder="开始时间" id="StartTime" class="layui-input" name="startTime" lay-verify="startTime">
                                 </div>
                             </div>
                             <div class="layui-form-item layui-inline">
                                 <div class="layui-input-inline">
-                                    <input type="text" placeholder="结束时间" id="EndTime" class="layui-input">
+                                    <input type="text" placeholder="结束时间" id="EndTime" class="layui-input" name="endTime" lay-verify="endTime">
                                 </div>
                             </div>
                         </div>
@@ -64,7 +65,7 @@
                     <div class="layui-card">
                         <div class="layui-card-header">公告内容</div>
                         <div class="layui-card-body">
-                            <textarea name="" placeholder="请输入" class="layui-textarea" style="margin-top: 0px; margin-bottom: 0px; height: 100px;" lay-verify="required"></textarea>
+                            <textarea name="content" lay-verify="content" placeholder="请输入" class="layui-textarea" style="margin-top: 0px; margin-bottom: 0px; height: 100px;"></textarea>
                         </div>
 
                     </div>
@@ -127,13 +128,13 @@
                                     <div class="layui-form-item">
                                         <div class="layui-inline">
                                             <div class="layui-input-inline">
-                                                <input type="checkbox" name="" title="是否长期有效" lay-skin="primary" checked>
+                                                <input type="checkbox" name="valid" lay-verify="valid" title="是否长期有效" lay-skin="primary" checked>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
                                         <div class="layui-input-inline">
-                                            <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+                                            <button class="layui-btn" lay-submit lay-filter="form">立即提交</button>
                                             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                                         </div>
                                     </div>
@@ -150,17 +151,18 @@
     <script type="text/javascript" src="../../lib/layui/layui.all.js"></script>
     <script type="text/javascript" src="../../lib/jQuery.js"></script>
     <script>
-        layui.use(['form', 'layer'], function () {
+        layui.use(['form', 'layer'], function() {
             var form = layui.form,
                 layer = layui.layer;
-            form.on('submit(*)', function (data) {
+            form.on('submit(form)', function(data) {
+                console.log(data.field)
                 getAllDepartment();
                 getAllUser();
                 return false;
             })
             var addReceiveDepartment = $('#addReceiveDepartment'),
                 addReceiveUser = $('#addReceiveUser');
-            addReceiveUser.on('click', function () {
+            addReceiveUser.on('click', function() {
                 layer.open({
                     type: 2,
                     area: ['700px', '450px'],
@@ -170,7 +172,7 @@
                 });
 
             })
-            addReceiveDepartment.on('click', function () {
+            addReceiveDepartment.on('click', function() {
                 layer.open({
                     type: 2,
                     area: ['700px', '450px'],
@@ -179,10 +181,12 @@
                     content: '../others/receivedepartment.html'
                 });
             });
+
             function getAllDepartment() {
                 var part = $('#parentIframe');
                 console.log((part).children());
             }
+
             function getAllUser() {
                 var part1 = $('#parentIframe1');
                 console.log((part1).children());
