@@ -23,9 +23,9 @@
         <![endif]-->
     <style>
     </style>
-    <div class="layui-fluid layui-form">
-        <form>
-            <div class="layui-row layui-col-space10">
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space10">
+            <form action="" class="layui-form">
                 <!-- 公告标题和发布时间s  -->
                 <div class="layui-col-xs12 layui-col-md6">
                     <div class="layui-card">
@@ -64,36 +64,23 @@
                     <div class="layui-card">
                         <div class="layui-card-header">公告内容</div>
                         <div class="layui-card-body">
-                            <textarea name="" placeholder="请输入" class="layui-textarea" style="margin-top: 0px; margin-bottom: 0px; height: 100px;"></textarea>
+                            <textarea name="" placeholder="请输入" class="layui-textarea" style="margin-top: 0px; margin-bottom: 0px; height: 100px;" lay-verify="required"></textarea>
                         </div>
 
                     </div>
                 </div>
                 <!-- 公告内容e -->
-
+                <!-- <form action="" class="layui-form"> -->
                 <!-- 底部部门选择和其他选项 -->
                 <div class="layui-col-xs12 layui-col-md12">
                     <div class="layui-row layui-col-space10">
                         <!-- 部门s -->
-                        <div class="layui-col-xs8 layui-col-md8">
+                        <div class="layui-col-xs12 layui-col-md12">
                             <div class="layui-card">
                                 <div class="layui-card-header">接收部门</div>
                                 <div class="layui-card-body">
-                                    <div class="layui-form-item">
-                                        <div class="layui-inline">
-                                            <label class="layui-form-label">接收部门</label>
-                                            <div class="layui-input-inline ">
-                                                <select name="postdepartment" lay-verify="">
-                                                    <option value="">选择接收部门</option>
-                                                    <option value="0">部们一</option>
-                                                    <option value="1">部门二</option>
-                                                    <option value="2">部门三</option>
-                                                    <option value="3">部门四</option>
-                                                    <option value="4">部门五</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="layui-inline">
+                                    <div class=" layui-row layui-col-space10">
+                                        <div class="layui-col-md12">
                                             <label class="layui-form-label">发送部门</label>
                                             <div class="layui-input-inline">
                                                 <select name="getdepartment" lay-verify="">
@@ -106,18 +93,25 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="layui-inline">
-                                            <label class="layui-form-label">接收用户</label>
-                                            <div class="layui-input-inline">
-                                                <select name="getdepartment" lay-verify="" lay-search>
-                                                    <option value="">选择接收用户</option>
-                                                    <option value="0">用户一</option>
-                                                    <option value="1">用户二</option>
-                                                    <option value="2">用户三</option>
-                                                    <option value="3">用户四</option>
-                                                    <option value="4">用户五</option>
-                                                </select>
+                                        <div class="layui-col-md12">
+                                            <label class="layui-form-label">接收部门</label>
+                                            <div class="layui-input-block">
+                                                <input type="button" class="layui-btn" id='addReceiveDepartment' value="增加">
                                             </div>
+                                            <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px; ">
+                                                <div id="parentIframe" style="margin: 0 auto;width: 90%">
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                        <div class="layui-col-md12">
+                                            <label class="layui-form-label">接收用户</label>
+                                            <div class="layui-input-block">
+                                                <input type="button" class="layui-btn" id='addReceiveUser' value="增加">
+                                            </div>
+                                            <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px; ">
+                                                <div id="parentIframe1" style="margin: 0 auto;width: 90%">
+                                                </div>
+                                            </blockquote>
                                         </div>
                                     </div>
                                 </div>
@@ -126,7 +120,7 @@
                         <!-- 部门e -->
 
                         <!-- 其他选项s -->
-                        <div class="layui-col-xs4 layui-col-md4">
+                        <div class="layui-col-xs12 layui-col-md12">
                             <div class="layui-card">
                                 <div class="layui-card-header">其他选项</div>
                                 <div class="layui-card-body">
@@ -139,7 +133,7 @@
                                     </div>
                                     <div class="layui-form-item">
                                         <div class="layui-input-inline">
-                                            <button class="layui-btn" lay-submit="" lay-filter="component-form-element">立即提交</button>
+                                            <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
                                             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                                         </div>
                                     </div>
@@ -149,12 +143,52 @@
                         <!-- 其他选项e -->
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
     <script type="text/javascript" src="../../lib/laydate/laydate.js"></script>
     <script type="text/javascript" src="../../lib/layui/layui.all.js"></script>
+    <script type="text/javascript" src="../../lib/jQuery.js"></script>
     <script>
+        layui.use(['form', 'layer'], function () {
+            var form = layui.form,
+                layer = layui.layer;
+            form.on('submit(*)', function (data) {
+                getAllDepartment();
+                getAllUser();
+                return false;
+            })
+            var addReceiveDepartment = $('#addReceiveDepartment'),
+                addReceiveUser = $('#addReceiveUser');
+            addReceiveUser.on('click', function () {
+                layer.open({
+                    type: 2,
+                    area: ['700px', '450px'],
+                    fixed: false, //不固定
+                    maxmin: true,
+                    content: '../others/receiveuser.html'
+                });
+
+            })
+            addReceiveDepartment.on('click', function () {
+                layer.open({
+                    type: 2,
+                    area: ['700px', '450px'],
+                    fixed: false, //不固定
+                    maxmin: true,
+                    content: '../others/receivedepartment.html'
+                });
+            });
+            function getAllDepartment() {
+                var part = $('#parentIframe');
+                console.log(part).children();
+            }
+            function getAllUser() {
+                var part1 = $('#parentIframe1');
+                console.log(part1).children();
+            }
+
+        });
         laydate.render({
             elem: '#StartTime',
             type: 'datetime'
@@ -162,10 +196,6 @@
         laydate.render({
             elem: '#EndTime',
             type: 'datetime'
-        });
-        layui.use("['layer','form']", function () {
-            var form = layui.form;
-            return false;
         });
     </script>
 </body>
