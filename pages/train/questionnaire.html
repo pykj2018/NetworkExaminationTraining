@@ -19,12 +19,11 @@
             text-align: center;
             font-size: 22px;
         }
-
+        
         .h2 {
             font-size: 18px;
-            text-align: center;
         }
-
+        
         .progress {
             display: flex;
             align-items: center;
@@ -32,7 +31,7 @@
             line-height: 30px;
             margin: 0 auto 30px;
         }
-
+        
         .button {
             display: flex;
             justify-content: space-evenly;
@@ -49,31 +48,39 @@
             <div class="layui-card" style="padding: 10px;">
                 <div class="layui-form-item">
                     <h1 class="h1">使用培训调查问卷</h1>
+                    <hr class="layui-bg-green">
                 </div>
 
                 <div class="layui-form-item">
-                    <hr class="layui-bg-green">
                     <h2 class="h2">教学评价</h2>
                     <hr class="layui-bg-green">
                 </div>
 
                 <div id="view"></div>
+
                 <div class="layui-form-item">
-                    <hr class="layui-bg-green">
                     <h2 class="h2">培训质量调查</h2>
                     <hr class="layui-bg-green">
                 </div>
+
                 <div id="view2"></div>
-                <div class="layui-row progress">
-                    <div class="layui-col-md2 layui-col-md-offset1">请选择调查比例</div>
-                    <div class="layui-progress layui-col-md6">
-                        <div class="layui-progress-bar" lay-percent="10%"></div>
+
+                <div class="layui-row progress layui-row">
+                    <div class="layui-col-md2 layui-col-md-offset1 layui-col-sm10">请选择调查比例</div>
+
+                    <div class="layui-col-md5 layui-col-md-offset1 layui-col-sm10 layui-progress" lay-filter="cent" lay-showpercent="true">
+                        <div class="layui-progress-bar" lay-percent="25%"></div>
+                    </div>
+
+                    <div class="layui-col-md2 layui-col-md-offset1 layui-col-sm10 site-button" style="margin-left:10px ">
+                        <input type="button" class="layui-btn site-active" value="+" data-type="plus">
+                        <input type="button" class="layui-btn site-active" value="-" data-type="subtract">
                     </div>
                 </div>
 
-                <div class="layui-form-item layui-row">
-                    <div class="layui-input-block layui-col-md4 button" >
-                        <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+                <div class="layui-form-item">
+                    <div class="layui-input-block layui-col-md6 button">
+                        <button class="layui-btn" lay-submit lay-filter="formDemo">生成</button>
                         <button type="reset" class="layui-btn layui-btn-primary">修改</button>
                     </div>
                 </div>
@@ -85,78 +92,125 @@
 <script src="../../lib/layui/lay/modules/laytpl.js"></script>
 
 <script>
-    layui.use('element', function () {
-        var element = layui.element;
+    layui.use('element', function() {
+        var $ = layui.jquery,
+            element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+        //触发事件
+        var xprecent = parseInt($('.layui-progress-bar').attr('lay-percent'));
+        var active = {
+            //设置进度
+            plus: function() {
+                xprecent >= 100 ? xprecent == 100 : xprecent += 5;
+                element.progress('cent', xprecent + "%")
+            },
+            subtract: function() {
+                xprecent <= 0 ? xprecent == 0 : xprecent -= 5;
+                element.progress('cent', xprecent + "%")
+            },
+            loading: function(othis) {
+                var DISABLED = 'layui-btn-disabled';
+                if (othis.hasClass(DISABLED)) return;
+
+                //模拟loading
+                var n = 0,
+                    timer = setInterval(function() {
+                        n = n + Math.random() * 10 | 0;
+                        if (n > 100) {
+                            n = 100;
+                            clearInterval(timer);
+                            othis.removeClass(DISABLED);
+                        }
+                        element.progress('cent', n + '%');
+                    }, 300 + Math.random() * 1000);
+
+                othis.addClass(DISABLED);
+            }
+        };
+
+        $('.site-active').on('click', function() {
+            console.log("demo")
+            var othis = $(this),
+                type = $(this).data('type');
+            active[type] ? active[type].call(this, othis) : '';
+        });
     });
-    layui.use('form', function () {
+
+
+    layui.use('form', function() {
         var form = layui.form;
-        return false;
+        setTimeout(() => {
+            layui.use('laytpl', function() {
+                var laytpl = layui.laytpl;
+                var data = {
+                    "list": [{
+                        "title": "内容设计",
+                        "item": ["好", "较好", "一般", "需改进"]
+                    }, {
+                        "title": "教学方法",
+                        "item": ["好", "较好", "一般", "需改进"]
+                    }, {
+                        "title": "表达能力",
+                        "item": ["好", "较好", "一般", "需改进"]
+                    }]
+                };
+                var data2 = {
+                    "list": [{
+                        "title": "您认为培训课程的安排",
+                        "item": ["很合理", "合理", "较合理", "一般", "不合理"]
+                    }, {
+                        "title": "您认为培训课程的安排",
+                        "item": ["很合理", "合理", "较合理", "一般", "不合理"]
+                    }, {
+                        "title": "您认为培训课程的安排",
+                        "item": ["很合理", "合理", "较合理", "一般", "不合理"]
+                    }, {
+                        "title": "您认为培训课程的安排",
+                        "item": ["很合理", "合理", "较合理", "一般", "不合理"]
+                    }, {
+                        "title": "您认为培训课程的安排",
+                        "item": ["很合理", "合理", "较合理", "一般", "不合理"]
+                    }, {
+                        "title": "您认为培训课程的安排",
+                        "item": ["很合理", "合理", "较合理", "一般", "不合理"]
+                    }]
+                };
+
+                var getTpl = site.innerHTML;
+                view = document.getElementById('view');
+                laytpl(getTpl).render(data, function(html) {
+                    view.innerHTML = html;
+                });
+
+                view2 = document.getElementById('view2');
+                laytpl(getTpl).render(data2, function(html) {
+                    view2.innerHTML = html;
+                });
+                form.render();
+            })
+        }, 200);
+
     });
-    setTimeout(() => {
-        layui.use('laytpl', function () {
-            var laytpl = layui.laytpl;
-            var data = {
-                "list": [{
-                    "title": "内容设计",
-                    "item": ["好", "较好", "一般", "需改进"]
-                }, {
-                    "title": "教学方法",
-                    "item": ["好", "较好", "一般", "需改进"]
-                }, {
-                    "title": "表达能力",
-                    "item": ["好", "较好", "一般", "需改进"]
-                }]
-            };
-            var data2 = {
-                "list": [{
-                    "title": "您认为培训课程的安排",
-                    "item": ["很合理", "合理", "较合理", "一般", "不合理"]
-                }, {
-                    "title": "您认为培训课程的安排",
-                    "item": ["很合理", "合理", "较合理", "一般", "不合理"]
-                }, {
-                    "title": "您认为培训课程的安排",
-                    "item": ["很合理", "合理", "较合理", "一般", "不合理"]
-                }, {
-                    "title": "您认为培训课程的安排",
-                    "item": ["很合理", "合理", "较合理", "一般", "不合理"]
-                }, {
-                    "title": "您认为培训课程的安排",
-                    "item": ["很合理", "合理", "较合理", "一般", "不合理"]
-                }, {
-                    "title": "您认为培训课程的安排",
-                    "item": ["很合理", "合理", "较合理", "一般", "不合理"]
-                }]
-            };
-
-            var getTpl = site.innerHTML;
-            view = document.getElementById('view');
-            laytpl(getTpl).render(data, function (html) {
-                view.innerHTML = html;
-            });
-
-            view2 = document.getElementById('view2');
-            laytpl(getTpl).render(data2, function (html) {
-                view2.innerHTML = html;
-            });
-        })
-    }, 200);
 </script>
 <script id="site" type="text/html">
     {{# layui.each(d.list, function(index, item){ }}
     <div class="layui-form-item">
-        <div class="layui-col-md3 layui-col-md-offset1">
+        <div class="layui-col-md3 layui-col-md-offset1 layui-col-sm12">
             {{item.title}}
         </div>
-        <div class="layui-col-md8">
+        <div class="layui-col-md8 layui-col-sm12">
             <div class="layui-row">
-                {{# layui.each(d.list[index].item, function(index, itemp){ }}
+                {{# layui.each(d.list[index].item, function(xindex, xtemp){ }}
                 <div class="layui-col-md2">
-                    <input type="radio" name="role" value="" title="{{itemp}}">
-                    <div class="layui-unselect layui-form-radio">
-                        <i class="layui-anim layui-icon"></i>
-                        <div>{{itemp}}</div>
+                    <div class="">
+                        <input type="radio" name="{{index}}" value="{{xtemp}}" title="{{xtemp}}">
                     </div>
+                    <!-- <label class="layui-form-label">{{xtemp}}</label> -->
+                    <!-- <input type="radio" name="role" value="" title="{{xtemp}}"> -->
+                    <!-- <div class="layui-unselect layui-form-radio">
+                        <i class="layui-anim layui-icon"></i>
+                        <div>{{xtemp}}</div>
+                    </div> -->
                 </div>
                 {{# }); }} {{# if(d.list[index].title.length === 0){ }} 无数据 {{# } }}
             </div>
