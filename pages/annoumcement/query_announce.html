@@ -21,18 +21,21 @@
     <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+
+
     <div class="layui-fluid  layui-form">
-        <div class="layui-row layui-col-space10">
-            <div class="layui-col-xs12 layui-col-md12">
-                <div class="layui-card">
-                    <div class="layui-card-header">筛选条件</div>
-                    <div class="layui-card-body">
-                        <!-- <form action=""> -->
+        <form>
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-xs12 layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">筛选条件</div>
+                        <div class="layui-card-body">
+                            <!-- <form action=""> -->
                             <div class="layui-form-item">
                                 <div class="layui-inline">
                                     <label class="layui-form-label">接收部门</label>
                                     <div class="layui-input-inline ">
-                                        <select name="postdepartment" lay-verify="">
+                                        <select name="postdepartment">
                                             <option value="">选择接收部门</option>
                                             <option value="0">部们一</option>
                                             <option value="1">部门二</option>
@@ -45,7 +48,7 @@
                                 <div class="layui-inline">
                                     <label class="layui-form-label">发送部门</label>
                                     <div class="layui-input-inline">
-                                        <select name="getdepartment" lay-verify="">
+                                        <select name="getdepartment">
                                             <option value="">选择接收部门</option>
                                             <option value="0">部们一</option>
                                             <option value="1">部门二</option>
@@ -58,7 +61,7 @@
                                 <div class="layui-inline">
                                     <label class="layui-form-label">接收用户</label>
                                     <div class="layui-input-inline">
-                                        <select name="getdepartment" lay-verify="" lay-search>
+                                        <select name="getdepartment" lay-search>
                                             <option value="">选择接收用户</option>
                                             <option value="0">用户一</option>
                                             <option value="1">用户二</option>
@@ -88,46 +91,49 @@
                                     </div>
                                 </div>
                                 <div class="layui-inline">
-                                    <button class="layui-btn" id="search">搜索</button>
+                                    <button class="layui-btn" lay-submit lay-filter="*">搜索</button>
+                                    <!-- <button class="layui-btn" id="search">搜索</button> -->
                                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                                 </div>
                             </div>
-                        <!-- </form> -->
+                            <!-- </form> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-xs12 layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">查询结果</div>
+                        <div class="layui-card-body">
+                            <table class="layui-table" id="searchAnnocTable" lay-data="{ height:332, url:'../../config/table.js', page:true, id:'searchAnnocTable'}"
+                                lay-filter="demo">
+                                <thead>
+                                    <tr>
+                                        <!-- <th lay-data="{type:'checkbox', fixed: 'left'}"></th> -->
+                                        <th lay-data="{field:'id', width:120, sort: true, fixed: true}">ID</th>
+                                        <th lay-data="{field:'title', width:150}">标题</th>
+                                        <th lay-data="{field:'postPart', width:150, sort: true}">发布部门</th>
+                                        <th lay-data="{field:'getPart', width:150}">接收部门</th>
+                                        <th lay-data="{field:'pushTime', width:150}">发布时间</th>
+                                        <th lay-data="{field:'lostTime', width:150, sort: true}">失效时间</th>
+                                        <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#bar'}"></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <script type="text/html" id="bar">
+                                <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+                                <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                            </script>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="layui-col-xs12 layui-col-md12">
-                <div class="layui-card">
-                    <div class="layui-card-header">查询结果</div>
-                    <div class="layui-card-body">
-                        <table class="layui-table" id="searchAnnocTable" lay-data="{ height:332, url:'../../config/table.js', page:true, id:'searchAnnocTable'}" lay-filter="demo">
-                            <thead>
-                                <tr>
-                                    <!-- <th lay-data="{type:'checkbox', fixed: 'left'}"></th> -->
-                                    <th lay-data="{field:'id', width:120, sort: true, fixed: true}">ID</th>
-                                    <th lay-data="{field:'title', width:150}">标题</th>
-                                    <th lay-data="{field:'postPart', width:150, sort: true}">发布部门</th>
-                                    <th lay-data="{field:'getPart', width:150}">接收部门</th>
-                                    <th lay-data="{field:'pushTime', width:150}">发布时间</th>
-                                    <th lay-data="{field:'lostTime', width:150, sort: true}">失效时间</th>
-                                    <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#bar'}"></th>
-                                </tr>
-                            </thead>
-                        </table>
-                        <script type="text/html" id="bar">
-                            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-                            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-                            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-                        </script>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </form>
     </div>
     <script type="text/javascript" src="../../lib/laydate/laydate.js"></script>
     <script type="text/javascript" src="../../lib/layui/layui.all.js"></script>
     <script>
-       
+
 
         laydate.render({
             elem: '#StartTime',
@@ -137,22 +143,9 @@
             elem: '#EndTime',
             type: 'datetime'
         });
-        layui.use('form', function () {
-            var form = layui.form;
-        });
-        layui.use('table', function () {
-            var table = layui.table;
-            var searchBtn = $('#search');
-            searchBtn.on('click', function () {
-                table.reload('searchAnnocTable', {
-                    url: '../../config/table1.js'
-                    , where: {} //设定异步数据接口的额外参数
-                });
-            })
-            //监听表格复选框选择
-            table.on('checkbox(demo)', function (obj) {
-                console.log(obj)
-            });
+        layui.use(['layer', 'form', 'table'], function () {
+            var form = layui.form,
+                table = layui.table;
             //监听工具条
             table.on('tool(demo)', function (obj) {
                 var data = obj.data;
@@ -167,8 +160,17 @@
                     layer.alert('编辑行：<br>' + JSON.stringify(data))
                 }
             });
-        });
+            form.on('submit(*)', function (data) {
+                console.log(JSON.stringify(data.field));
+                table.reload('searchAnnocTable', {
+                    url: '../../config/table1.js'
+                    , where: {
 
+                    } //设定异步数据接口的额外参数
+                });
+                return false;
+            });
+        });
     </script>
 
 </body>
