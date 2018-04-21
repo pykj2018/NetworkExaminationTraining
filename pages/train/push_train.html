@@ -41,13 +41,13 @@
                         <div class="layui-col-md4">
                             <label class="layui-form-label">培训名称</label>
                             <div class="layui-input-block">
-                                <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                <input type="text" name="title" required placeholder="请输入标题" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-col-md4">
                             <label class="layui-form-label">培训类型</label>
                             <div class="layui-input-block">
-                                <select name="city" lay-verify="required">
+                                <select name="city">
                                     <option value=""></option>
                                     <option value="0">北京</option>
                                     <option value="1">上海</option>
@@ -60,7 +60,7 @@
                         <div class="layui-col-md4">
                             <label class="layui-form-label">培训方式</label>
                             <div class="layui-input-block">
-                                <select name="city" lay-verify="required">
+                                <select name="city">
                                     <option value=""></option>
                                     <option value="0">北京</option>
                                     <option value="1">上海</option>
@@ -76,19 +76,19 @@
                         <div class="layui-col-md4">
                             <label class="layui-form-label">培训学时</label>
                             <div class="layui-input-block">
-                                <input type="text" class="layui-input" id="data1" placeholder="请选择日期">
+                                <input type="text" name="title" class="layui-input" id="data1" placeholder="请选择日期">
                             </div>
                         </div>
                         <div class="layui-col-md4">
                             <label class="layui-form-label">培训部门</label>
                             <div class="layui-input-block">
-                                <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                <input type="text" name="title" required placeholder="请输入标题" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-col-md4">
                             <label class="layui-form-label">参培部门</label>
                             <div class="layui-input-block">
-                                <select name="city" lay-verify="required">
+                                <select name="city">
                                     <option value=""></option>
                                     <option value="0">北京</option>
                                     <option value="1">上海</option>
@@ -104,7 +104,7 @@
                         <div class="layui-col-md4">
                             <label class="layui-form-label">考试图像记录周期</label>
                             <div class="layui-input-block">
-                                <select name="city" lay-verify="required">
+                                <select name="city">
                                     <option value=""></option>
                                     <option value="0">持续记录</option>
                                     <option value="0">持续记录</option>
@@ -115,12 +115,6 @@
                     </div>
                     <div class="layui-form-item layui-row layui-col-space10">
                         <div class="layui-col-md12">
-                            <label class="layui-form-label">培训资料</label>
-                            <div class="layui-input-block">
-                                <button class="layui-btn">增加</button>
-                            </div>
-                        </div>
-                        <div class="layui-col-md12">
                             <label class="layui-form-label">参培人员</label>
                             <div class="layui-input-block">
                                 <input type="button" class="layui-btn" id='addTrainers' value="增加">
@@ -130,7 +124,6 @@
                                 <div id="parentIframe" style="margin: 0 auto;width: 90%">
                                 </div>
                             </blockquote>
-
                         </div>
                         <div class="layui-col-md12">
                             <label class="layui-form-label">培训负责人</label>
@@ -142,6 +135,49 @@
                                 <div id="parentIframe1" style="margin: 0 auto;width: 90%">
                                 </div>
                             </blockquote>
+                        </div>
+                        <div class="layui-col-md12">
+                            <div class="layui-card">
+                                <div class="layui-card-header">培训资料</div>
+                                <div class="layui-card-body">
+                                    <blockquote class="layui-row layui-elem-quote layui-quote-nm" style="margin-top: 10px; ">
+                                        <div class="layui-col-md11">
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">课件名称</label>
+                                                <div class="layui-input-inline">
+                                                    <input type="text" id="searchDetailInp" class="layui-input" placeholder="搜索">
+                                                </div>
+                                            </div>
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">课件介绍</label>
+                                                <div class="layui-input-inline">
+                                                    <input type="text" id="searchDetailInp" class="layui-input" placeholder="搜索">
+                                                </div>
+                                            </div>
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">课件类型</label>
+                                                <div class="layui-input-inline">
+                                                    <input type="text" id="searchDetailInp" class="layui-input" placeholder="搜索">
+                                                </div>
+                                            </div>
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">课件长度</label>
+                                                <div class="layui-input-inline">
+                                                    <input type="text" id="searchDetailInp" class="layui-input" placeholder="搜索">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-col-md1">
+                                            X
+                                        </div>
+                                    </blockquote>
+                                    <div class="layui-form-item">
+                                        <div class="layui-input-block" style="text-align: center;">
+                                            <button class="layui-btn" id="addCourseInfo">添加课件</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -162,7 +198,7 @@
 
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                            <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
                             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                         </div>
                     </div>
@@ -180,7 +216,8 @@
             layer = layui.layer;
         // 添加参培人员和负责人
         var addTrainersBtn = $('#addTrainers'),
-            addChargerBtn = $('#addCharger');
+            addChargerBtn = $('#addCharger'),
+            addCourseInfoBtn = $('#addCourseInfo');
         addTrainersBtn.on('click', function () {
             layer.open({
                 type: 2,
@@ -198,9 +235,16 @@
                 maxmin: true,
                 content: '../others/charger.html'
             });
+        });
+        addCourseInfoBtn.on('click', function () {
+            console.log(1);
         })
         $(document).on('click', '#delBtn', function () {
             $(this).parent('.userItm').remove();
+        })
+        form.on('submit(*)', function (data) {
+            console.log(data.filter);
+            return false;
         })
     });
 

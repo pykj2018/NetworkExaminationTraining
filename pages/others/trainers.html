@@ -61,12 +61,12 @@
             });
             // 获得表格内容传入父层
             getTableBtn.on('click', function () {
-                parent.layer.close(index);
+                // parent.layer.close(index);
                 var checkStatus = table.checkStatus('trainersTable'),
                     data = checkStatus.data,
                     domStr = '<div class="item"><button class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button></div>';
                 for (var i = 0; i < data.length; i++) {
-                    domStr =  '<div class="layui-inline item userItm"><span style="margin-right:5px">'+data[i].id+'</span><button id="delBtn" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon" style="font-size:12px"></i></button></div>';
+                    domStr = '<div class="layui-inline item userItm"><span style="margin-right:5px">' + data[i].id + '</span><button id="delBtn" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon" style="font-size:12px"></i></button></div>';
                     parent.$('#parentIframe').append(domStr);
                 }
             });
