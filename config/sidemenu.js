@@ -14,10 +14,14 @@ var dataArray = [
     }],
     [{
         'item': '发布培训任务',
-        'href': 'pages/train/push_train.html',
-        'submenu': [
-            '查询',
-            '搜索'
+        'submenu': [{
+                'xitem': '查询',
+                'xhref': 'pages/train/push_train.html'
+            },
+            {
+                'xitem': '搜索',
+                'xhref': 'pages/train/push_train.html'
+            }
         ]
     }, {
         'item': '培训任务查询',

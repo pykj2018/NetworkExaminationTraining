@@ -118,10 +118,10 @@
 <script id="site" type="text/html">
     {{# layui.each(d.list, function(index, item){ }}
     <li class="layui-nav-item">
-        <a class="" href="javascript:;">{{item.item}}</a> {{# if(item.submenu.length){ }}
+        <a class="" target='myIframe' href="{{item.href?item.href:item.submenu[0].xhref}}">{{item.item}}</a> {{# if(item.submenu.length){ }}
         <dl class="layui-nav-child">
             {{# layui.each(item.submenu, function(index, xitem){ }}
-            <dd><a href="javascript:;">{{xitem}}</a></dd>
+            <dd><a target='myIframe' href="{{xitem.xhref?xitem.xhref:''}}">{{xitem.xitem}}</a></dd>
             {{# }); }} {{# if(item.submenu.length === 0){ }} {{# } }}
         </dl>
         {{# } else { }} {{# } }}
