@@ -83,6 +83,7 @@
                     <div class="layui-input-block">
                         <div class="layui-upload">
                             <button type="button" class="layui-btn layui-btn" id="testList">选择多文件</button>
+                            <input type="file" multiple/formData name="myfile"> 
                             <div class="layui-upload-list">
                                 <table class="layui-table">
                                     <thead>
@@ -145,7 +146,7 @@
 
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <button type="button" id="upLoadFile"  class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+                        <button type="button" id="upLoadFile" class="layui-btn" lay-submit lay-filter="*">立即提交</button>
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
@@ -220,8 +221,9 @@
         };
         //监听提交
         form.on('submit(*)', function (data) {
-            var files = $('input[type="file"]').prop('files');
+            var files = $('input[name="file"]').prop('files');
             console.log(files);
+            console.log(data);
             return false;
         });
         // 文件+表单所有信息上传
@@ -231,7 +233,7 @@
             accept: 'file',
             multiple: true,
             auto: false,
-            bindAction: '#upLoadFile',
+            bindAction: '#upLoadFile1',
             choose: function (obj) {
                 var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
                 //读取本地文件
