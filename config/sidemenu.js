@@ -34,7 +34,19 @@ var dataArray = [
     }, {
         'item': '发布考试任务',
         'href': 'pages/train/push_exam.html',
-        'submenu': []
+        'submenu': [{
+                'xitem': '发布',
+                'xhref': 'pages/train/push_exam.html'
+            },
+            {
+                'xitem': '发布1',
+                'xhref': 'pages/train/push_exam.1.html'
+            },
+            {
+                'xitem': '发布2',
+                'xhref': 'pages/train/push_exam.2.html'
+            }
+        ]
     }, {
         'item': '考试影像分析',
         'href': 'pages/train/analysis_video.html',
@@ -42,15 +54,21 @@ var dataArray = [
     }, {
         'item': '调查问卷管理',
         'href': 'pages/train/questionnaire.html',
-<<<<<<< HEAD
-    }, {
-        'item': '调查问卷管理',
-        'href': 'pages/others/librarylist.html',
     }, {
         'item': '资料添加管理',
         'href': 'pages/train/libraryUpload.html',
-=======
-        'submenu': []
->>>>>>> 5e60b2eec3660fa8acaa72a54ca726b3037f04d6
+        'submenu': [{
+                'xitem': '调查问卷添加',
+                'xhref': 'pages/train/questionnaire.html',
+            },
+            {
+                'xitem': '调查问卷查询',
+                'xhref': 'pages/train/questionnaire1.html'
+            },
+            {
+                'xitem': '调查问卷分析',
+                'xhref': 'pages/train/questionnaire2.html'
+            }
+        ]
     }]
 ]
