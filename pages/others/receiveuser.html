@@ -100,9 +100,10 @@
                 for (let i = 0; i < data.length; i++) { //遍历获取id
                     catchArr.push({
                         'id': data[i].id,
-                        'name': data[i].name
+                        'name': data[i].title
                     });
                 }
+                console.table(catchArr);
                 parent.userArr = parent.unique(parent.userArr.concat(catchArr)); //更新父层ifream，存储数据
 
                 parent.$('#parentIframeUser').empty();

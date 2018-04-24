@@ -231,13 +231,19 @@
 
         //验证去重
         function unique(array) {
+            itemToStrArr = array.map(function(i) {
+                return JSON.stringify(i);
+            })
+
             var n = [];
-            for (let i = 0; i < array.length; i++) {
-                if (n.indexOf(array[i]) == -1) {
-                    n.push(array[i]);
+            for (let i = 0; i < itemToStrArr.length; i++) {
+                if (n.indexOf(itemToStrArr[i]) == -1) {
+                    n.push(itemToStrArr[i]);
                 }
             }
-            return n;
+            return n.map(function(i) {
+                return JSON.parse(i);
+            })
         }
     </script>
 </body>
