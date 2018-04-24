@@ -29,8 +29,7 @@
             <button id="searchBtn" class="layui-btn">搜索</button>
         </div>
         <div>
-            <table class="layui-table" lay-data="{url:'../../config/table.js?page=1&limit=10', page:true, id:'chargerTable',limit:5,limits:[10,20,30]}"
-                lay-filter="receiveUserTable">
+            <table class="layui-table" lay-data="{url:'../../config/table.js?page=1&limit=10', page:true, id:'chargerTable',limit:5,limits:[10,20,30]}" lay-filter="chargerTable">
                 <thead>
                     <tr>
                         <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
@@ -44,12 +43,15 @@
             <button id="getTableBtn" class="layui-btn">确定</button>
         </div>
     </div>
-    <script src="../../lib/jQuery.js"></script>
+
     <script src="../../lib/laydate/laydate.js"></script>
     <script src="../../lib/layui/layui.js"></script>
     <script>
-        layui.use(['form', 'layer', 'table'], function () {
+        var index = parent.layer.getFrameIndex(window.name);
+
+        layui.use(['form', 'layer', 'table'], function() {
             var table = layui.table,
+                $ = layui.jquery,
                 getTableBtn = $('#getTableBtn'),
                 searchBtn = $('#searchBtn'),
                 index = parent.layer.getFrameIndex(window.name);
@@ -69,19 +71,41 @@
                     parent.$('#parentIframe1').append(domStr);
                 }
             });
+
             // 搜索
-            searchBtn.on('click', function () {
+            searchBtn.on('click', function() {
                 // 重新渲染表格
                 var searchDetail = $('#searchDetailInp').val()
                 if (searchDetail != '') {
-                    table.reload('receiveUserTable', {
-                        url: '../../config/table1.js'
-                        , where: {
+                    table.reload('chargerTable', {
+                        url: '../../config/table1.js',
+                        where: {
 
                         } //设定异步数据接口的额外参数
                     });
                 } else {
                     layer.msg('搜索内容不能为空');
+                }
+            });
+
+            var catchArr = [];
+
+            // 获得表格内容传入父层
+            getTableBtn.on('click', function() {
+                parent.layer.close(index);
+                var checkStatus = table.checkStatus('chargerTable'),
+                    data = checkStatus.data,
+                    domStr = '<div class="item"><button class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button></div>';
+
+                for (let i = 0; i < data.length; i++) { //遍历获取id
+                    catchArr.push(data[i].id);
+                }
+                parent.userArr = parent.unique(parent.userArr.concat(catchArr)).sort(); //更新父层ifream，存储数据
+
+                parent.$('#parentIframeUser').empty();
+                for (var i = 0; i < parent.userArr.length; i++) {
+                    domStr = '<div class="layui-inline item userItm"><span style="margin-right:5px">' + parent.userArr[i] + '</span><button id="delBtn_u" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon" style="font-size:12px"></i></button></div>';
+                    parent.$('#parentIframeUser').append(domStr);
                 }
             });
         });
