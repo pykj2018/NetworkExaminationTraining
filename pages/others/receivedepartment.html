@@ -29,7 +29,8 @@
             <button id="searchBtn" class="layui-btn">搜索</button>
         </div>
         <div>
-            <table class="layui-table" lay-data="{url:'../../config/table.js?page=1&limit=10', page:true, id:'chargerTable',limit:5,limits:[10,20,30]}" lay-filter="chargerTable">
+            <table class="layui-table" lay-data="{url:'../../config/table.js?page=1&limit=10', page:true, id:'chargerTable',limit:5,limits:[10,20,30]}"
+                lay-filter="chargerTable">
                 <thead>
                     <tr>
                         <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
@@ -47,7 +48,7 @@
     <script src="../../lib/laydate/laydate.js"></script>
     <script src="../../lib/layui/layui.js"></script>
     <script>
-        layui.use(['form', 'layer', 'table'], function() {
+        layui.use(['element', 'form', 'layer', 'table'], function () {
             var table = layui.table,
                 getTableBtn = $('#getTableBtn'),
                 searchBtn = $('#searchBtn'),
@@ -55,10 +56,10 @@
             table.init('chargerTable', {
                 height: 290,
                 limit: 10
-                    //支持所有基础参数
+                //支持所有基础参数
             });
             // 获得表格内容传入父层
-            getTableBtn.on('click', function() {
+            getTableBtn.on('click', function () {
                 // parent.layer.close(index);
                 var checkStatus = table.checkStatus('chargerTable'),
                     data = checkStatus.data,
@@ -69,7 +70,7 @@
                 }
             });
             // 搜索
-            searchBtn.on('click', function() {
+            searchBtn.on('click', function () {
                 // 重新渲染表格
                 var searchDetail = $('#searchDetailInp').val()
                 if (searchDetail != '') {
