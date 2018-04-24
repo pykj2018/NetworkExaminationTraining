@@ -197,12 +197,12 @@
 
             $(document).on('click', '#delBtn_u', function() {
                 $(this).parent('.userItm').remove();
-                remove(userArr, $(this).siblings('span').text())
+                removeItem(userArr, $(this).siblings('span').text())
             })
 
             $(document).on('click', '#delBtn_d', function() {
                 $(this).parent('.userItm').remove();
-                remove(departmentArr, $(this).siblings('span').text())
+                removeItem(departmentArr, $(this).siblings('span').text())
             })
 
         });
@@ -217,12 +217,12 @@
 
         function ins(arr, e) {
             for (let i = 0; i < arr.length; i++) {
-                if (arr[i] == e) return i;
+                if (arr[i].id == e) return i;
             }
             return -1;
         }
 
-        function remove(arr, e) {
+        function removeItem(arr, e) {
             var index = ins(arr, e);
             if (index > -1) {
                 arr.splice(index, 1);
