@@ -83,7 +83,6 @@
                     <div class="layui-input-block">
                         <div class="layui-upload">
                             <button type="button" class="layui-btn layui-btn" id="testList">选择多文件</button>
-                            <input type="file" multiple/formData name="myfile"> 
                             <div class="layui-upload-list">
                                 <table class="layui-table">
                                     <thead>
@@ -219,11 +218,31 @@
                 return allReceiveDepartment;
             }
         };
+        // 获取所有上传文件名字
+        function getAllUploadFilesName() {
+            var files = $('input[name="file"]').prop('files'),
+                fileArr = [];
+            for (var i = 0; i < files.length; i++) {
+                fileArr.push(files[i].name);
+            }
+            return fileArr;
+        }
         //监听提交
         form.on('submit(*)', function (data) {
-            var files = $('input[name="file"]').prop('files');
-            console.log(files);
-            console.log(data);
+            getAllUploadFilesName();
+            $.ajax({
+                url: '',
+                data: {
+
+                },
+                success: function (res) {
+                    if (res) {
+                        
+                    } else {
+
+                    }
+                }
+            })
             return false;
         });
         // 文件+表单所有信息上传
@@ -233,7 +252,6 @@
             accept: 'file',
             multiple: true,
             auto: false,
-            bindAction: '#upLoadFile1',
             choose: function (obj) {
                 var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
                 //读取本地文件

@@ -22,7 +22,6 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <style>
-
     </style>
     <div class="layui-fluid">
         <div class="layui-row layui-col-space10">
@@ -98,6 +97,7 @@
                                             <label class="layui-form-label">接收部门</label>
                                             <div class="layui-input-block">
                                                 <input type="button" class="layui-btn" id='addReceiveDepartment' value="增加">
+                                                <input type="button" class="layui-btn" id='clearPartDepartmentBtn' value="清空">
                                             </div>
                                             <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px; ">
                                                 <div id="parentIframeDepartment" style="margin: 0 auto;width: 90%">
@@ -108,6 +108,7 @@
                                             <label class="layui-form-label">接收用户</label>
                                             <div class="layui-input-block">
                                                 <input type="button" class="layui-btn" id='addReceiveUser' value="增加">
+                                                <input type="button" class="layui-btn" id='clearPartUserBtn' value="清空">
                                             </div>
                                             <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px; ">
                                                 <div id="parentIframeUser" style="margin: 0 auto;width: 90%">
@@ -153,19 +154,23 @@
         var userArr = [];
         var departmentArr = [];
         var $ = layui.jquery; //需要全局声明，子ifream才能取到
-        layui.use(['form', 'layer'], function() {
+        layui.use(['form', 'layer'], function () {
             var form = layui.form,
-                layer = layui.layer;
-            form.on('submit(form)', function(data) {
+                layer = layui.layer,
+                clearPartDepartmentBtn = $('#clearPartDepartmentBtn'),
+                clearPartUserBtn = $('#clearPartUserBtn'),
+                addReceiveDepartment = $('#addReceiveDepartment'),
+                parentIframeDepartment = $('#parentIframeDepartment'),
+                parentIframeUser = $('#parentIframeUser')
+            addReceiveUser = $('#addReceiveUser');
+            form.on('submit(form)', function (data) {
                 console.log(data.field)
                 getAllDepartment();
                 getAllUser();
                 return false;
-            })
-            var addReceiveDepartment = $('#addReceiveDepartment'),
-                addReceiveUser = $('#addReceiveUser');
+            });
 
-            addReceiveUser.on('click', function() {
+            addReceiveUser.on('click', function () {
                 layer.open({
                     type: 2,
                     area: ['700px', '450px'],
@@ -173,9 +178,8 @@
                     maxmin: true,
                     content: '../others/receiveuser.html',
                 });
-
             })
-            addReceiveDepartment.on('click', function() {
+            addReceiveDepartment.on('click', function () {
                 layer.open({
                     type: 2,
                     area: ['700px', '450px'],
@@ -184,7 +188,27 @@
                     content: '../others/receivedepartment.html'
                 });
             });
-
+            // 清空选区事件
+            clearPartDepartmentBtn.on('click', function () {
+                layer.confirm('确认清空?', {
+                    btn: ['确认', '取消'] //按钮
+                }, function () {
+                    layer.msg('清除成功', { icon: 1 });
+                    parentIframeDepartment.children().remove();
+                }, function () {
+                    layer.close();
+                });
+            });
+            clearPartUserBtn.on('click', function () {
+                layer.confirm('确认清空?', {
+                    btn: ['确认', '取消'] //按钮
+                }, function () {
+                    layer.msg('清除成功', { icon: 1 });
+                    parentIframeUser.children().remove();
+                }, function () {
+                    layer.close();
+                });
+            });
             function getAllDepartment() {
                 var part = $('#parentIframeDepartment');
                 console.log((part).children());
@@ -195,12 +219,12 @@
                 console.log((part1).children());
             }
 
-            $(document).on('click', '#delBtn_u', function() {
+            $(document).on('click', '#delBtn_u', function () {
                 $(this).parent('.userItm').remove();
                 removeItem(userArr, $(this).siblings('span').text())
             })
 
-            $(document).on('click', '#delBtn_d', function() {
+            $(document).on('click', '#delBtn_d', function () {
                 $(this).parent('.userItm').remove();
                 removeItem(departmentArr, $(this).siblings('span').text())
             })
