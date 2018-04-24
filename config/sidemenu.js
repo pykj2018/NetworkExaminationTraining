@@ -42,15 +42,15 @@ var dataArray = [
     }, {
         'item': '调查问卷管理',
         'href': 'pages/train/questionnaire.html',
-<<<<<<< HEAD
+        'submenu': []
+
     }, {
         'item': '调查问卷管理',
         'href': 'pages/others/librarylist.html',
+        'submenu': []
     }, {
         'item': '资料添加管理',
         'href': 'pages/train/libraryUpload.html',
-=======
         'submenu': []
->>>>>>> 5e60b2eec3660fa8acaa72a54ca726b3037f04d6
     }]
 ]
