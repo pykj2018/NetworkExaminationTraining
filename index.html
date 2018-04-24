@@ -65,7 +65,7 @@
         <div class="layui-side layui-bg-black">
             <div class="layui-side-scroll">
                 <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-                <ul class="layui-nav layui-nav-tree sideNav" lay-filter="test">
+                <ul class="layui-nav layui-nav-tree sideNav" lay-filter="test" id="view">
                     <!-- js渲染区 -->
                 </ul>
             </div>
@@ -87,35 +87,46 @@
 <script type="text/javascript" src="config/sidemenu.js"></script>
 <script>
     //JavaScript代码区域
-    window.onload = function () {
-        render(0);
-        $(document).on('click', '.layui-nav-item', function () {
-            $(this).addClass('layui-this');
-            $(this).siblings().removeClass('layui-this');
-        })
-    }
-    layui.use('element', function () {
-        var element = layui.element;
-        element.on('nav(nav)', function (data) {
-            // console.log(data[0].dataset.index);
-            $("iframe[name=myIframe]").attr('src', dataArray[data[0].dataset.index][0].href);
-            //加载侧边导航
-            render(data[0].dataset.index);
-
-        })
-    });
 
     //侧边导航渲染
-    function render(e) {
-        // console.log(e);
-        $(".sideNav").empty();
-        for (var i = 0; i < dataArray[e].length; i++) {
-            var template = "<li class='layui-nav-item'><a target='myIframe' href='" +
-                dataArray[e][i].href + "'>" +
-                dataArray[e][i].item + "</a></li>";
-            $(".sideNav").append(template);
-        }
+    function laytpl(e) {
+        layui.use(['laytpl', 'element'], function() {
+            var laytpl = layui.laytpl;
+            var element = layui.element;
+
+            var data = {
+                'list': dataArray[e]
+            };
+            laytpl(site.innerHTML).render(data, function(html) {
+                document.getElementById('view').innerHTML = html;
+            });
+            element.init();
+        })
     }
+
+    layui.use('element', function() {
+        var element = layui.element;
+        var $ = layui.jquery;
+        laytpl(0);
+        element.on('nav(nav)', function(data) {
+            laytpl(data[0].dataset.index);
+            // console.log(data[0].dataset.index);
+            $("iframe[name=myIframe]").attr('src', dataArray[data[0].dataset.index][0].href);
+        });
+    });
+</script>
+<script id="site" type="text/html">
+    {{# layui.each(d.list, function(index, item){ }}
+    <li class="layui-nav-item">
+        <a class="" target='myIframe' href="{{item.href?item.href:item.submenu[0].xhref}}">{{item.item}}</a> {{# if(item.submenu.length){ }}
+        <dl class="layui-nav-child">
+            {{# layui.each(item.submenu, function(index, xitem){ }}
+            <dd><a target='myIframe' href="{{xitem.xhref?xitem.xhref:''}}">{{xitem.xitem}}</a></dd>
+            {{# }); }} {{# if(item.submenu.length === 0){ }} {{# } }}
+        </dl>
+        {{# } else { }} {{# } }}
+    </li>
+    {{# }); }} {{# if(d.list.length === 0){ }} 无数据 {{# } }}
 </script>
 
 </html>
