@@ -56,12 +56,12 @@
                 searchBtn = $('#searchBtn'),
                 index = parent.layer.getFrameIndex(window.name);
             table.init('receiveUserTable', {
-                height: 290
-                , limit: 10
-                //支持所有基础参数
+                height: 290,
+                limit: 10
+                    //支持所有基础参数
             });
             // 获得表格内容传入父层
-            getTableBtn.on('click', function () {
+            getTableBtn.on('click', function() {
                 // parent.layer.close(index);
                 var checkStatus = table.checkStatus('receiveUserTable'),
                     data = checkStatus.data,
@@ -98,13 +98,16 @@
                     domStr = '<div class="item"><button class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button></div>';
 
                 for (let i = 0; i < data.length; i++) { //遍历获取id
-                    catchArr.push(data[i].id);
+                    catchArr.push({
+                        'id': data[i].id,
+                        'name': data[i].name
+                    });
                 }
-                parent.userArr = parent.unique(parent.userArr.concat(catchArr)).sort(); //更新父层ifream，存储数据
+                parent.userArr = parent.unique(parent.userArr.concat(catchArr)); //更新父层ifream，存储数据
 
                 parent.$('#parentIframeUser').empty();
                 for (var i = 0; i < parent.userArr.length; i++) {
-                    domStr = '<div class="layui-inline item userItm"><span style="margin-right:5px">' + parent.userArr[i] + '</span><button id="delBtn_u" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon" style="font-size:12px"></i></button></div>';
+                    domStr = '<div class="layui-inline item userItm"><span style="margin-right:5px">' + parent.userArr[i].id + '</span><button id="delBtn_u" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon" style="font-size:12px"></i></button></div>';
                     parent.$('#parentIframeUser').append(domStr);
                 }
             });
