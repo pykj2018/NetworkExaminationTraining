@@ -14,23 +14,21 @@ var dataArray = [
     }],
     [{
         'item': '发布培训任务',
-        'submenu': [{
-                'xitem': '查询',
-                'xhref': 'pages/train/push_train.html'
-            },
-            {
-                'xitem': '搜索',
-                'xhref': 'pages/train/push_train.html'
-            }
-        ]
+        'href': 'pages/train/push_train.html',
+        'submenu': []
     }, {
         'item': '培训任务查询',
         'href': 'pages/train/query_train.html',
         'submenu': []
     }, {
         'item': '学习资料库',
-        'href': 'pages/train/library.html',
-        'submenu': []
+        'submenu': [{
+            'xitem': '学习资料库',
+            'xhref': 'pages/train/library.html'
+        }, {
+            'xitem': '学习资料库上传',
+            'xhref': 'pages/train/libraryUpload.html'
+        }]
     }, {
         'item': '发布考试任务',
         'href': 'pages/train/push_exam.html',
@@ -43,7 +41,7 @@ var dataArray = [
                 'xhref': 'pages/train/push_exam.1.html'
             },
             {
-                'xitem': '发布2',
+                'xitem': '考试任务查询',
                 'xhref': 'pages/train/push_exam.2.html'
             }
         ]
@@ -53,9 +51,6 @@ var dataArray = [
         'submenu': []
     }, {
         'item': '调查问卷管理',
-        'href': 'pages/train/questionnaire.html',
-    }, {
-        'item': '资料添加管理',
         'href': 'pages/train/libraryUpload.html',
         'submenu': [{
                 'xitem': '调查问卷添加',

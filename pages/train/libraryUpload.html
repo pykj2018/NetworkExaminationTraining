@@ -72,7 +72,7 @@
                     <label class="layui-form-label">选择资料</label>
                     <div class="layui-input-block">
                         <div class="layui-upload">
-                            <button type="button" class="layui-btn layui-btn-normal" id="testList">选择多文件</button>
+                            <button type="button" class="layui-btn layui-btn" id="testList">选择多文件</button>
                             <div class="layui-upload-list">
                                 <table class="layui-table">
                                     <thead>
@@ -122,10 +122,20 @@
                 </div>
 
                 <div class="layui-form-item layui-row">
-                    <div class="layui-col-md3">
-                        <label class="layui-form-label">发布时间</label>
-                        <div class="layui-input-block">
-                            <input type="text" class="layui-input" id="data" placeholder="请选择日期">
+                    <div class="layui-col-md6">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">有效时间</label>
+                            <div class="layui-form-item layui-inline">
+                                <div class="layui-input-inline">
+                                    <input type="text" placeholder="开始时间" id="StartTime" class="layui-input">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item layui-inline">
+                                <div class="layui-input-inline">
+                                    <input type="text" placeholder="结束时间" id="EndTime" class="layui-input">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -144,44 +154,36 @@
 <script src="../../lib/layui/layui.js"></script>
 <script src="../../lib/layui/lay/modules/laytpl.js"></script>
 <script>
-    layui.use(['element', 'form', 'upload'], function () {
+    layui.use(['element', 'form', 'upload'], function() {
         var element = layui.element,
             form = layui.form,
             $ = layui.jquery,
             upload = layui.upload;
         //监听提交
-        form.on('submit(*)', function (data) {
+        form.on('submit(*)', function(data) {
             return false;
         });
-        var demoListView = $('#demoList')
-            , uploadListIns = upload.render({
-                elem: '#testList'
-                , url: '/upload/'
-                , accept: 'file'
-                , multiple: true
-                , auto: false
-                , bindAction: '#testListAction'
-                , choose: function (obj) {
+        var demoListView = $('#demoList'),
+            uploadListIns = upload.render({
+                elem: '#testList',
+                url: '/upload/',
+                accept: 'file',
+                multiple: true,
+                auto: false,
+                bindAction: '#testListAction',
+                choose: function(obj) {
                     var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
                     //读取本地文件
-                    obj.preview(function (index, file, result) {
-                        var tr = $(['<tr id="upload-' + index + '">'
-                            , '<td>' + file.name + '</td>'
-                            , '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>'
-                            , '<td>等待上传</td>'
-                            , '<td>'
-                            , '<button class="layui-btn layui-btn-mini demo-reload layui-hide">重传</button>'
-                            , '<button class="layui-btn layui-btn-mini layui-btn-danger demo-delete">删除</button>'
-                            , '</td>'
-                            , '</tr>'].join(''));
+                    obj.preview(function(index, file, result) {
+                        var tr = $(['<tr id="upload-' + index + '">', '<td>' + file.name + '</td>', '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>', '<td>等待上传</td>', '<td>', '<button class="layui-btn layui-btn-mini demo-reload layui-hide">重传</button>', '<button class="layui-btn layui-btn-mini layui-btn-danger demo-delete">删除</button>', '</td>', '</tr>'].join(''));
 
                         //单个重传
-                        tr.find('.demo-reload').on('click', function () {
+                        tr.find('.demo-reload').on('click', function() {
                             obj.upload(index, file);
                         });
 
                         //删除
-                        tr.find('.demo-delete').on('click', function () {
+                        tr.find('.demo-delete').on('click', function() {
                             delete files[index]; //删除对应的文件
                             tr.remove();
                             uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
@@ -189,29 +191,34 @@
 
                         demoListView.append(tr);
                     });
-                }
-                , done: function (res, index, upload) {
+                },
+                done: function(res, index, upload) {
                     if (res.code == 0) { //上传成功
-                        var tr = demoListView.find('tr#upload-' + index)
-                            , tds = tr.children();
+                        var tr = demoListView.find('tr#upload-' + index),
+                            tds = tr.children();
                         tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
                         tds.eq(3).html(''); //清空操作
                         return delete this.files[index]; //删除文件队列已经上传成功的文件
                     }
                     this.error(index, upload);
-                }
-                , error: function (index, upload) {
-                    var tr = demoListView.find('tr#upload-' + index)
-                        , tds = tr.children();
+                },
+                error: function(index, upload) {
+                    var tr = demoListView.find('tr#upload-' + index),
+                        tds = tr.children();
                     tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
                     tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
                 }
             });
     });
+
     //日期范围
     laydate.render({
-        elem: '#data',
-        range: true
+        elem: '#StartTime',
+        type: 'datetime'
+    });
+    laydate.render({
+        elem: '#EndTime',
+        type: 'datetime'
     });
 </script>
 
