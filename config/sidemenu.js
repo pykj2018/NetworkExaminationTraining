@@ -27,5 +27,11 @@ var dataArray = [
     }, {
         'item': '调查问卷管理',
         'href': 'pages/train/questionnaire.html',
+    }, {
+        'item': '调查问卷管理',
+        'href': 'pages/others/librarylist.html',
+    }, {
+        'item': '资料添加管理',
+        'href': 'pages/train/libraryUpload.html',
     }]
 ]
