@@ -100,7 +100,7 @@
                                                 <input type="button" class="layui-btn" id='addReceiveDepartment' value="增加">
                                             </div>
                                             <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px; ">
-                                                <div id="parentIframe" style="margin: 0 auto;width: 90%">
+                                                <div id="parentIframeDepartment" style="margin: 0 auto;width: 90%">
                                                 </div>
                                             </blockquote>
                                         </div>
@@ -110,7 +110,7 @@
                                                 <input type="button" class="layui-btn" id='addReceiveUser' value="增加">
                                             </div>
                                             <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px; ">
-                                                <div id="parentIframe1" style="margin: 0 auto;width: 90%">
+                                                <div id="parentIframeUser" style="margin: 0 auto;width: 90%">
                                                 </div>
                                             </blockquote>
                                         </div>
@@ -149,8 +149,10 @@
     </div>
     <script type="text/javascript" src="../../lib/laydate/laydate.js"></script>
     <script type="text/javascript" src="../../lib/layui/layui.all.js"></script>
-    <script type="text/javascript" src="../../lib/jQuery.js"></script>
     <script>
+        var userArr = [];
+        var departmentArr = [];
+        var $ = layui.jquery; //需要全局声明，子ifream才能取到
         layui.use(['form', 'layer'], function() {
             var form = layui.form,
                 layer = layui.layer;
@@ -162,13 +164,14 @@
             })
             var addReceiveDepartment = $('#addReceiveDepartment'),
                 addReceiveUser = $('#addReceiveUser');
+
             addReceiveUser.on('click', function() {
                 layer.open({
                     type: 2,
                     area: ['700px', '450px'],
                     fixed: false, //不固定
                     maxmin: true,
-                    content: '../others/receiveuser.html'
+                    content: '../others/receiveuser.html',
                 });
 
             })
@@ -183,16 +186,23 @@
             });
 
             function getAllDepartment() {
-                var part = $('#parentIframe');
+                var part = $('#parentIframeDepartment');
                 console.log((part).children());
             }
 
             function getAllUser() {
-                var part1 = $('#parentIframe1');
+                var part1 = $('#parentIframeUser');
                 console.log((part1).children());
             }
-            $(document).on('click', '#delBtn', function () {
+
+            $(document).on('click', '#delBtn_u', function() {
                 $(this).parent('.userItm').remove();
+                remove(userArr, $(this).siblings('span').text())
+            })
+
+            $(document).on('click', '#delBtn_d', function() {
+                $(this).parent('.userItm').remove();
+                remove(departmentArr, $(this).siblings('span').text())
             })
 
         });
@@ -204,6 +214,31 @@
             elem: '#EndTime',
             type: 'datetime'
         });
+
+        function ins(arr, e) {
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i] == e) return i;
+            }
+            return -1;
+        }
+
+        function remove(arr, e) {
+            var index = ins(arr, e);
+            if (index > -1) {
+                arr.splice(index, 1);
+            }
+        }
+
+        //验证去重
+        function unique(array) {
+            var n = [];
+            for (let i = 0; i < array.length; i++) {
+                if (n.indexOf(array[i]) == -1) {
+                    n.push(array[i]);
+                }
+            }
+            return n;
+        }
     </script>
 </body>
 

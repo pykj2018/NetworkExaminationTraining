@@ -43,12 +43,12 @@
             <button id="getTableBtn" class="layui-btn">确定</button>
         </div>
     </div>
-    <script src="../../lib/jQuery.js"></script>
     <script src="../../lib/laydate/laydate.js"></script>
     <script src="../../lib/layui/layui.js"></script>
     <script>
         layui.use(['form', 'layer', 'table'], function() {
             var table = layui.table,
+                $ = layui.jquery,
                 getTableBtn = $('#getTableBtn'),
                 searchBtn = $('#searchBtn'),
                 index = parent.layer.getFrameIndex(window.name);
@@ -57,17 +57,7 @@
                 limit: 10
                     //支持所有基础参数
             });
-            // 获得表格内容传入父层
-            getTableBtn.on('click', function() {
-                // parent.layer.close(index);
-                var checkStatus = table.checkStatus('chargerTable'),
-                    data = checkStatus.data,
-                    domStr = '<div class="item"><button class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button></div>';
-                for (var i = 0; i < data.length; i++) {
-                    domStr = '<div class="layui-inline item userItm"><span style="margin-right:5px">' + data[i].id + '</span><button id="delBtn" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon" style="font-size:12px"></i></button></div>';
-                    parent.$('#parentIframe').append(domStr);
-                }
-            });
+
             // 搜索
             searchBtn.on('click', function() {
                 // 重新渲染表格
@@ -83,6 +73,28 @@
                     layer.msg('搜索内容不能为空');
                 }
             });
+
+            var catchArr = [];
+
+            // 获得表格内容传入父层
+            getTableBtn.on('click', function() {
+                parent.layer.close(index);
+                var checkStatus = table.checkStatus('chargerTable'),
+                    data = checkStatus.data,
+                    domStr = '<div class="item"><button class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button></div>';
+
+                for (let i = 0; i < data.length; i++) { //遍历获取id
+                    catchArr.push(data[i].id);
+                }
+                parent.departmentArr = parent.unique(parent.departmentArr.concat(catchArr)).sort(); //更新父层ifream，存储数据
+
+                parent.$('#parentIframeDepartment').empty();
+                for (var i = 0; i < parent.departmentArr.length; i++) {
+                    domStr = '<div class="layui-inline item userItm"><span style="margin-right:5px">' + parent.departmentArr[i] + '</span><button id="delBtn_d" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon" style="font-size:12px"></i></button></div>';
+                    parent.$('#parentIframeDepartment').append(domStr);
+                }
+            });
+
         });
     </script>
 </body>
