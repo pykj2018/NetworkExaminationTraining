@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -53,6 +52,17 @@
                         </div>
                     </div>
                     <div class="layui-col-md3">
+                        <label class="layui-form-label">资料类型</label>
+                        <div class="layui-input-block">
+                            <select name="city" lay-verify="required">
+                                <option value=""></option>
+                                <option value="0">10%</option>
+                                <option value="0">20%</option>
+                                <option value="0">30%</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-col-md3">
                         <label class="layui-form-label">上传部门</label>
                         <div class="layui-input-block">
                             <select name="city" lay-verify="required">
@@ -69,64 +79,57 @@
                             <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
                         </div>
                     </div>
-                    <div class="layui-col-md3">
-                        <button class="layui-btn">搜索</button>
-                    </div>
+
                 </div>
 
                 <div class="layui-form-item layui-row">
-                    <div class="layui-col-md3">
-                        <label class="layui-form-label">培训时间</label>
-                        <div class="layui-input-block">
-                            <input type="text" class="layui-input" id="data" placeholder="请选择日期">
+                    <div class="layui-col-md6">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">上传时间</label>
+                            <div class="layui-form-item layui-inline">
+                                <div class="layui-input-inline">
+                                    <input type="text" placeholder="开始时间" id="StartTime" class="layui-input">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item layui-inline">
+                                <div class="layui-input-inline">
+                                    <input type="text" placeholder="结束时间" id="EndTime" class="layui-input">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="layui-col-md3">
-                        <label class="layui-form-label">资料类型</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-col-md4">
-                        <label class="layui-form-label">上传资料</label>
-                        <div class="layui-btn-group">
-                            <button class="layui-btn">搜索</button>
-                            <button class="layui-btn">下载</button>
-                            <button class="layui-btn">删除资料</button>
-                        </div>
+                    <div class="layui-col-md6">
+                        <label class="layui-form-label"></label>
+                        <a href="../others/librarylist.html" class="layui-btn">搜索</a>
                     </div>
                 </div>
             </div>
-
-            <div class="layui-card">
-                <div class="layui-card-header">文档资料</div>
-                <div class="layui-card-body">
-                    <div class="layui-btn-group">
-                        <button class="layui-btn">规章</button>
-                        <button class="layui-btn">非正常</button>
-                        <button class="layui-btn">故障处理</button>
-                        <button class="layui-btn">文件处理</button>
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">文档资料</div>
+                        <div class="layui-card-body">
+                            <div class="layui-btn-group">
+                                <a href="../others/librarylist.html" class="layui-btn">规章</a>
+                                <a href="../others/librarylist.html" class="layui-btn">非正常</a>
+                                <a href="../others/librarylist.html" class="layui-btn">故障处理</a>
+                                <a href="../others/librarylist.html" class="layui-btn">文件处理</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="layui-card">
-                <div class="layui-card-header">微课资料</div>
-                <div class="layui-card-body">
-                    <div class="layui-btn-group">
-                        <button class="layui-btn">故障处理</button>
-                        <button class="layui-btn">非正常</button>
-                        <button class="layui-btn">文件视频</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="layui-card">
-                <div class="layui-card-header">文档资料</div>
-                <div class="layui-card-body">
-                    <div class="layui-btn-group">
-                        <button class="layui-btn">LKJ培训</button>
-                        <button class="layui-btn">人身安全培训</button>
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">微课资料</div>
+                        <div class="layui-card-body">
+                            <div class="layui-btn-group">
+                                <a href="../others/librarylist.html" class="layui-btn">规章</a>
+                                <a href="../others/librarylist.html" class="layui-btn">非正常</a>
+                                <a href="../others/librarylist.html" class="layui-btn">故障处理</a>
+                                <a href="../others/librarylist.html" class="layui-btn">文件处理</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -144,10 +147,15 @@
     layui.use('form', function () {
         var form = layui.form;
     });
+
     //日期范围
     laydate.render({
-        elem: '#data',
-        range: true
+        elem: '#StartTime',
+        type: 'datetime'
+    });
+    laydate.render({
+        elem: '#EndTime',
+        type: 'datetime'
     });
 </script>
 

@@ -22,6 +22,14 @@
             line-height: 30px;
             margin: 0 auto 30px;
         }
+        
+        .xtable {
+            display: flex;
+        }
+        
+        .xtable table td input {
+            width: 60%;
+        }
     </style>
 </head>
 
@@ -36,26 +44,46 @@
                     <div class="layui-form-item">
                         <div class="layui-col-md3">
                             <label class="layui-form-label">考试通知</label>
-                            <div class="layui-btn-group">
-                                <button class="layui-btn">上传考试通知</button>
+                            <div class="layui-upload">
+                                <button id="upload_1" type="button" class="layui-btn layui-btn">上传考试通知</button>
+                                <input class="layui-upload-file" type="file" accept="" name="file">
+                                <span class="layui-inline layui-upload-choose"></span>
                             </div>
                         </div>
                         <div class="layui-col-md3">
                             <label class="layui-form-label">选择题库</label>
-                            <div class="layui-btn-group">
-                                <button class="layui-btn">点击选择</button>
+                            <div class="layui-upload">
+                                <button id="upload_2" type="button" class="layui-btn layui-btn">点击选择</button>
+                                <input class="layui-upload-file" type="file" accept="" name="file">
+                                <span class="layui-inline layui-upload-choose"></span>
                             </div>
                         </div>
                         <div class="layui-col-md3">
+                            <label class="layui-form-label">监考教师</label>
+                            <div class="layui-btn-group">
+                                <input type="button" class="layui-btn" value="+">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item layui-row">
+                        <div class="layui-col-md3">
                             <label class="layui-form-label">发布部门</label>
                             <div class="layui-btn-group">
-                                <button class="layui-btn">点击选择</button>
+                                <input type="button" class="layui-btn" value="点击选择">
                             </div>
                         </div>
                         <div class="layui-col-md3">
                             <label class="layui-form-label">签收部门</label>
                             <div class="layui-btn-group">
-                                <button class="layui-btn">点击选择</button>
+                                <input type="button" class="layui-btn" value="点击选择">
+                            </div>
+                        </div>
+                        <div class="layui-col-md6">
+                            <label class="layui-form-label">选择人员</label>
+                            <div class="layui-btn-group">
+                                <input type="button" class="layui-btn" value="点击选择">
+                                <input type="button" class="layui-btn" value="人员标识">
                             </div>
                         </div>
                     </div>
@@ -73,35 +101,29 @@
                                 <input type="text" name="title" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                             </div>
                         </div>
-                    </div>
-
-                    <div class="layui-form-item layui-row">
                         <div class="layui-col-md3">
                             <label class="layui-form-label">考试名称</label>
                             <div class="layui-input-block">
                                 <input type="text" name="title" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                             </div>
                         </div>
-                        <div class="layui-col-md3">
-                            <label class="layui-form-label">选择人员</label>
-                            <div class="layui-btn-group">
-                                <button class="layui-btn">点击选择</button>
-                                <button class="layui-btn">人员标识</button>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="layui-form-item layui-row">
-                        <div class="layui-col-md3">
-                            <label class="layui-form-label">考试时间</label>
-                            <div class="layui-input-block">
-                                <input type="text" class="layui-input" id="data1" placeholder="请选择日期">
-                            </div>
-                        </div>
-                        <div class="layui-col-md3">
-                            <label class="layui-form-label">监考教师</label>
-                            <div class="layui-btn-group">
-                                <button class="layui-btn">+</button>
+                        <div class="layui-col-md6">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">考试时间</label>
+                                <div class="layui-form-item layui-inline">
+                                    <div class="layui-input-inline">
+                                        <input type="text" placeholder="开始时间" id="StartTime" class="layui-input">
+                                    </div>
+                                </div>
+
+                                <div class="layui-form-item layui-inline">
+                                    <div class="layui-input-inline">
+                                        <input type="text" placeholder="结束时间" id="EndTime" class="layui-input">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="layui-col-md3 layui-col-md-offset1">
@@ -110,7 +132,7 @@
                     </div>
 
                     <div class="layui-form-item">
-                        <div class="layui-col-md9" style="display: flex">
+                        <div class="layui-col-md9 xtable">
                             <label class="layui-form-label">难度分配</label>
                             <table class="layui-table">
                                 <colgroup>
@@ -153,7 +175,7 @@
                     </div>
 
                     <div class="layui-form-item">
-                        <div class="layui-col-md9" style="display: flex">
+                        <div class="layui-col-md9 xtable">
                             <label class="layui-form-label">分数分配</label>
                             <table class="layui-table">
                                 <colgroup>
@@ -264,10 +286,45 @@
         });
     });
 
+    layui.use('upload', function() {
+        var upload = layui.upload;
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#upload_1',
+            auto: false,
+            url: '/upload/' //上传接口
+                ,
+            done: function(res) {
+                //上传完毕回调
+            },
+            accept: 'file',
+            error: function() {
+                //请求异常回调
+            }
+        });
+        var uploadInst2 = upload.render({
+            elem: '#upload_2',
+            auto: false,
+            url: '/upload/' //上传接口
+                ,
+            done: function(res) {
+                //上传完毕回调
+            },
+            accept: 'file',
+            error: function() {
+                //请求异常回调
+            }
+        });
+    });
+
     //日期范围
     laydate.render({
-        elem: '#data1',
-        range: true
+        elem: '#StartTime',
+        type: 'datetime'
+    });
+    laydate.render({
+        elem: '#EndTime',
+        type: 'datetime'
     });
 </script>
 

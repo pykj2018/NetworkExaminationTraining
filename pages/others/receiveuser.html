@@ -30,7 +30,7 @@
         </div>
         <div>
             <table class="layui-table" lay-data="{url:'../../config/table.js?page=1&limit=10', page:true, id:'chargerTable',limit:5,limits:[10,20,30]}"
-                lay-filter="chargerTable">
+                lay-filter="receiveUserTable">
                 <thead>
                     <tr>
                         <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
@@ -53,7 +53,7 @@
                 getTableBtn = $('#getTableBtn'),
                 searchBtn = $('#searchBtn'),
                 index = parent.layer.getFrameIndex(window.name);
-            table.init('chargerTable', {
+            table.init('receiveUserTable', {
                 height: 290
                 , limit: 10
                 //支持所有基础参数
@@ -61,7 +61,7 @@
             // 获得表格内容传入父层
             getTableBtn.on('click', function () {
                 // parent.layer.close(index);
-                var checkStatus = table.checkStatus('chargerTable'),
+                var checkStatus = table.checkStatus('receiveUserTable'),
                     data = checkStatus.data,
                     domStr = '<div class="item"><button class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button></div>';
                 for (var i = 0; i < data.length; i++) {
@@ -74,7 +74,7 @@
                 // 重新渲染表格
                 var searchDetail = $('#searchDetailInp').val()
                 if (searchDetail != '') {
-                    table.reload('chargerTable', {
+                    table.reload('receiveUserTable', {
                         url: '../../config/table1.js'
                         , where: {
 

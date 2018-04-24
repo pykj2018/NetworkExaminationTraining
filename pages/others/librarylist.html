@@ -21,19 +21,97 @@
         <![endif]-->
     <div class="layui-fluid">
         <div class="layui-card">
-            <div class="layui-card-header">操作</div>
+            <div class="layui-card-header">资料详情列表</div>
             <div class="layui-card-body">
-                <div class="layui-btn">查看</div>
-                <div class="layui-btn">添加</div>
+                <table class="layui-table" lay-data="{url:'../../config/table.js?page=1&limit=10', page:true, height: 450, id:'libraryTable',limit:5,limits:[10,20,30]}"
+                    lay-filter="libraryTable">
+                    <thead>
+                        <tr>
+                            <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
+                            <th lay-data="{field:'id', width:80, sort: true, fixed: true}">ID</th>
+                            <th lay-data="{field:'title', width:80}">资料类型</th>
+                            <th lay-data="{field:'title', width:80}">资料分类</th>
+                            <th lay-data="{field:'title', width:80}">资料名</th>
+                            <th lay-data="{field:'title', width:80}">创建日期</th>
+                            <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}"></th>
+                        </tr>
+                    </thead>
+                </table>
+                <script type="text/html" id="barDemo">
+                    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+                    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                </script>
             </div>
         </div>
-        <div class="layui-card">
-            <div class="layui-card-header">资料详情列表</div>
-            <div class="layui-card-body"></div>
-        </div>
     </div>
+    <script type="text/javascript" src="../../lib/jQuery.js"></script>
     <script type="text/javascript" src="../../lib/laydate/laydate.js"></script>
     <script type="text/javascript" src="../../lib/layui/layui.js"></script>
+    <script>
+        layui.use(['form', 'layer', 'table'], function () {
+            var table = layui.table,
+                getTableBtn = $('#getTableBtn'),
+                searchBtn = $('#searchBtn');
+            // index = parent.layer.getFrameIndex(window.name);
+            //监听工具条
+            table.on('tool(libraryTable)', function (obj) {
+                var data = obj.data;
+                if (obj.event === 'detail') {
+                    layer.msg('ID：' + data.id + ' 的查看操作');
+                } else if (obj.event === 'del') {
+                    layer.confirm('真的删除行么', function (index) {
+                        obj.del();
+                        layer.close(index);
+                    });
+                } else if (obj.event === 'edit') {
+                    layer.alert('编辑行：<br>' + JSON.stringify(data))
+                }
+            });
+            var active = {
+                getCheckData: function () { //获取选中数据
+                    var checkStatus = table.checkStatus('idTest')
+                        , data = checkStatus.data;
+                    layer.alert(JSON.stringify(data));
+                }
+                , getCheckLength: function () { //获取选中数目
+                    var checkStatus = table.checkStatus('idTest')
+                        , data = checkStatus.data;
+                    layer.msg('选中了：' + data.length + ' 个');
+                }
+                , isAll: function () { //验证是否全选
+                    var checkStatus = table.checkStatus('idTest');
+                    layer.msg(checkStatus.isAll ? '全选' : '未全选')
+                }
+            };
+            // 获得表格内容传入父层
+            getTableBtn.on('click', function () {
+                // parent.layer.close(index);
+                var checkStatus = table.checkStatus('libraryTable'),
+                    data = checkStatus.data,
+                    domStr = '<div class="item"><button class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button></div>';
+                for (var i = 0; i < data.length; i++) {
+                    domStr = '<div class="layui-inline item userItm"><span style="margin-right:5px">' + data[i].id + '</span><span class=itemId style="display:none">' + data[i].id + '</span><button id="delBtn" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon" style="font-size:12px"></i></button></div>';
+                    parent.$('#parentIframe1').append(domStr);
+                }
+            });
+            // 搜索
+            searchBtn.on('click', function () {
+                // 重新渲染表格
+                var searchDetail = $('#searchDetailInp').val()
+                if (searchDetail != '') {
+                    table.reload('libraryTable', {
+                        url: '../../config/table1.js',
+                        where: {
+
+                        } //设定异步数据接口的额外参数
+                    });
+                } else {
+                    layer.msg('搜索内容不能为空');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

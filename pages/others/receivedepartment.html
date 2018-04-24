@@ -29,8 +29,8 @@
             <button id="searchBtn" class="layui-btn">搜索</button>
         </div>
         <div>
-            <table class="layui-table" lay-data="{url:'../../config/table.js?page=1&limit=10', page:true, id:'chargerTable',limit:5,limits:[10,20,30]}"
-                lay-filter="chargerTable">
+            <table class="layui-table" lay-data="{url:'../../config/table.js?page=1&limit=10', page:true, id:'receiveDepartmentTable',limit:5,limits:[10,20,30]}"
+                lay-filter="receiveDepartmentTable">
                 <thead>
                     <tr>
                         <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
@@ -53,19 +53,19 @@
                 getTableBtn = $('#getTableBtn'),
                 searchBtn = $('#searchBtn'),
                 index = parent.layer.getFrameIndex(window.name);
-            table.init('chargerTable', {
+                // console.log(index);
+            table.init('receiveDepartmentTable', {
                 height: 290,
                 limit: 10
-                //支持所有基础参数
             });
             // 获得表格内容传入父层
             getTableBtn.on('click', function () {
                 // parent.layer.close(index);
-                var checkStatus = table.checkStatus('chargerTable'),
+                var checkStatus = table.checkStatus('receiveDepartmentTable'),
                     data = checkStatus.data,
                     domStr = '<div class="item"><button class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button></div>';
                 for (var i = 0; i < data.length; i++) {
-                    domStr = '<div class="layui-inline item userItm"><span style="margin-right:5px">' + data[i].id + '</span><button id="delBtn" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon" style="font-size:12px"></i></button></div>';
+                    domStr = '<div class="layui-inline item userItm"><span class="itemId" style="display:none">' + data[i].id + '</span><span style="margin-right:5px">' + data[i].id + '</span><button id="delBtn" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon" style="font-size:12px"></i></button></div>';
                     parent.$('#parentIframe').append(domStr);
                 }
             });
@@ -74,7 +74,7 @@
                 // 重新渲染表格
                 var searchDetail = $('#searchDetailInp').val()
                 if (searchDetail != '') {
-                    table.reload('chargerTable', {
+                    table.reload('receiveDepartmentTable', {
                         url: '../../config/table1.js',
                         where: {
 
