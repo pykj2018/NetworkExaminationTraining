@@ -36,8 +36,8 @@ var addInfoFromTableToIframe = {
         var catchArr = [];
         for (let i = 0; i < data.length; i++) { //遍历获取id
             catchArr.push({
-                'id': data[i].group_id,
-                'name': data[i].group_name
+                'id': data[i]['group_id'],
+                'name': data[i]['group_name']
             });
         }
         return catchArr;
