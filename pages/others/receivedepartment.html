@@ -33,13 +33,6 @@
         <div>
             <table id="receiveDepartmentTable" class="layui-table" lay-data="{height:290, page:true, id:'receiveDepartmentTable',limit:5,limits:[10,20,30]}"
                 lay-filter="receiveDepartmentTable">
-                <!-- <thead>
-                    <tr>
-                        <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
-                        <th lay-data="{field:'id', width:80, sort: true, fixed: true}">ID</th>
-                        <th lay-data="{field:'title', width:80}">用户名</th>
-                    </tr>
-                </thead> -->
             </table>
         </div>
         <div class="layui-btn-container">
@@ -65,8 +58,8 @@
                 page: true,
                 cols: [[ //标题栏  
                     { checkbox: true }
-                    , { field: 'id', title: '创建时间', width: 80 }
-                    , { field: 'paycard', title: '流水编号', width: 120 }
+                    , { field: 'group_id', title: '创建时间', width: 80 }
+                    , { field: 'name', title: '流水编号', width: 120 }
                 ]],
 
             })

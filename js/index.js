@@ -21,7 +21,6 @@ var addInfoFromTableToIframe = {
         this.fatherIframe = config.fatherIframe;
         this.table = config.table;
         this.parent = config.parent;
-        console.log(config);
         return this;
     },
     bind: function () {
@@ -29,6 +28,7 @@ var addInfoFromTableToIframe = {
         this.clickBtn.on('click', function () {
             var checkStatus = self.table.checkStatus(self.tableName);
             var data = checkStatus.data;
+            console.log(data);
             self.render(data);
         })
     },
@@ -36,8 +36,8 @@ var addInfoFromTableToIframe = {
         var catchArr = [];
         for (let i = 0; i < data.length; i++) { //遍历获取id
             catchArr.push({
-                'id': data[i].id,
-                'name': data[i].title
+                'id': data[i].group_id,
+                'name': data[i].group_name
             });
         }
         return catchArr;
@@ -49,7 +49,7 @@ var addInfoFromTableToIframe = {
         this.parent.userArr = parent.unique(parent.userArr.concat(catchArr)); //更新父层ifream，存储数据
         this.fatherIframe.empty();
         for (var i = 0; i < this.parent.userArr.length; i++) {
-            domStr = '<div class="layui-inline item userItm"><span class="itemId" style="display:none">' + parent.userArr[i].id + '</span><span style="margin-right:5px">' + parent.userArr[i].id + '</span><button id="delBtn_u" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon" style="font-size:12px"></i></button></div>';
+            domStr = '<div class="layui-inline item userItm"><span class="itemId" style="display:none">' + parent.userArr[i].id + '</span><span style="margin-right:5px">' + parent.userArr[i].name + '</span><button id="delBtn_u" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon" style="font-size:12px"></i></button></div>';
             this.fatherIframe.append(domStr);
         }
     }
