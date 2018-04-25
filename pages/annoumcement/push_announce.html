@@ -161,15 +161,8 @@
                 clearPartUserBtn = $('#clearPartUserBtn'),
                 addReceiveDepartment = $('#addReceiveDepartment'),
                 parentIframeDepartment = $('#parentIframeDepartment'),
-                parentIframeUser = $('#parentIframeUser')
-            addReceiveUser = $('#addReceiveUser');
-            form.on('submit(form)', function (data) {
-                console.log(data.field)
-                getAllDepartment();
-                getAllUser();
-                return false;
-            });
-
+                parentIframeUser = $('#parentIframeUser'),
+                addReceiveUser = $('#addReceiveUser');
             addReceiveUser.on('click', function () {
                 layer.open({
                     type: 2,
@@ -209,16 +202,50 @@
                     layer.close();
                 });
             });
-            function getAllDepartment() {
-                var part = $('#parentIframeDepartment');
-                console.log((part).children());
-            }
+            function getFatherIframeContentDepartment() {
+                var parentIframe = $('#parentIframeDepartment'),
+                    allReceiveDepartment = [],
+                    itemId = parentIframe.find(".itemId");
+                for (var i = 0; i < itemId.length; i++) {
+                    allReceiveDepartment.push(itemId.eq(i).text());
+                }
+                if (allReceiveDepartment.length === 0) {
+                    return false;
+                } else {
+                    console.log(allReceiveDepartment);
+                    return allReceiveDepartment;
+                }
+            };
+            function getFatherIframeContentUser() {
+                var parentIframe = $('#parentIframeUser'),
+                    allReceiveUser = [],
+                    itemId = parentIframe.find(".itemId");
+                for (var i = 0; i < itemId.length; i++) {
+                    allReceiveUser.push(itemId.eq(i).text());
+                }
+                if (allReceiveUser.length === 0) {
+                    return false;
+                } else {
+                    console.log(allReceiveUser);
+                    return allReceiveUser;
+                }
+            };
+            form.on('submit(form)', function (data) {
+                var a = getFatherIframeContentDepartment(),
+                    b = getFatherIframeContentUser();
+                if (a && b) {
+                    $.ajax({
+                        url: '',
+                        type: '',
+                        success: function () {
 
-            function getAllUser() {
-                var part1 = $('#parentIframeUser');
-                console.log((part1).children());
-            }
-
+                        }
+                    })
+                } else {
+                    layer.alert('请检查部门参数等不能为空!');
+                }
+                return false;
+            });
             $(document).on('click', '#delBtn_u', function () {
                 $(this).parent('.userItm').remove();
                 removeItem(userArr, $(this).siblings('span').text())
@@ -238,21 +265,18 @@
             elem: '#EndTime',
             type: 'datetime'
         });
-
         function ins(arr, e) {
             for (let i = 0; i < arr.length; i++) {
                 if (arr[i].id == e) return i;
             }
             return -1;
         }
-
         function removeItem(arr, e) {
             var index = ins(arr, e);
             if (index > -1) {
                 arr.splice(index, 1);
             }
         }
-
         //验证去重
         function unique(array) {
             itemToStrArr = array.map(function (i) {

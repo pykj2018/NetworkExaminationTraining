@@ -48,9 +48,23 @@ var addInfoFromTableToIframe = {
         this.parent.userArr = parent.unique(parent.userArr.concat(catchArr)); //更新父层ifream，存储数据
         this.fatherIframe.empty();
         for (var i = 0; i < this.parent.userArr.length; i++) {
-            domStr = '<div class="layui-inline item userItm"><span style="margin-right:5px">' + parent.userArr[i].id + '</span><button id="delBtn_u" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon" style="font-size:12px"></i></button></div>';
+            domStr = '<div class="layui-inline item userItm"><span class="itemId" style="display:none">' + parent.userArr[i].id + '</span><span style="margin-right:5px">' + parent.userArr[i].id + '</span><button id="delBtn_u" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon" style="font-size:12px"></i></button></div>';
             this.fatherIframe.append(domStr);
         }
     }
 
 }
+function getFatherIframeContentDepartment() {
+    var parentIframe = $('#parentIframeDepartment'),
+        allReceiveDepartment = [],
+        itemId = parentIframe.find(".itemId");
+    for (var i = 0; i < itemId.length; i++) {
+        allReceiveDepartment.push(itemId.eq(i).text());
+    }
+    if (allReceiveDepartment.length === 0) {
+        return false;
+    } else {
+        console.log(allReceiveDepartment);
+        return allReceiveDepartment;
+    }
+};

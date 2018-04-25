@@ -29,7 +29,8 @@
             <button id="searchBtn" class="layui-btn">搜索</button>
         </div>
         <div>
-            <table class="layui-table" lay-data="{url:'../../config/table.js?page=1&limit=10', page:true, id:'receiveDepartmentTable',limit:5,limits:[10,20,30]}" lay-filter="receiveDepartmentTable">
+            <table class="layui-table" lay-data="{url:'../../config/table.js?page=1&limit=10',height:290, page:true, id:'receiveDepartmentTable',limit:5,limits:[10,20,30]}"
+                lay-filter="receiveDepartmentTable">
                 <thead>
                     <tr>
                         <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
@@ -43,34 +44,19 @@
             <button id="getTableBtn" class="layui-btn">确定</button>
         </div>
     </div>
+    <script src="../../lib/jQuery.js"></script>
     <script src="../../lib/laydate/laydate.js"></script>
     <script src="../../lib/layui/layui.js"></script>
+    <script src="../../js/index.js"></script>
     <script>
-        layui.use(['element', 'form', 'layer', 'table'], function() {
+        layui.use(['element', 'form', 'layer', 'table'], function () {
             var table = layui.table,
                 $ = layui.jquery,
                 getTableBtn = $('#getTableBtn'),
                 searchBtn = $('#searchBtn'),
                 index = parent.layer.getFrameIndex(window.name);
-            // console.log(index);
-            table.init('receiveDepartmentTable', {
-                height: 290,
-                limit: 10
-            });
-            // 获得表格内容传入父层
-            getTableBtn.on('click', function() {
-                // parent.layer.close(index);
-                var checkStatus = table.checkStatus('receiveDepartmentTable'),
-                    data = checkStatus.data,
-                    domStr = '<div class="item"><button class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button></div>';
-                for (var i = 0; i < data.length; i++) {
-                    domStr = '<div class="layui-inline item userItm"><span class="itemId" style="display:none">' + data[i].id + '</span><span style="margin-right:5px">' + data[i].id + '</span><button id="delBtn" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon" style="font-size:12px"></i></button></div>';
-                    parent.$('#parentIframe').append(domStr);
-                }
-            });
-
             // 搜索
-            searchBtn.on('click', function() {
+            searchBtn.on('click', function () {
                 // 重新渲染表格
                 var searchDetail = $('#searchDetailInp').val()
                 if (searchDetail != '') {
@@ -84,32 +70,14 @@
                     layer.msg('搜索内容不能为空');
                 }
             });
-
-            var catchArr = [];
-
             // 获得表格内容传入父层
-            getTableBtn.on('click', function() {
-                parent.layer.close(index);
-                var checkStatus = table.checkStatus('receiveDepartmentTable'),
-                    data = checkStatus.data,
-                    domStr = '<div class="item"><button class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button></div>';
-
-                for (let i = 0; i < data.length; i++) { //遍历获取id
-                    catchArr.push({
-                        'id': data[i].id,
-                        'name': data[i].title
-                    });
-                }
-                console.table(catchArr);
-                parent.departmentArr = parent.unique(parent.departmentArr.concat(catchArr)); //更新父层ifream，存储数据
-
-                parent.$('#parentIframeDepartment').empty();
-                for (var i = 0; i < parent.departmentArr.length; i++) {
-                    domStr = '<div class="layui-inline item userItm"><span style="margin-right:5px">' + parent.departmentArr[i].id + '</span><button id="delBtn_d" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon" style="font-size:12px"></i></button></div>';
-                    parent.$('#parentIframeDepartment').append(domStr);
-                }
-            });
-
+            addInfoFromTableToIframe.init({
+                clickBtn: '#getTableBtn',
+                tableName: 'receiveDepartmentTable',
+                fatherIframe: parent.$('#parentIframeDepartment'),
+                table: table,
+                parent: parent
+            }).bind();
         });
     </script>
 </body>
