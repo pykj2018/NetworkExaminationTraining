@@ -21,15 +21,33 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <div class="layui-fluid">
-        <div class="layui-form-item">
-            <label class="layui-form-label">关键词:</label>
-            <div class="layui-input-inline">
-                <input type="text" id="searchDetailInp" class="layui-input" placeholder="搜索">
+        <form action="" class="layui-form">
+            <div class="layui-form-item layui-row layui-col-space5">
+                <div class="layui-col-xs6">
+                    <label class="layui-form-label">子部门:</label>
+                    <div class="layui-input-inline">
+                        <select name="" id="" class="">
+                            <option value="">选则一个部门</option>
+                            <option value="0">部门1</option>
+                            <option value="0">部门1</option>
+                            <option value="0">部门1</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-col-xs6">
+                    <label class="layui-form-label">关键词:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="searchDetailInp" class="layui-input" placeholder="搜索">
+                    </div>
+                </div>
+                <div class="layui-btn-group  layui-col-xs-offset1 layui-col-xs2">
+                    <button id="searchBtn" class="layui-btn">搜索</button>
+                </div>
             </div>
-            <button id="searchBtn" class="layui-btn">搜索</button>
-        </div>
+        </form>
         <div>
-            <table class="layui-table" lay-data="{url:'../../config/table.js?page=1&limit=10', page:true, height:290, id:'receiveUserTable',limit:5,limits:[10,20,30]}" lay-filter="receiveUserTable">
+            <table class="layui-table" lay-data="{url:'../../config/table.js?page=1&limit=10', page:true, height:290, id:'receiveUserTable',limit:5,limits:[10,20,30]}"
+                lay-filter="receiveUserTable">
                 <thead>
                     <tr>
                         <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
@@ -50,15 +68,16 @@
     <script>
         var index = parent.layer.getFrameIndex(window.name);
 
-        layui.use(['form', 'layer', 'table'], function() {
+        layui.use(['form', 'layer', 'table'], function () {
             var table = layui.table,
+                form = layui.form,
                 $ = layui.jquery,
                 getTableBtn = $('#getTableBtn'),
                 searchBtn = $('#searchBtn'),
                 index = parent.layer.getFrameIndex(window.name),
                 catchArr = [];
             // 搜索
-            searchBtn.on('click', function() {
+            searchBtn.on('click', function () {
                 // 重新渲染表格
                 var searchDetail = $('#searchDetailInp').val()
                 if (searchDetail != '') {
@@ -74,11 +93,11 @@
             });
             // 获得表格内容传入父层
             addInfoFromTableToIframe.init({
-                clickBtn:'#getTableBtn',
-                tableName:'receiveUserTable',
+                clickBtn: '#getTableBtn',
+                tableName: 'receiveUserTable',
                 fatherIframe: parent.$('#parentIframeUser'),
-                table:table,
-                parent:parent
+                table: table,
+                parent: parent
             }).bind();
         });
     </script>
