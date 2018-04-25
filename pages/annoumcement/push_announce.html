@@ -255,17 +255,16 @@
 
         //验证去重
         function unique(array) {
-            itemToStrArr = array.map(function(i) {
+            itemToStrArr = array.map(function (i) {
                 return JSON.stringify(i);
             })
-
             var n = [];
             for (let i = 0; i < itemToStrArr.length; i++) {
                 if (n.indexOf(itemToStrArr[i]) == -1) {
                     n.push(itemToStrArr[i]);
                 }
             }
-            return n.map(function(i) {
+            return n.map(function (i) {
                 return JSON.parse(i);
             })
         }
