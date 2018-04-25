@@ -21,7 +21,6 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <div class="layui-fluid">
-        <!-- <form action="" class="layui-form"> -->
         <div class="layui-form layui-form-item layui-row layui-col-space5">
             <div class="layui-col-xs6">
                 <label class="layui-form-label">子部门:</label>
@@ -35,26 +34,29 @@
                 </div>
             </div>
             <div class="layui-col-xs6">
-                <label class="layui-form-label">关键词:</label>
+                <label class="layui-form-label">用户名:</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="searchDetailInp" class="layui-input" placeholder="搜索">
+                    <input type="text" id="searchUserName" class="layui-input" placeholder="搜索">
+                </div>
+            </div>
+            <div class="layui-col-xs6">
+                <label class="layui-form-label">职位:</label>
+                <div class="layui-input-inline">
+                    <select name="" id="positionSelect" class="">
+                        <option value="">选则一个职位</option>
+                        <option value="0">职位1</option>
+                        <option value="0">职位1</option>
+                        <option value="0">职位1</option>
+                    </select>
                 </div>
             </div>
             <div class="layui-btn-group  layui-col-xs-offset1 layui-col-xs2">
                 <button id="searchBtn" class="layui-btn">搜索</button>
             </div>
         </div>
-        <!-- </form> -->
         <div>
-            <table id="receiveUserTable" class="layui-table" lay-data="{url:'../../config/table.js?page=1&limit=10', page:true, height:290, id:'receiveUserTable',limit:5,limits:[10,20,30]}"
+            <table id="receiveUserTable" class="layui-table" lay-data="{page:true, id:'receiveUserTable',limit:5,limits:[10,20,30]}"
                 lay-filter="receiveUserTable">
-                <!-- <thead>
-                    <tr>
-                        <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
-                        <th lay-data="{field:'id', width:80, sort: true, fixed: true}">ID</th>
-                        <th lay-data="{field:'title', width:80}">用户名</th>
-                    </tr>
-                </thead> -->
             </table>
         </div>
         <div class="layui-btn-container">
@@ -66,9 +68,11 @@
     <script src="../../lib/layui/layui.js"></script>
     <script src="../../js/index.js"></script>
     <script>
+
         layui.use(['form', 'layer', 'table'], function () {
             var table = layui.table,
                 form = layui.form,
+                layer = layui.layer,
                 getTableBtn = $('#getTableBtn'),
                 searchBtn = $('#searchBtn'),
                 partSelected = $('#partSelect option:selected'),
@@ -76,38 +80,38 @@
             // 表格初始化
             table.render({
                 elem: '#receiveUserTable',
-                url: '../../config/table.js?page=1&limit=10',
-                height: 290,
+                url: '../../config/table.js',
+                height: 330,
                 page: true,
                 cols: [[ //标题栏  
-                    { checkbox: true }
-                    , { field: 'id', title: 'ID', width: 80 }
-                    , { field: 'paycard', title: '姓名', width: 120 }
+                    { checkbox: true },
+                    { field: 'group_id', title: 'ID', width: 80 },
+                    { field: 'paycard', title: '姓名', width: 120 }
                 ]],
             })
             // 搜索
             searchBtn.on('click', function () {
-                var searchDetail = $('#searchDetailInp').val(),
-                    partSelectVal = partSelected.val();
-                if (searchDetail != '' || partSelectVal != '') {
-                    table.reload('receiveUserTable', {
-                        url: '../../config/table1.js',
-                        method: 'POST',
-                        where: {
+                table.reload('receiveUserTable', {
+                    url: '../../config/table1.js',
+                    method: 'POST',
+                    where: {
 
-                        }
-                    });
-                } else {
-                    layer.msg('搜索内容不能为空');
-                }
+                    }
+                });
             });
             // 获得表格内容传入父层
             addInfoFromTableToIframe.init({
                 clickBtn: '#getTableBtn',
                 tableName: 'receiveUserTable',
                 fatherIframe: parent.$('#parentIframeUser'),
+                layer: layer,
+                dId: 'delBtn_u',
+                arr: 'userArr',
                 table: table,
-                parent: parent
+                parent: parent,
+                $: $,
+                arrId: 'group_id',
+                arrName: 'group_name',
             }).bind();
         });
     </script>

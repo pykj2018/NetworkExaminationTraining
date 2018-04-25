@@ -31,8 +31,15 @@
         </div>
         <!-- </form> -->
         <div>
-            <table id="receiveDepartmentTable" class="layui-table" lay-data="{height:290, page:true, id:'receiveDepartmentTable',limit:5,limits:[10,20,30]}"
-                lay-filter="receiveDepartmentTable">
+
+            <table id="receiveDepartmentTable" class="layui-table" lay-data="{page:true, id:'receiveDepartmentTable'}" lay-filter="receiveDepartmentTable">
+                <!-- <thead>
+                    <tr>
+                        <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
+                        <th lay-data="{field:'id', width:80, sort: true, fixed: true}">ID</th>
+                        <th lay-data="{field:'title', width:80}">用户名</th>
+                    </tr>
+                </thead> -->
             </table>
         </div>
         <div class="layui-btn-container">
@@ -47,43 +54,43 @@
         layui.use(['element', 'form', 'layer', 'table'], function () {
             var table = layui.table,
                 $ = layui.jquery,
+                layer = layui.layer,
                 getTableBtn = $('#getTableBtn'),
-                searchBtn = $('#searchBtn'),
-                index = parent.layer.getFrameIndex(window.name);
+                searchBtn = $('#searchBtn');
             // 表格初始化
             table.render({
                 elem: '#receiveDepartmentTable',
-                url: '../../config/table.js?page=1&limit=10',
-                height: 290,
+                url: '../../config/table.js',
+                height: 330,
                 page: true,
                 cols: [[ //标题栏  
-                    { checkbox: true }
-                    , { field: 'group_id', title: '创建时间', width: 80 }
-                    , { field: 'name', title: '流水编号', width: 120 }
+                    { checkbox: true },
+                    { field: 'id', title: 'ID', width: 80 },
+                    { field: 'name', title: '部门名', width: 120 }
                 ]],
 
             })
             // 搜索
             searchBtn.on('click', function () {
-                var searchDetail = $('#searchDetailInp').val()
-                if (searchDetail != '') {
-                    table.reload('receiveDepartmentTable', {
-                        url: '../../config/table1.js',
-                        where: {
+                table.reload('receiveDepartmentTable', {
+                    url: '../../config/table1.js',
+                    where: {
 
-                        } //设定异步数据接口的额外参数
-                    });
-                } else {
-                    layer.msg('搜索内容不能为空');
-                }
+                    } //设定异步数据接口的额外参数
+                });
             });
             // 获得表格内容传入父层
             addInfoFromTableToIframe.init({
                 clickBtn: '#getTableBtn',
                 tableName: 'receiveDepartmentTable',
                 fatherIframe: parent.$('#parentIframeDepartment'),
+                dId: 'delBtn_d',
+                arr: 'departmentArr',
                 table: table,
-                parent: parent
+                parent: parent,
+                $: $,
+                arrId: 'group_id',
+                arrName: 'group_name',
             }).bind();
         });
     </script>
