@@ -46,8 +46,7 @@
             </div>
         </form>
         <div>
-            <table class="layui-table" lay-data="{url:'../../config/table.js?page=1&limit=10', page:true, height:290, id:'receiveUserTable',limit:5,limits:[10,20,30]}"
-                lay-filter="receiveUserTable">
+            <table class="layui-table" lay-data="{url:'../../config/table.js?page=1&limit=10', page:true, height:290, id:'receiveUserTable',limit:5,limits:[10,20,30]}" lay-filter="receiveUserTable">
                 <thead>
                     <tr>
                         <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
@@ -61,14 +60,13 @@
             <button id="getTableBtn" class="layui-btn">确定</button>
         </div>
     </div>
-    <script src="../../lib/jQuery.js"></script>
     <script src="../../lib/laydate/laydate.js"></script>
     <script src="../../lib/layui/layui.js"></script>
     <script src="../../js/index.js"></script>
     <script>
         var index = parent.layer.getFrameIndex(window.name);
 
-        layui.use(['form', 'layer', 'table'], function () {
+        layui.use(['form', 'layer', 'table'], function() {
             var table = layui.table,
                 form = layui.form,
                 $ = layui.jquery,
@@ -77,7 +75,7 @@
                 index = parent.layer.getFrameIndex(window.name),
                 catchArr = [];
             // 搜索
-            searchBtn.on('click', function () {
+            searchBtn.on('click', function() {
                 // 重新渲染表格
                 var searchDetail = $('#searchDetailInp').val()
                 if (searchDetail != '') {
@@ -96,8 +94,11 @@
                 clickBtn: '#getTableBtn',
                 tableName: 'receiveUserTable',
                 fatherIframe: parent.$('#parentIframeUser'),
+                dId: 'delBtn_u',
+                arr: 'userArr',
                 table: table,
-                parent: parent
+                parent: parent,
+                $: $
             }).bind();
         });
     </script>

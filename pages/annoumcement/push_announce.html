@@ -22,6 +22,7 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <style>
+
     </style>
     <div class="layui-fluid">
         <div class="layui-row layui-col-space10">
@@ -150,20 +151,21 @@
     </div>
     <script type="text/javascript" src="../../lib/laydate/laydate.js"></script>
     <script type="text/javascript" src="../../lib/layui/layui.all.js"></script>
+    <script src="../../js/index.js"></script>
     <script>
-        var userArr = [];
-        var departmentArr = [];
-        var $ = layui.jquery; //需要全局声明，子ifream才能取到
-        layui.use(['form', 'layer'], function () {
+        var $ = layui.jquery;
+        //需要全局声明，子ifream才能取到
+        layui.use(['form', 'layer'], function() {
             var form = layui.form,
                 layer = layui.layer,
                 clearPartDepartmentBtn = $('#clearPartDepartmentBtn'),
                 clearPartUserBtn = $('#clearPartUserBtn'),
-                addReceiveDepartment = $('#addReceiveDepartment'),
                 parentIframeDepartment = $('#parentIframeDepartment'),
                 parentIframeUser = $('#parentIframeUser'),
+                addReceiveDepartment = $('#addReceiveDepartment'),
                 addReceiveUser = $('#addReceiveUser');
-            addReceiveUser.on('click', function () {
+
+            addReceiveUser.on('click', function() {
                 layer.open({
                     type: 2,
                     area: ['700px', '450px'],
@@ -172,7 +174,7 @@
                     content: '../others/receiveuser.html',
                 });
             })
-            addReceiveDepartment.on('click', function () {
+            addReceiveDepartment.on('click', function() {
                 layer.open({
                     type: 2,
                     area: ['700px', '450px'],
@@ -181,27 +183,29 @@
                     content: '../others/receivedepartment.html'
                 });
             });
-            // 清空选区事件
-            clearPartDepartmentBtn.on('click', function () {
+
+            // 清空选区事件clearPrecinct
+            clearPartDepartmentBtn.on('click', function() {
+                clearPrecinct(parentIframeDepartment, 'departmentArr');
+            });
+            clearPartUserBtn.on('click', function() {
+                clearPrecinct(parentIframeUser, 'userArr');
+            });
+
+            function clearPrecinct(precinct, data) {
                 layer.confirm('确认清空?', {
                     btn: ['确认', '取消'] //按钮
-                }, function () {
-                    layer.msg('清除成功', { icon: 1 });
-                    parentIframeDepartment.children().remove();
-                }, function () {
+                }, function() {
+                    layer.msg('清除成功', {
+                        icon: 1
+                    });
+                    precinct.children().remove();
+                    object[data] = [];
+                }, function() {
                     layer.close();
                 });
-            });
-            clearPartUserBtn.on('click', function () {
-                layer.confirm('确认清空?', {
-                    btn: ['确认', '取消'] //按钮
-                }, function () {
-                    layer.msg('清除成功', { icon: 1 });
-                    parentIframeUser.children().remove();
-                }, function () {
-                    layer.close();
-                });
-            });
+            }
+
             function getFatherIframeContentDepartment() {
                 var parentIframe = $('#parentIframeDepartment'),
                     allReceiveDepartment = [],
@@ -216,6 +220,7 @@
                     return allReceiveDepartment;
                 }
             };
+
             function getFatherIframeContentUser() {
                 var parentIframe = $('#parentIframeUser'),
                     allReceiveUser = [],
@@ -230,14 +235,14 @@
                     return allReceiveUser;
                 }
             };
-            form.on('submit(form)', function (data) {
+            form.on('submit(form)', function(data) {
                 var a = getFatherIframeContentDepartment(),
                     b = getFatherIframeContentUser();
                 if (a && b) {
                     $.ajax({
                         url: '',
                         type: '',
-                        success: function () {
+                        success: function() {
 
                         }
                     })
@@ -246,14 +251,16 @@
                 }
                 return false;
             });
-            $(document).on('click', '#delBtn_u', function () {
+            $(document).on('click', '#delBtn_u', function() {
                 $(this).parent('.userItm').remove();
-                removeItem(userArr, $(this).siblings('span').text())
+                var itemId = $(this).siblings('.itemId').text();
+                removeItem(object.userArr, itemId);
             })
 
-            $(document).on('click', '#delBtn_d', function () {
+            $(document).on('click', '#delBtn_d', function() {
                 $(this).parent('.userItm').remove();
-                removeItem(departmentArr, $(this).siblings('span').text())
+                var itemId = $(this).siblings('.itemId').text();
+                removeItem(object.departmentArr, itemId);
             })
 
         });
@@ -265,33 +272,6 @@
             elem: '#EndTime',
             type: 'datetime'
         });
-        function ins(arr, e) {
-            for (let i = 0; i < arr.length; i++) {
-                if (arr[i].id == e) return i;
-            }
-            return -1;
-        }
-        function removeItem(arr, e) {
-            var index = ins(arr, e);
-            if (index > -1) {
-                arr.splice(index, 1);
-            }
-        }
-        //验证去重
-        function unique(array) {
-            itemToStrArr = array.map(function (i) {
-                return JSON.stringify(i);
-            })
-            var n = [];
-            for (let i = 0; i < itemToStrArr.length; i++) {
-                if (n.indexOf(itemToStrArr[i]) == -1) {
-                    n.push(itemToStrArr[i]);
-                }
-            }
-            return n.map(function (i) {
-                return JSON.parse(i);
-            })
-        }
     </script>
 </body>
 
