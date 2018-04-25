@@ -120,7 +120,7 @@
                             <!-- <button class="layui-btn" id='addCharger'>增加</button> -->
                         </div>
                         <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px; ">
-                            <div id="parentIframe" style="margin: 0 auto;width: 90%"></div>
+                            <div id="parentIframeDepartment" style="margin: 0 auto;width: 90%"></div>
                         </blockquote>
                     </div>
                 </div>
@@ -157,16 +157,18 @@
 <script src="../../lib/laydate/laydate.js"></script>
 <script src="../../lib/layui/layui.js"></script>
 <script src="../../lib/layui/lay/modules/laytpl.js"></script>
+<script src="../../js/index.js"></script>
 <!-- <script src="../../js/libraryUpload.js"></script> -->
 <script>
+    var userArr = [];
+    var departmentArr = [];
     layui.use(['element', 'form', 'upload'], function () {
         var element = layui.element,
             form = layui.form,
-            $ = layui.jquery,
             upload = layui.upload,
             addReceiveDepartmentBtn = $('#addPartBtn'),
             clearReceiveDepartmentBtn = $('#clearPartBtn'),
-            part = $('#parentIframe'),
+            part = $('#parentIframeDepartment'),
             demoListView = $('#demoList'),
             formData = $('#form_id').serializeArray(),
             allReceiveDepartment = {};
@@ -201,12 +203,12 @@
             });
         });
         // 单个删除按钮
-        $(document).on('click', '#delBtn', function () {
+        $(document).on('click', '#delBtn_u', function () {
             $(this).parent('.userItm').remove();
         });
         // 获取整个父选区信息
         function getFatherIframeContent() {
-            var parentIframe = $('#parentIframe'),
+            var parentIframe = $('#parentIframeDepartment'),
                 allReceiveDepartment = [],
                 itemId = parentIframe.find(".itemId");
             for (var i = 0; i < itemId.length; i++) {
@@ -229,29 +231,34 @@
         }
         //监听提交
         form.on('submit(*)', function (data) {
-            getAllUploadFilesName();
-            $.ajax({
-                url: '',
-                data: {
+            var a = getAllUploadFilesName(),
+                b = getFatherIframeContent();
+            if (a && b) {
+                $.ajax({
+                    url: '',
+                    data: {
 
-                },
-                success: function (res) {
-                    if (res) {
-                        
-                    } else {
+                    },
+                    success: function (res) {
+                        if (res) {
 
+                        } else {
+
+                        }
                     }
-                }
-            })
+                })
+            } else {
+                layer.alert('请检查是否添加文件和接收部门!')
+            }
             return false;
         });
-        // 文件+表单所有信息上传
+        // 文件上传
         var uploadListIns = upload.render({
             elem: '#testList',
             url: '/upload/',
             accept: 'file',
             multiple: true,
-            auto: false,
+            auto: true,
             choose: function (obj) {
                 var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
                 //读取本地文件

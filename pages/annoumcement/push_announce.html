@@ -126,17 +126,19 @@
                             <div class="layui-card">
                                 <div class="layui-card-header">其他选项</div>
                                 <div class="layui-card-body">
-                                    <div class="layui-form-item">
-                                        <div class="layui-inline">
-                                            <div class="layui-input-inline">
-                                                <input type="checkbox" name="valid" lay-verify="valid" title="是否长期有效" lay-skin="primary" checked>
+                                    <div class="layui-inline">
+                                        <div class="layui-form-item">
+                                            <div class="layui-inline">
+                                                <div class="layui-input-inline">
+                                                    <input type="checkbox" name="valid" lay-verify="valid" title="是否长期有效" lay-skin="primary" checked>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <div class="layui-input-inline">
-                                            <button class="layui-btn" lay-submit lay-filter="form">立即提交</button>
-                                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                        <div class="layui-form-item">
+                                            <div class="layui-input-inline">
+                                                <button class="layui-btn" lay-submit lay-filter="form">立即提交</button>
+                                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -150,6 +152,7 @@
     </div>
     <script type="text/javascript" src="../../lib/laydate/laydate.js"></script>
     <script type="text/javascript" src="../../lib/layui/layui.all.js"></script>
+    <script type="text/javascript" src="../../js/index.js"></script>
     <script>
         var userArr = [];
         var departmentArr = [];
@@ -212,7 +215,6 @@
                 if (allReceiveDepartment.length === 0) {
                     return false;
                 } else {
-                    console.log(allReceiveDepartment);
                     return allReceiveDepartment;
                 }
             };
@@ -226,7 +228,6 @@
                 if (allReceiveUser.length === 0) {
                     return false;
                 } else {
-                    console.log(allReceiveUser);
                     return allReceiveUser;
                 }
             };
@@ -265,33 +266,6 @@
             elem: '#EndTime',
             type: 'datetime'
         });
-        function ins(arr, e) {
-            for (let i = 0; i < arr.length; i++) {
-                if (arr[i].id == e) return i;
-            }
-            return -1;
-        }
-        function removeItem(arr, e) {
-            var index = ins(arr, e);
-            if (index > -1) {
-                arr.splice(index, 1);
-            }
-        }
-        //验证去重
-        function unique(array) {
-            itemToStrArr = array.map(function (i) {
-                return JSON.stringify(i);
-            })
-            var n = [];
-            for (let i = 0; i < itemToStrArr.length; i++) {
-                if (n.indexOf(itemToStrArr[i]) == -1) {
-                    n.push(itemToStrArr[i]);
-                }
-            }
-            return n.map(function (i) {
-                return JSON.parse(i);
-            })
-        }
     </script>
 </body>
 

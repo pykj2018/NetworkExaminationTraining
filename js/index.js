@@ -21,6 +21,7 @@ var addInfoFromTableToIframe = {
         this.fatherIframe = config.fatherIframe;
         this.table = config.table;
         this.parent = config.parent;
+        console.log(config);
         return this;
     },
     bind: function () {
@@ -54,17 +55,36 @@ var addInfoFromTableToIframe = {
     }
 
 }
-function getFatherIframeContentDepartment() {
-    var parentIframe = $('#parentIframeDepartment'),
-        allReceiveDepartment = [],
-        itemId = parentIframe.find(".itemId");
-    for (var i = 0; i < itemId.length; i++) {
-        allReceiveDepartment.push(itemId.eq(i).text());
+/******************************************
+ * @description 表格内容去重
+ * @method ins
+ * @method removeItem
+ * @method unique
+ *******************************************/
+function ins(arr, e) {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i].id == e) return i;
     }
-    if (allReceiveDepartment.length === 0) {
-        return false;
-    } else {
-        console.log(allReceiveDepartment);
-        return allReceiveDepartment;
+    return -1;
+}
+function removeItem(arr, e) {
+    var index = ins(arr, e);
+    if (index > -1) {
+        arr.splice(index, 1);
     }
-};
+}
+function unique(array) {
+    itemToStrArr = array.map(function (i) {
+        return JSON.stringify(i);
+    })
+    var n = [];
+    for (let i = 0; i < itemToStrArr.length; i++) {
+        if (n.indexOf(itemToStrArr[i]) == -1) {
+            n.push(itemToStrArr[i]);
+        }
+    }
+    return n.map(function (i) {
+        return JSON.parse(i);
+    })
+}
+

@@ -21,6 +21,7 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <div class="layui-fluid">
+        <!-- <form action="" class="layui-form"> -->
         <div class="layui-form-item">
             <label class="layui-form-label">关键词:</label>
             <div class="layui-input-inline">
@@ -28,16 +29,17 @@
             </div>
             <button id="searchBtn" class="layui-btn">搜索</button>
         </div>
+        <!-- </form> -->
         <div>
-            <table class="layui-table" lay-data="{url:'../../config/table.js?page=1&limit=10',height:290, page:true, id:'receiveDepartmentTable',limit:5,limits:[10,20,30]}"
+            <table id="receiveDepartmentTable" class="layui-table" lay-data="{height:290, page:true, id:'receiveDepartmentTable',limit:5,limits:[10,20,30]}"
                 lay-filter="receiveDepartmentTable">
-                <thead>
+                <!-- <thead>
                     <tr>
                         <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
                         <th lay-data="{field:'id', width:80, sort: true, fixed: true}">ID</th>
                         <th lay-data="{field:'title', width:80}">用户名</th>
                     </tr>
-                </thead>
+                </thead> -->
             </table>
         </div>
         <div class="layui-btn-container">
@@ -55,9 +57,21 @@
                 getTableBtn = $('#getTableBtn'),
                 searchBtn = $('#searchBtn'),
                 index = parent.layer.getFrameIndex(window.name);
+            // 表格初始化
+            table.render({
+                elem: '#receiveDepartmentTable',
+                url: '../../config/table.js?page=1&limit=10',
+                height: 290,
+                page: true,
+                cols: [[ //标题栏  
+                    { checkbox: true }
+                    , { field: 'id', title: '创建时间', width: 80 }
+                    , { field: 'paycard', title: '流水编号', width: 120 }
+                ]],
+
+            })
             // 搜索
             searchBtn.on('click', function () {
-                // 重新渲染表格
                 var searchDetail = $('#searchDetailInp').val()
                 if (searchDetail != '') {
                     table.reload('receiveDepartmentTable', {
