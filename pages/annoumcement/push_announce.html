@@ -210,7 +210,6 @@
                     layer.msg('内容为空');
                 }
             }
-
             function getFatherIframeContentDepartment() {
                 var parentIframe = $('#parentIframeDepartment'),
                     allReceiveDepartment = [],
@@ -239,8 +238,11 @@
                 }
             };
             form.on('submit(form)', function (data) {
-                var a = getFatherIframeContentDepartment(),
-                    b = getFatherIframeContentUser();
+                var a = getFatherIframeContent.init({
+                    parentIframe: 'parentIframeUser',
+                    itemId: '.itemId',
+                    isSetSession:true
+                })
                 if (a) {
                     avoidDuplicationOfSubmission($('#formSubmitBtn'));
                     $.ajax({

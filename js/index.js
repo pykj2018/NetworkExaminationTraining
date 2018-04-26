@@ -95,15 +95,6 @@ var addInfoFromTableToIframe = {
  * @method unique
  *******************************************/
 
-function getFatherIframeContentDepartment() {
-    var parentIframe = $('#parentIframeDepartment'),
-        allReceiveDepartment = [],
-        itemId = parentIframe.find(".itemId");
-    for (var i = 0; i < itemId.length; i++) {
-        allReceiveDepartment.push(itemId.eq(i).text());
-    }
-}
-
 //删除子项 arr格式为数组对象 对比属性为id
 function removeItem(arr, e) {
     for (let i = 0; i < arr.length; i++) {
@@ -114,8 +105,52 @@ function removeItem(arr, e) {
         }
     }
 }
-// 避免重复提交方法
-function avoidDuplicationOfSubmission (btn) {
+
+
+/*****************************************************************
+ * @description 获取父控件内容
+ * @param parentIframe 父ID
+ * @param itemId 内容ID
+ * @param isSetSession {boolean} 是否设置session
+ * @method init 初始化获取结果 return a == allContentArr
+ * @method getAllContent 获取所有元素 return false or allContentArr
+ * @method setArrInSession session操作
+ *****************************************************************/
+var getFatherIframeContent = {
+    parentIframe: null,
+    itemId: null,
+    isSetSession: false,
+    allContentArr: [],
+    init: function (config) {
+        this.parentIframe = $('#' + config.parentIframe);
+        this.itemId = config.itemId;
+        this.isSetSession = config.isSetSession;
+        this.setArrInSession(config.parentIframe);
+        this.allContentArr = this.getAllContent();
+        return this.allContentArr;
+    },
+    getAllContent: function () {
+        var _itemId = this.parentIframe.find(this.itemId),
+            arr = [];
+        for (var i = 0; i < _itemId.length; i++) {
+            arr.push(_itemId.eq(i).text());
+        }
+        return arr.length === 0 ? false : arr;
+    },
+    setArrInSession: function (fatherName) {
+        var arr = this.getAllContent()
+        if (this.isSetSession === true && arr) {
+            sessionStorage.setItem(fatherName, arr);
+        } else {
+            return false;
+        }
+    }
+}
+/****************************************
+ * @description 避免重复方法按钮避免重复提交
+ * @param btn 传入要禁用的按钮
+ ****************************************/
+function avoidDuplicationOfSubmission(btn) {
     btn.addClass('layui-btn layui-btn-disabled');
-    btn.attr('disable','true');
+    btn.attr('disable', 'true');
 }

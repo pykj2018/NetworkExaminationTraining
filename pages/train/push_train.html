@@ -26,10 +26,8 @@
                 <div class="layui-card-header">培训通知</div>
                 <div class="layui-card-body">
                     <div class="layui-form-item">
-                        <div class="layui-btn-group">
-                            <input type="button" class="layui-btn" value="增加">
-                            <input type="button" class="layui-btn" value="查看">
-                            <input type="button" class="layui-btn" value="下载">
+                        <div class="layui-upload">
+                            <button type="button" class="layui-btn layui-btn-normal" id="uploadNoticeBtn">选择文件</button>
                         </div>
                     </div>
                 </div>
@@ -82,12 +80,6 @@
                         <div class="layui-col-md4">
                             <label class="layui-form-label">培训部门</label>
                             <div class="layui-input-block">
-                                <input type="text" name="title" required placeholder="请输入标题" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-col-md4">
-                            <label class="layui-form-label">参培部门</label>
-                            <div class="layui-input-block">
                                 <select name="city">
                                     <option value=""></option>
                                     <option value="0">北京</option>
@@ -98,9 +90,6 @@
                                 </select>
                             </div>
                         </div>
-
-                    </div>
-                    <div class="layui-form-item layui-row">
                         <div class="layui-col-md4">
                             <label class="layui-form-label">考试图像记录周期</label>
                             <div class="layui-input-block">
@@ -114,6 +103,16 @@
                         </div>
                     </div>
                     <div class="layui-form-item layui-row layui-col-space10">
+                        <div class="layui-col-md12">
+                            <label class="layui-form-label">参培部门</label>
+                            <div class="layui-input-block">
+                                <input type="button" class="layui-btn" id='addDepartment' value="增加">
+                            </div>
+                            <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px; ">
+                                <div id="parentIframeDepartment" style="margin: 0 auto;width: 90%">
+                                </div>
+                            </blockquote>
+                        </div>
                         <div class="layui-col-md12">
                             <label class="layui-form-label">参培人员</label>
                             <div class="layui-input-block">
@@ -137,92 +136,58 @@
                             </blockquote>
                         </div>
                         <div class="layui-col-md12">
-                            <div class="layui-card">
-                                <div class="layui-card-header">培训资料</div>
-                                <div class="layui-card-body">
-                                    <!-- <blockquote class="layui-row layui-elem-quote layui-quote-nm" style="margin-top: 10px; ">
-                                        <div class="layui-col-md11">
-                                            <div class="layui-inline">
-                                                <label class="layui-form-label">课件名称</label>
-                                                <div class="layui-input-inline">
-                                                    <input type="text" id="searchDetailInp" class="layui-input" placeholder="搜索">
-                                                </div>
-                                            </div>
-                                            <div class="layui-inline">
-                                                <label class="layui-form-label">课件介绍</label>
-                                                <div class="layui-input-inline">
-                                                    <input type="text" id="searchDetailInp" class="layui-input" placeholder="搜索">
-                                                </div>
-                                            </div>
-                                            <div class="layui-inline">
-                                                <label class="layui-form-label">课件类型</label>
-                                                <div class="layui-input-inline">
-                                                    <input type="text" id="searchDetailInp" class="layui-input" placeholder="搜索">
-                                                </div>
-                                            </div>
-                                            <div class="layui-inline">
-                                                <label class="layui-form-label">课件长度</label>
-                                                <div class="layui-input-inline">
-                                                    <input type="text" id="searchDetailInp" class="layui-input" placeholder="搜索">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="layui-col-md1">
-                                            X
-                                        </div>
-                                    </blockquote> -->
-                                    <div class="" id="view"></div>
-                                    <div class="layui-form-item">
-                                        <div class="layui-input-block" style="text-align: center;">
-                                            <input type="button" class="layui-btn" value="添加课件">
-                                        </div>
-                                    </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">培训资料</label>
+                                <div class="layui-input-block">
+                                    <input type="button" class="layui-btn" id='addCharger' value="增加">
+                                    <!-- <button class="layui-btn" id='addCharger'>增加</button> -->
                                 </div>
+                            </div>
+                            <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px; ">
+                                <div id="parentIframe" style="margin: 0 auto;width: 90%">
+                                </div>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-card">
+                    <div class="layui-card-header">其他选项</div>
+                    <div class="layui-card-body">
+                        <div class="layui-form-item layui-row">
+                            <div class="layui-col-md4" style="text-align: center">
+                                <!-- <label class="layui-form-label"></label> -->
+                                <input type="checkbox" name="" title="是否发布考试" lay-skin="primary" checked>
+                            </div>
+                            <div class="layui-col-md4">
+                                <!-- <label class="layui-form-label"></label> -->
+                                <input type="checkbox" name="" title="是否留存培训影像资料" lay-skin="primary" checked>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="layui-card">
-                <div class="layui-card-header">其他选项</div>
-                <div class="layui-card-body">
-                    <div class="layui-form-item layui-row">
-                        <div class="layui-col-md4" style="text-align: center">
-                            <!-- <label class="layui-form-label"></label> -->
-                            <input type="checkbox" name="" title="是否发布考试" lay-skin="primary" checked>
-                        </div>
-                        <div class="layui-col-md4">
-                            <!-- <label class="layui-form-label"></label> -->
-                            <input type="checkbox" name="" title="是否留存培训影像资料" lay-skin="primary" checked>
-                        </div>
-                    </div>
-
-                    <div class="layui-form-item">
-                        <div class="layui-input-block">
-                            <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
-                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </form>
-    </div>
+        </div>
 </body>
 <script src="../../lib/jQuery.js"></script>
 <script src="../../lib/laydate/laydate.js"></script>
 <script src="../../lib/layui/layui.js"></script>
 <script>
-    var opt = 1; //组件长度变量
-
-    layui.use(['layer', 'form'], function() {
+    layui.use(['layer', 'form', 'upload'], function () {
         var form = layui.form,
-            layer = layui.layer;
-
-        // 添加参培人员和负责人
-        var addTrainersBtn = $('#addTrainers'),
+            layer = layui.layer,
+            upload = layui.upload,
+            // 添加参培人员和负责人
+            addTrainersBtn = $('#addTrainers'),
             addChargerBtn = $('#addCharger'),
             addCourseInfoBtn = $('#addCourseInfo');
-        addTrainersBtn.on('click', function() {
+        addTrainersBtn.on('click', function () {
             layer.open({
                 type: 2,
                 area: ['700px', '450px'],
@@ -231,7 +196,7 @@
                 content: '../others/trainers.html'
             });
         });
-        addChargerBtn.on('click', function() {
+        addChargerBtn.on('click', function () {
             layer.open({
                 type: 2,
                 area: ['700px', '450px'],
@@ -240,76 +205,35 @@
                 content: '../others/charger.html'
             });
         });
-        addCourseInfoBtn.on('click', function() {
+        // 通知上传
+        upload.render({
+            elem: '#uploadNoticeBtn'
+            , url: '/upload/'
+            , auto: false
+            //,multiple: true
+            , bindAction: '#uploadNoticeBtn'
+            , done: function (res) {
+                console.log(res)
+            }
+        });
+        addCourseInfoBtn.on('click', function () {
             opt++;
             laytpl(opt);
             console.log(opt);
         })
-        $(document).on('click', '#delBtn', function() {
+        $(document).on('click', '#delBtn', function () {
             $(this).parent('.userItm').remove();
         })
-        form.on('submit(*)', function(data) {
+        form.on('submit(*)', function (data) {
             console.log(data.filter);
             return false;
         })
     });
-
-    laytpl(opt);
-
-    function laytpl(opt) {
-        layui.use('laytpl', function() {
-            var laytpl = layui.laytpl;
-            var data = {
-                "list": []
-            };
-            data.list.length = opt;
-
-            laytpl(site.innerHTML).render(data, function(html) {
-                document.getElementById('view').innerHTML = html;
-            });
-        })
-    }
-
     //日期范围
     laydate.render({
         elem: '#data1',
         range: true
     });
-</script>
-<script id="site" type="text/html">
-    {{# layui.each(d.list, function(index, item){ }}
-    <blockquote class="layui-row layui-elem-quote layui-quote-nm" style="margin-top: 10px; ">
-        <div class="layui-col-md11">
-            <div class="layui-inline">
-                <label class="layui-form-label">课件名称</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="name" id="searchDetailInp" class="layui-input" placeholder="搜索">
-                </div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">课件介绍</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="introduce" id="searchDetailInp" class="layui-input" placeholder="搜索">
-                </div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">课件类型</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="type" id="searchDetailInp" class="layui-input" placeholder="搜索">
-                </div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">课件长度</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="time" id="searchDetailInp" class="layui-input" placeholder="搜索">
-                </div>
-            </div>
-        </div>
-        <div class="layui-col-md1">
-            X
-        </div>
-    </blockquote>
-    {{# }); }} {{# if(d.list.length === 0){ }} 无数据 {{# } }}
 </script>
 
 </html>

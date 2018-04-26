@@ -112,17 +112,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="layui-col-md12">
-                        <label class="layui-form-label">接收部门</label>
-                        <div class="layui-input-block">
-                            <input type="button" class="layui-btn" id='addPartBtn' value="增加">
-                            <input type="button" class="layui-btn" id='clearPartBtn' value="清空">
-                            <!-- <button class="layui-btn" id='addCharger'>增加</button> -->
-                        </div>
-                        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px; ">
-                            <div id="parentIframeDepartment" style="margin: 0 auto;width: 90%"></div>
-                        </blockquote>
-                    </div>
+                    
                 </div>
                 <div class="layui-form-item layui-row">
                     <div class="layui-col-md6">
@@ -158,29 +148,14 @@
 <script src="../../lib/layui/layui.js"></script>
 <script src="../../lib/layui/lay/modules/laytpl.js"></script>
 <script src="../../js/index.js"></script>
-<!-- <script src="../../js/libraryUpload.js"></script> -->
 <script>
-    var userArr = [];
-    var departmentArr = [];
     layui.use(['element', 'form', 'upload'], function () {
         var element = layui.element,
             form = layui.form,
             upload = layui.upload,
-            addReceiveDepartmentBtn = $('#addPartBtn'),
-            clearReceiveDepartmentBtn = $('#clearPartBtn'),
-            part = $('#parentIframeDepartment'),
             demoListView = $('#demoList'),
             formData = $('#form_id').serializeArray(),
             allReceiveDepartment = {};
-        addReceiveDepartmentBtn.on('click', function () {
-            layer.open({
-                type: 2,
-                area: ['700px', '450px'],
-                fixed: false, //不固定
-                maxmin: true,
-                content: '../others/receivedepartment.html'
-            });
-        });
         // 对象转数组转字符串
         function arrayToStr(obj) {
             var m = [],
@@ -191,35 +166,6 @@
             fStr = '{' + m.join(',') + '}';
             return fStr;
         }
-        // 清空按钮
-        clearReceiveDepartmentBtn.on('click', function () {
-            layer.confirm('确认清空?', {
-                btn: ['确认', '取消'] //按钮
-            }, function () {
-                layer.msg('清除成功', { icon: 1 });
-                part.children().remove();
-            }, function () {
-                layer.close();
-            });
-        });
-        // 单个删除按钮
-        $(document).on('click', '#delBtn_d', function () {
-            $(this).parent('.userItm').remove();
-        });
-        // 获取整个父选区信息
-        function getFatherIframeContent() {
-            var parentIframe = $('#parentIframeDepartment'),
-                allReceiveDepartment = [],
-                itemId = parentIframe.find(".itemId");
-            for (var i = 0; i < itemId.length; i++) {
-                allReceiveDepartment.push(itemId.eq(i).text());
-            }
-            if (allReceiveDepartment.length === 0) {
-                return [];
-            } else {
-                return allReceiveDepartment;
-            }
-        };
         // 获取所有上传文件名字
         function getAllUploadFilesName() {
             var files = $('input[name="file"]').prop('files'),
@@ -227,13 +173,12 @@
             for (var i = 0; i < files.length; i++) {
                 fileArr.push(files[i].name);
             }
-            return fileArr;
+            return fileArr.length == 0 ? false : fileArr;
         }
         //监听提交
         form.on('submit(*)', function (data) {
-            var a = getAllUploadFilesName(),
-                b = getFatherIframeContent();
-            if (a && b) {
+            var a = getAllUploadFilesName();
+            if (a) {
                 $.ajax({
                     url: '',
                     data: {
@@ -252,7 +197,9 @@
             }
             return false;
         });
+
         // 文件上传
+
         var uploadListIns = upload.render({
             elem: '#testList',
             url: '/upload/',
