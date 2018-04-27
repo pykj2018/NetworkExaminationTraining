@@ -89,6 +89,7 @@
                     { field: 'paycard', title: '姓名', width: 120 }
                 ]],
             })
+            sessionStorage.getItem('parentIframeDepartment');
             // 搜索
             searchBtn.on('click', function () {
                 table.reload('receiveUserTable', {

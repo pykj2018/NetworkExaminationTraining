@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>查看当前培训任务</title>
+    <link rel="stylesheet" href="../../lib/layui/css/layui.css">
+</head>
+
+<body>
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-card-header">查看当前培训任务</div>
+            <div class="layui-card-body">
+                <table class="layui-table" id="trainTasks" lay-filter="trainTasks"></table>
+                <script type="text/html" id="barDemo">
+                    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+                  </script>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../../lib/jQuery.js"></script>
+    <script type="text/javascript" src="../../lib/laydate/laydate.js"></script>
+    <script type="text/javascript" src="../../lib/layui/layui.js"></script>
+    <script>
+        layui.use('table', function () {
+            var table = layui.table;
+            //第一个实例
+            table.render({
+                elem: '#trainTasks',
+                height:'auto',
+                url: '../../config/table.js', //数据接口
+                page: true, //开启分页
+                cols: [[ //表头
+                    { field: 'group_id', title: 'ID', sort: true, fixed: 'left' },
+                    { field: 'group_name', title: '用户名',  },
+                    { field: 'sex', title: '性别',  sort: true },
+                    { field: 'city', title: '城市', },
+                    { field: 'sign', title: '签名', },
+                    { field: 'experience', title: '积分',  sort: true },
+                    { field: 'score', title: '评分',  sort: true },
+                    { field: 'classify', title: '职业', },
+                    { field: 'wealth', title: '财富', sort: true },
+                    { fixed: 'right', width: 160, align: 'center', toolbar: '#barDemo' }
+                ]]
+            });
+            table.on('tool(trainTasks)', function (obj) {
+                var data = obj.data;
+                if (obj.event === 'detail') {
+                    layer.msg('ID：' + data.group_id + ' 的查看操作');
+                } else if (obj.event === 'del') {
+                    layer.confirm('真的删除行么', function (index) {
+                        obj.del();
+                        layer.close(index);
+                    });
+                } else if (obj.event === 'edit') {
+                    layer.alert('编辑行：<br>' + JSON.stringify(data))
+                }
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>

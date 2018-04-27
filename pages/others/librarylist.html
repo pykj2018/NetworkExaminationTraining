@@ -19,8 +19,13 @@
     <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+    <style>
+        .card-body {
+            padding: 20px;
+        }
+    </style>
     <div class="layui-fluid">
-        <div class="layui-card">
+        <div class="layui-card" style="padding: 10px;">
             <div class="layui-card-header">资料详情列表</div>
             <div class="layui-card-body">
                 <table class="layui-table" lay-data="{url:'../../config/table.js?page=1&limit=10', page:true, height: 450, id:'libraryTable',limit:5,limits:[10,20,30]}"

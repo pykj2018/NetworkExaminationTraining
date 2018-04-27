@@ -11,7 +11,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../../css/reset.css">
     <link rel="stylesheet" href="../../lib/layui/css/layui.css">
     <title>发布培训任务</title>
 </head>
@@ -74,7 +73,7 @@
                         <div class="layui-col-md4">
                             <label class="layui-form-label">培训学时</label>
                             <div class="layui-input-block">
-                                <input type="text" name="title" class="layui-input" id="data1" placeholder="请选择日期">
+                                <input type="text" name="title" class="layui-input" placeholder="请选择学时">
                             </div>
                         </div>
                         <div class="layui-col-md4">
@@ -216,11 +215,6 @@
                 console.log(res)
             }
         });
-        addCourseInfoBtn.on('click', function () {
-            opt++;
-            laytpl(opt);
-            console.log(opt);
-        })
         $(document).on('click', '#delBtn', function () {
             $(this).parent('.userItm').remove();
         })

@@ -166,15 +166,6 @@
                 addReceiveDepartment = $('#addReceiveDepartment'),
                 addReceiveUser = $('#addReceiveUser');
 
-            addReceiveUser.on('click', function () {
-                layer.open({
-                    type: 2,
-                    area: ['700px', '550px'],
-                    fixed: false, //不固定
-                    maxmin: true,
-                    content: '../others/receiveuser.html',
-                });
-            })
             addReceiveDepartment.on('click', function () {
                 layer.open({
                     type: 2,
@@ -184,6 +175,15 @@
                     content: '../others/receivedepartment.html'
                 });
             });
+            addReceiveUser.on('click', function () {
+                layer.open({
+                    type: 2,
+                    area: ['700px', '550px'],
+                    fixed: false, //不固定
+                    maxmin: true,
+                    content: '../others/receiveuser.html',
+                });
+            })
 
             // 清空选区事件clearPrecinct
             clearPartDepartmentBtn.on('click', function () {
@@ -241,9 +241,10 @@
                 var a = getFatherIframeContent.init({
                     parentIframe: 'parentIframeUser',
                     itemId: '.itemId',
-                    isSetSession:true
+                    isSetSession: false
                 })
-                if (a) {
+                alert(a);
+                if (a.length > 0) {
                     avoidDuplicationOfSubmission($('#formSubmitBtn'));
                     $.ajax({
                         url: '',

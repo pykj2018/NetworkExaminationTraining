@@ -90,25 +90,25 @@
 
     //侧边导航渲染
     function laytpl(e) {
-        layui.use(['laytpl', 'element'], function() {
+        layui.use(['laytpl', 'element'], function () {
             var laytpl = layui.laytpl;
             var element = layui.element;
 
             var data = {
                 'list': dataArray[e]
             };
-            laytpl(site.innerHTML).render(data, function(html) {
+            laytpl(site.innerHTML).render(data, function (html) {
                 document.getElementById('view').innerHTML = html;
             });
             element.init();
         })
     }
 
-    layui.use('element', function() {
+    layui.use('element', function () {
         var element = layui.element;
         var $ = layui.jquery;
         laytpl(0);
-        element.on('nav(nav)', function(data) {
+        element.on('nav(nav)', function (data) {
             laytpl(data[0].dataset.index);
             // console.log(data[0].dataset.index);
             $("iframe[name=myIframe]").attr('src', dataArray[data[0].dataset.index][0].href);

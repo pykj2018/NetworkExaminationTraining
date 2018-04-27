@@ -13,13 +13,18 @@ var dataArray = [
         'submenu': []
     }],
     [{
-        'item': '发布培训任务',
-        'href': 'pages/train/push_train.html',
-        'submenu': []
-    }, {
-        'item': '培训任务查询',
-        'href': 'pages/train/query_train.html',
-        'submenu': []
+        'item': '培训任务',
+        'href': 'pages/train/training_tasks.html',
+        'submenu': [{
+            'xitem': '当前培训任务',
+            'xhref': 'pages/train/training_tasks.html'
+        }, {
+            'xitem': '培训任务查询',
+            'xhref': 'pages/train/query_train.html'
+        }, {
+            'xitem': '添加培训任务',
+            'xhref': 'pages/train/push_train.html'
+        }]
     }, {
         'item': '学习资料库',
         'submenu': [{
@@ -33,17 +38,17 @@ var dataArray = [
         'item': '发布考试任务',
         'href': 'pages/train/push_exam.html',
         'submenu': [{
-                'xitem': '发布',
-                'xhref': 'pages/train/push_exam.html'
-            },
-            {
-                'xitem': '发布1',
-                'xhref': 'pages/train/push_exam.1.html'
-            },
-            {
-                'xitem': '考试任务查询',
-                'xhref': 'pages/train/push_exam.2.html'
-            }
+            'xitem': '发布',
+            'xhref': 'pages/train/push_exam.html'
+        },
+        {
+            'xitem': '发布1',
+            'xhref': 'pages/train/push_exam.1.html'
+        },
+        {
+            'xitem': '考试任务查询',
+            'xhref': 'pages/train/push_exam.2.html'
+        }
         ]
     }, {
         'item': '考试影像分析',

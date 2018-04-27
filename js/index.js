@@ -1,3 +1,11 @@
+/**********************************
+ * @description 工具对象,所有工具方法
+ **********************************/
+
+var m_util = {
+
+}
+
 /******************************************
  * @description 添加表格内容到父级ifram的对象
  * @param clickBtn 事件触发按钮(必填)
@@ -10,7 +18,7 @@
  * @param $ layui内的jq对象 如果没有则在调用页面引入jq即可
  * @method bind 事件触发方法
  *******************************************/
-//数组存在object对象里 方便多页面的数组管理和调用 成不成你觉得？
+//数组存在object对象里 方便多页面的数组管理和调用 成!
 var object = {
     userArr: [],
     departmentArr: []
@@ -135,15 +143,11 @@ var getFatherIframeContent = {
         for (var i = 0; i < _itemId.length; i++) {
             arr.push(_itemId.eq(i).text());
         }
-        return arr.length === 0 ? false : arr;
+        return arr.length === 0 ? [] : arr;
     },
     setArrInSession: function (fatherName) {
         var arr = this.getAllContent()
-        if (this.isSetSession === true && arr) {
-            sessionStorage.setItem(fatherName, arr);
-        } else {
-            return false;
-        }
+        sessionStorage.setItem(fatherName, arr);
     }
 }
 /****************************************
@@ -152,5 +156,5 @@ var getFatherIframeContent = {
  ****************************************/
 function avoidDuplicationOfSubmission(btn) {
     btn.addClass('layui-btn layui-btn-disabled');
-    btn.attr('disable', 'true');
+    btn.attr('disabled', true);
 }
