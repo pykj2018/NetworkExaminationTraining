@@ -143,6 +143,7 @@
             layui.use('laytpl', function() {
                 var laytpl = layui.laytpl;
                 var data = {
+                    "name": "data",
                     "list": [{
                         "title": "内容设计",
                         "item": ["好", "较好", "一般", "需改进"]
@@ -155,6 +156,7 @@
                     }]
                 };
                 var data2 = {
+                    "name": "data2",
                     "list": [{
                         "title": "您认为培训课程的安排",
                         "item": ["很合理", "合理", "较合理", "一般", "不合理"]
@@ -203,7 +205,7 @@
                 {{# layui.each(d.list[index].item, function(xindex, xtemp){ }}
                 <div class="layui-col-md2">
                     <div class="">
-                        <input type="radio" name="{{index}}" value="{{xtemp}}" title="{{xtemp}}">
+                        <input type="radio" name="{{d.name+'-'+index}}" value="{{xtemp}}" title="{{xtemp}}">
                     </div>
                     <!-- <label class="layui-form-label">{{xtemp}}</label> -->
                     <!-- <input type="radio" name="role" value="" title="{{xtemp}}"> -->
