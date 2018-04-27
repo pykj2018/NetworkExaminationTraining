@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../../lib/layui/css/layui.css">
     <link rel="stylesheet" href="../../lib/laydate/theme/default/laydate.css">
-
+    <link href="../../lib/umeditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
@@ -64,9 +64,9 @@
                     <div class="layui-card">
                         <div class="layui-card-header">公告内容</div>
                         <div class="layui-card-body">
-                            <textarea name="content" lay-verify="content" placeholder="请输入" class="layui-textarea" style="margin-top: 0px; margin-bottom: 0px; height: 100px;"></textarea>
+                            <script type="text/plain" id="myEditor" style="width:1000px;height:240px;">
+                            </script>
                         </div>
-
                     </div>
                 </div>
                 <!-- 公告内容e -->
@@ -153,6 +153,7 @@
     <script type="text/javascript" src="../../lib/laydate/laydate.js"></script>
     <script type="text/javascript" src="../../lib/layui/layui.all.js"></script>
     <script type="text/javascript" src="../../js/index.js"></script>
+
     <script>
         var $ = layui.jquery;
         //需要全局声明，子ifream才能取到
@@ -242,7 +243,8 @@
                     parentIframe: 'parentIframeUser',
                     itemId: '.itemId',
                     isSetSession: false
-                })
+                });
+                umConfig.getContent();
                 alert(a);
                 if (a.length > 0) {
                     avoidDuplicationOfSubmission($('#formSubmitBtn'));
@@ -280,6 +282,11 @@
             type: 'datetime'
         });
     </script>
+    <script src="../../lib/umeditor/third-party/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../lib/umeditor/umeditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../lib/umeditor/umeditor.min.js"></script>
+    <script type="text/javascript" src="../../lib/umeditor/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" src="../../js/umeditor_config.js"></script>
 </body>
 
 </html>
