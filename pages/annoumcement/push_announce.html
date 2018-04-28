@@ -151,8 +151,10 @@
     <script type="text/javascript" src="../../lib/laydate/laydate.js"></script>
     <script type="text/javascript" src="../../lib/layui/layui.all.js"></script>
     <script type="text/javascript" src="../../js/index.js"></script>
-
+    <script type="text/javascript" src="../../lib/wangeditor/wangEditor.js"></script>
+    <script type="text/javascript" src="../../js/editor_config.js"></script>
     <script>
+        editorConfig.init('#myEditor');
         var $ = layui.jquery;
         //需要全局声明，子ifream才能取到
         layui.use(['form', 'layer'], function () {
@@ -282,8 +284,6 @@
             type: 'datetime'
         });
     </script>
-    <script type="text/javascript" src="../../lib/wangeditor/wangEditor.js"></script>
-    <script type="text/javascript" src="../../js/editor_config.js"></script>
 </body>
 
 </html>

@@ -83,7 +83,7 @@
                 <hr class="layui-bg-gray">
                 <div class="layui-card-header">试题题干</div>
                 <div class="layui-card-body">
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <div id="stem"></div>
                 </div>
                 <hr class="layui-bg-gray">
             </div>
@@ -92,7 +92,10 @@
     <script type="text/javascript" src="../../lib/layui/layui.js"></script>
     <script type="text/javascript" src="../../lib/laydate/laydate.js"></script>
     <script type="text/javascript" src="../../lib/layui/layui.js"></script>
+    <script type="text/javascript" src="../../lib/wangeditor/wangEditor.js"></script>
+    <script type="text/javascript" src="../../js/editor_config.js"></script>
     <script>
+        editorConfig.init('#stem');
         layui.use(['form'], function () {
 
         })

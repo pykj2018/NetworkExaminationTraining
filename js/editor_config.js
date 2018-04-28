@@ -1,5 +1,9 @@
 
-// 实例化编辑器
+/**
+ * @description 富文本设置
+ * @method init 初始化
+ * @method getContent 获取富文本内容
+ */
 var editorConfig = {
     config: null,
     E: window.wangEditor,
@@ -18,7 +22,7 @@ var editorConfig = {
         console.log(con);
     }
 }
-editorConfig.init('#myEditor');
-$('.layui-card-header').on('click', function () {
-    editorConfig.getContent();
-})
+
+// $('.layui-card-header').on('click', function () {
+//     editorConfig.getContent();
+// })
