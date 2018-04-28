@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>新增题库</title>
+    <link rel="stylesheet" href="../../lib/layui/css/layui.css">
+</head>
+
+<body>
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <a href="javascript:;" class="layui-btn layui-btn-primary">添加题库</a>
+                <a href="../questionbank/bank_list.html" class="layui-btn">题库列表</a>
+            </div>
+        </div>
+        <div class="layui-card layui-form">
+            <div class="layui-card-header">新增题库</div>
+            <div class="layui-card-body layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">题库名称:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" placeholder="名称">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">系统:</label>
+                        <div class="layui-input-inline">
+                            <select>
+                                <option value="">选个题型</option>
+                                <option value="0">单选题</option>
+                                <option value="1">多选题</option>
+                                <option value="2">判断题</option>
+                                <option value="3">填空题</option>
+                                <option value="4">问答题</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">单位:</label>
+                        <div class="layui-input-inline">
+                            <select>
+                                <option value="">选个题型</option>
+                                <option value="0">单选题</option>
+                                <option value="1">多选题</option>
+                                <option value="2">判断题</option>
+                                <option value="3">填空题</option>
+                                <option value="4">问答题</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">类别:</label>
+                        <div class="layui-input-inline">
+                            <select>
+                                <option value="">选个题型</option>
+                                <option value="0">单选题</option>
+                                <option value="1">多选题</option>
+                                <option value="2">判断题</option>
+                                <option value="3">填空题</option>
+                                <option value="4">问答题</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">题库说明:</label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input" placeholder="说明">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-inline">
+                            <button id="formSubmitBtn" class="layui-btn" lay-submit="" lay-filter="form">立即提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script type="text/javascript" src="../../lib/jQuery.js"></script>
+    <script type="text/javascript" src="../../lib/laydate/laydate.js"></script>
+    <script type="text/javascript" src="../../lib/layui/layui.js"></script>
+    <script>
+        layui.use(['form'], function () {
+        })
+    </script>
+</body>
+
+</html>

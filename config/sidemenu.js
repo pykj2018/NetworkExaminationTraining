@@ -1,7 +1,8 @@
 var dataArray = [
     [{
         'item': '公告首页',
-        'href': 'pages/annoumcement/index_announce.html',
+        // 'href': 'pages/annoumcement/index_announce.html',
+        'href': 'pages/questionbank/bank_list.html',
         'submenu': []
     }, {
         'item': '发布公告',
@@ -48,8 +49,7 @@ var dataArray = [
         {
             'xitem': '考试任务查询',
             'xhref': 'pages/train/push_exam.2.html'
-        }
-        ]
+        }]
     }, {
         'item': '考试影像分析',
         'href': 'pages/train/analysis_video.html',
@@ -68,7 +68,26 @@ var dataArray = [
         {
             'xitem': '调查问卷分析',
             'xhref': 'pages/train/questionnaire2.html'
-        }
-        ]
-    }]
+        }]
+    }], [{
+        'item': '新增题库',
+        'href': 'pages/questionbank/add_bank.html',
+        'submenu': []
+    }, {
+        'item': '题库列表',
+        'href': 'pages/questionbank/bank_list.html',
+        'submenu': []
+    }, {
+        'item': '新增试题',
+        'href': 'pages/questionbank/add_exercises.html',
+        'submenu': []
+    }, {
+        'item': '管理试题',
+        'href': 'pages/questionbank/query_announce.html',
+        'submenu': []
+    }, {
+        'item': '批量导入试题',
+        'href': 'pages/questionbank/query_announce.html',
+        'submenu': []
+    }],
 ]
