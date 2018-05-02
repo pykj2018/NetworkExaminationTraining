@@ -16,6 +16,8 @@ var m_util = {
  * @param dId 绑定的删除按钮id
  * @param arr 操作的数组名称，需跟数组名称一样，不可以自定义
  * @param $ layui内的jq对象 如果没有则在调用页面引入jq即可
+ * @method removeItem
+ * @method unique
  * @method bind 事件触发方法
  *******************************************/
 //数组存在object对象里 方便多页面的数组管理和调用 成!
@@ -97,11 +99,6 @@ var addInfoFromTableToIframe = {
     }
 
 }
-/******************************************
- * @description 表格内容去重
- * @method removeItem
- * @method unique
- *******************************************/
 
 //删除子项 arr格式为数组对象 对比属性为id
 function removeItem(arr, e) {
@@ -157,4 +154,77 @@ var getFatherIframeContent = {
 function avoidDuplicationOfSubmission(btn) {
     btn.addClass('layui-btn layui-btn-disabled');
     btn.attr('disabled', true);
+}
+
+
+/** 
+ * @description 添加题目组件传入select 对比相应option获取dom细节
+ * 
+ */
+var addExercises = {
+    selectName: null,
+    contentName: null,
+    form: null,
+    init: function (config) {
+        this.selectName = 'select(' + config.selectName + ')';
+        this.contentName = config.contentName;
+        this.form = config.form;
+        this.bind();
+        return this;
+    },
+    bind: function () {
+        var self = this;
+        this.form.on(this.selectName, function (data) {
+            var optionVal = data.value;
+            self.render(optionVal);
+        });
+    },
+    render: function (optionVal) {
+        if (optionVal === '0') {
+            // 单选题 
+            questionSet.qSingleChoice();
+            console.log('单选');
+        } else if (optionVal === '1') {
+            // 多选
+            questionSet.qMultipleChoice()
+            console.log('多选');
+        } else if (optionVal === '2') {
+            // 判断
+            questionSet.qJudgment()
+            console.log('判断');
+        } else if (optionVal === '3') {
+            // 填空
+            questionSet.qCompletion()
+            console.log('填空');
+        } else if (optionVal === '4') {
+            // 问答
+            questionSet.qAnswer()
+            console.log('问答');
+        } else {
+            // 暂无题型
+            console.log('暂无');
+        }
+    }
+
+}
+/**
+ * @description 题目集合
+ */
+var questionSet = {
+    qSingleChoice: function () {
+        console.log(1);
+    },
+    qMultipleChoice: function () {
+        console.log(2);
+    },
+    qJudgment: function () {
+        console.log(3);
+    },
+    qCompletion: function () {
+        console.log(4);
+    },
+    qAnswer: function () {
+        console.log(5);
+    }
+
 }

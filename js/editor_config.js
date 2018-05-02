@@ -11,6 +11,9 @@ var editorConfig = {
     _create: function (config) {
         var editor = this.editor;
         editor = new this.E(config);
+        // editor.customConfig.uploadImgServer = '/upload'
+        editor.customConfig.zIndex = 1;
+        editor.customConfig.uploadImgShowBase64 = true;
         editor.create();
     },
     init: function (config) {

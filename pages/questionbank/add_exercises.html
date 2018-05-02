@@ -18,7 +18,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">试题类型:</label>
                         <div class="layui-input-inline">
-                            <select>
+                            <select id="exerciseType" lay-filter="exerciseType">
                                 <option value="">选个题型</option>
                                 <option value="0">单选题</option>
                                 <option value="1">多选题</option>
@@ -34,12 +34,11 @@
                         <label class="layui-form-label">试题难度: </label>
                         <div class="layui-input-inline">
                             <select>
-                                <option value="">选个题型</option>
-                                <option value="0">单选题</option>
-                                <option value="1">多选题</option>
-                                <option value="2">判断题</option>
-                                <option value="3">填空题</option>
-                                <option value="4">问答题</option>
+                                <option value="">选个难度</option>
+                                <option value="0">简单</option>
+                                <option value="1">中等</option>
+                                <option value="2">困难</option>
+                                <option value="3">极难</option>
                             </select>
                         </div>
                     </div>
@@ -49,12 +48,12 @@
                         <label class="layui-form-label">所属题库:</label>
                         <div class="layui-input-inline">
                             <select>
-                                <option value="">选个题型</option>
-                                <option value="0">单选题</option>
-                                <option value="1">多选题</option>
-                                <option value="2">判断题</option>
-                                <option value="3">填空题</option>
-                                <option value="4">问答题</option>
+                                <option value="">选个题库</option>
+                                <option value="0">题库一</option>
+                                <option value="1">题库二</option>
+                                <option value="2">题库三</option>
+                                <option value="3">题库四</option>
+                                <option value="4">题库五</option>
                             </select>
                         </div>
                     </div>
@@ -70,14 +69,10 @@
                 <div class="layui-col-xs6 layui-col-md8">
                     <div class="layui-form-item">
                         <label class="layui-form-label">试题状态:</label>
-                        <div class="layui-input-inline">
-                            <select>
-                                <option value="">选个题型</option>
-                                <option value="0">开放</option>
-                                <option value="1">关闭</option>
-                            </select>
+                        <div class="layui-input-inline" style="width:auto;">
+                            <input type="checkbox" name="switch" lay-skin="switch" lay-filter="isVisual" lay-text="ON|OFF">
                         </div>
-                        <div class="layui-form-mid layui-word-aux">学生自测可见</div>
+                        <div class="layui-form-mid layui-word-aux visualtext">学生自测不可见</div>
                     </div>
                 </div>
                 <hr class="layui-bg-gray">
@@ -89,15 +84,28 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="../../lib/layui/layui.js"></script>
+    <script src="../../lib/jQuery.js"></script>
     <script type="text/javascript" src="../../lib/laydate/laydate.js"></script>
     <script type="text/javascript" src="../../lib/layui/layui.js"></script>
     <script type="text/javascript" src="../../lib/wangeditor/wangEditor.js"></script>
     <script type="text/javascript" src="../../js/editor_config.js"></script>
+    <script src="../../js/index.js"></script>
     <script>
         editorConfig.init('#stem');
         layui.use(['form'], function () {
 
+            var form = layui.form;
+            addExercises.init({
+                form: form,
+                selectName: 'exerciseType',
+            });
+            form.on('switch(isVisual)', function (data) {
+                if (this.checked) {
+                    $('.visualtext').text('学生自测可见');
+                } else {
+                    $('.visualtext').text('学生自测不可见');
+                }
+            });
         })
     </script>
 </body>
