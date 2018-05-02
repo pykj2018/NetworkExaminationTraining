@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../lib/layui/css/layui.css">
+</head>
+
+<body style="background: #fff;">
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div class="layui-fluid">
+        <form class="layui-form" action="">
+            <div class="layui-form-item sel-type">
+                <label class="layui-form-label">题目类型:</label>
+                <div class="layui-input-inline">
+                    <select name="city" lay-verify="required">
+                        <option value=""></option>
+                        <option value="0">选择题</option>
+                        <option value="1">判断题</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item sel-tit">
+                <label class="layui-form-label">题目标题:</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="searchDetailInp" class="layui-input" placeholder="添加">
+                </div>
+            </div>
+            <div class="layui-form-item  sel-num">
+                <label class="layui-form-label">选项数量:</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="searchDetailInp" class="layui-input" placeholder="最多为五个">
+                </div>
+            </div>
+            <div class="layui-form-item sel-set">
+                <label class="layui-form-label">内容设定:</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="searchDetailInp" class="layui-input">
+                </div>
+            </div>
+        </form>
+        <div>
+            <!-- <table id="receiveDepartmentTable" class="layui-table" lay-data="{page:true, id:'receiveDepartmentTable'}" lay-filter="receiveDepartmentTable"></table> -->
+        </div>
+        <div class="layui-btn-container">
+            <button id="getDataBtn" class="layui-btn">确定</button>
+        </div>
+    </div>
+    <script src="../../lib/laydate/laydate.js"></script>
+    <script src="../../lib/layui/layui.js"></script>
+    <script src="../../js/index.js"></script>
+    <script>
+        layui.use(['element', 'form', 'layer', 'table'], function() {
+            var table = layui.table,
+                $ = layui.jquery,
+                layer = layui.layer;
+
+            $(".sel-num input").focus(function() { //聚焦清空
+                $(this).val('')
+            })
+            $(".sel-num input").blur(function() {
+                var selSetLen = 0 < $(this).val() < 5 ? $(this).val() : 5; //最多五个
+                console.log(selSetLen)
+                $(".sel-set>div").empty();
+                for (let i = 0; i < selSetLen; i++) {
+                    $(".sel-set>div").append('<input type="text" id="searchDetailInp" class="layui-input" >')
+                }
+            })
+            $("#getDataBtn").click(function() {
+                var thirdObj = {
+                    'id': '',
+                    'title': '',
+                    'type': '',
+                    'fourth': []
+                }
+                thirdObj.title = $(".sel-tit input").val(); //title
+                thirdObj.type = $(".sel-type select").val(); //type
+                for (let i = 0; i < $(".sel-set input").length; i++) {
+                    thirdObj.fourth.push($(".sel-set input").eq(i).val())
+                }
+                parent.objData[0].third = thirdObj;
+                console.log(thirdObj);
+                var domStr = "<div>" + thirdObj.title + thirdObj.type + "</div>"
+            })
+
+            // 获得表格内容传入父层
+            // addInfoFromTableToIframe.init({
+            //     clickBtn: '#getDataBtn',
+            //     tableName: 'receiveDepartmentTable',
+            //     fatherIframe: parent.$('#parentIframeDepartment'),
+            //     dId: 'delBtn_d',
+            //     arr: 'departmentArr',
+            //     table: table,
+            //     parent: parent,
+            //     $: $,
+            //     arrId: 'group_id',
+            //     arrName: 'group_name',
+            // }).bind();
+        });
+    </script>
+</body>
+
+</html>
