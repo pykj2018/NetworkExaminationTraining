@@ -10,8 +10,8 @@
 </head>
 
 <body>
-    <div class="layui-fluid">
-        <div class="layui-card layui-form">
+    <div class="layui-fluid layui-form">
+        <div class="layui-card">
             <div class="layui-card-header">添加试题基本信息</div>
             <div class="layui-card-body layui-row">
                 <div class="layui-col-xs6 layui-col-md6">
@@ -75,12 +75,35 @@
                         <div class="layui-form-mid layui-word-aux visualtext">学生自测不可见</div>
                     </div>
                 </div>
-                <hr class="layui-bg-gray">
-                <div class="layui-card-header">试题题干</div>
-                <div class="layui-card-body">
-                    <div id="stem"></div>
+            </div>
+        </div>
+        <div class="layui-card">
+            <div class="layui-card-header">试题题干</div>
+            <div class="layui-card-body">
+                <div id="stem"></div>
+            </div>
+        </div>
+        <div class="layui-card">
+            <div class="layui-card-header">试题区域</div>
+            <div class="layui-card-body" id="exerciseContent">
+                <div class="layui-row">
+                    <div class="layui-col-md12 layui-col-xs12">单项选则题</div>
+                    <div class="layui-col-md12 layui-col-xs12">
+                        <div class="layui-row  layui-form-item">
+                            <div class="layui-col-md1">
+                                <div class="layui-input-inline">
+                                    <input type="radio">
+                                </div>
+                            </div>
+                            <div class="layui-col-md8">
+                                <div class="layui-input-block">
+                                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                                </div>
+                            </div>
+                            <div class="layui-col-md3"></div>
+                        </div>
+                    </div>
                 </div>
-                <hr class="layui-bg-gray">
             </div>
         </div>
     </div>
@@ -93,11 +116,11 @@
     <script>
         editorConfig.init('#stem');
         layui.use(['form'], function () {
-
             var form = layui.form;
             addExercises.init({
                 form: form,
                 selectName: 'exerciseType',
+                contentName: $('#exerciseContent')
             });
             form.on('switch(isVisual)', function (data) {
                 if (this.checked) {

@@ -115,7 +115,6 @@ function removeItem(arr, e) {
 /*****************************************************************
  * @description 获取父控件内容
  * @param parentIframe 父ID
- * @param itemId 内容ID
  * @param isSetSession {boolean} 是否设置session
  * @method init 初始化获取结果 return a == allContentArr
  * @method getAllContent 获取所有元素 return false or allContentArr
@@ -123,29 +122,18 @@ function removeItem(arr, e) {
  *****************************************************************/
 var getFatherIframeContent = {
     parentIframe: null,
-    itemId: null,
-    isSetSession: false,
-    allContentArr: [],
     init: function (config) {
-        this.parentIframe = $('#' + config.parentIframe);
-        this.itemId = config.itemId;
-        this.isSetSession = config.isSetSession;
-        this.setArrInSession(config.parentIframe);
-        this.allContentArr = this.getAllContent();
-        return this.allContentArr;
+        this.parentIframe = $(config.parentIframe);
+        return this;
     },
-    getAllContent: function () {
-        var _itemId = this.parentIframe.find(this.itemId),
+    getAllContentArr: function () {
+        var _itemId = this.parentIframe.find('.itemId'),
             arr = [];
         for (var i = 0; i < _itemId.length; i++) {
             arr.push(_itemId.eq(i).text());
         }
         return arr.length === 0 ? [] : arr;
     },
-    setArrInSession: function (fatherName) {
-        var arr = this.getAllContent()
-        sessionStorage.setItem(fatherName, arr);
-    }
 }
 /****************************************
  * @description 避免重复方法按钮避免重复提交
@@ -159,6 +147,8 @@ function avoidDuplicationOfSubmission(btn) {
 
 /** 
  * @description 添加题目组件传入select 对比相应option获取dom细节
+ * @param selectName 选择的select
+ * @param contentName 渲染目标
  * 
  */
 var addExercises = {
@@ -182,23 +172,23 @@ var addExercises = {
     render: function (optionVal) {
         if (optionVal === '0') {
             // 单选题 
-            questionSet.qSingleChoice();
+            questionSet.qSingleChoice(this.contentName);
             console.log('单选');
         } else if (optionVal === '1') {
             // 多选
-            questionSet.qMultipleChoice()
+            questionSet.qMultipleChoice(this.contentName)
             console.log('多选');
         } else if (optionVal === '2') {
             // 判断
-            questionSet.qJudgment()
+            questionSet.qJudgment(this.contentName)
             console.log('判断');
         } else if (optionVal === '3') {
             // 填空
-            questionSet.qCompletion()
+            questionSet.qCompletion(this.contentName)
             console.log('填空');
         } else if (optionVal === '4') {
             // 问答
-            questionSet.qAnswer()
+            questionSet.qAnswer(this.contentName)
             console.log('问答');
         } else {
             // 暂无题型
@@ -211,20 +201,35 @@ var addExercises = {
  * @description 题目集合
  */
 var questionSet = {
-    qSingleChoice: function () {
-        console.log(1);
+    qSingleChoice: function (contentName) {
+        var str = '<div class="layui-card">'
+            + '<div class="layui-card-header">'
+            + '单选题'
+            + '</div>'
+            + '<div class="layui-card-body">'
+            + '这里是单选题的内容区域'
+            + '</div>'
+            + '</div>'
+        contentName.html(str);
     },
-    qMultipleChoice: function () {
-        console.log(2);
+    qMultipleChoice: function (contentName) {
+        contentName.html('2');
     },
-    qJudgment: function () {
-        console.log(3);
+    qJudgment: function (contentName) {
+        contentName.html('3');
     },
-    qCompletion: function () {
-        console.log(4);
+    qCompletion: function (contentName) {
+        contentName.html('4');
     },
-    qAnswer: function () {
-        console.log(5);
-    }
+    qAnswer: function (contentName) {
+        contentName.html('5');
+    },
+    add: function () {
+        $(document).on('click', function () {
 
+        })
+    },
+    del: function () {
+
+    }
 }

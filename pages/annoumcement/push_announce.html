@@ -82,12 +82,7 @@
                                             <label class="layui-form-label">发送部门</label>
                                             <div class="layui-input-inline">
                                                 <select name="getdepartment" lay-verify="">
-                                                    <option value="">选择接收部门</option>
-                                                    <option value="0">部们一</option>
-                                                    <option value="1">部门二</option>
-                                                    <option value="2">部门三</option>
-                                                    <option value="3">部门四</option>
-                                                    <option value="4">部门五</option>
+                                                    <option value="">选择发送部门</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -166,7 +161,6 @@
                 parentIframeUser = $('#parentIframeUser'),
                 addReceiveDepartment = $('#addReceiveDepartment'),
                 addReceiveUser = $('#addReceiveUser');
-
             addReceiveDepartment.on('click', function () {
                 layer.open({
                     type: 2,
@@ -187,17 +181,21 @@
                     content: '../others/receiveuser.html',
                 });
             })
-
             // 清空选区事件clearPrecinct
             clearPartDepartmentBtn.on('click', function () {
-                clearPrecinct(parentIframeDepartment, 'departmentArr');
+                var departmentContent = getFatherIframeContent.init({
+                    parentIframe: '#parentIframeDepartment',
+                }).getAllContentArr();
+                clearPrecinct(departmentContent, parentIframeDepartment, 'departmentArr');
             });
             clearPartUserBtn.on('click', function () {
-                clearPrecinct(parentIframeUser, 'userArr');
+                var userContent = getFatherIframeContent.init({
+                    parentIframe: '#parentIframeUser',
+                }).getAllContentArr();
+                clearPrecinct(userContent, parentIframeUser, 'userArr');
             });
-
-            function clearPrecinct(precinct, data) {
-                if (getFatherIframeContentDepartment()) {
+            function clearPrecinct(arr, precinct, data) {
+                if (arr.length > 0) {
                     layer.confirm('确认清空?', {
                         btn: ['确认', '取消'] //按钮
                     }, function () {
@@ -213,41 +211,7 @@
                     layer.msg('内容为空');
                 }
             }
-            function getFatherIframeContentDepartment() {
-                var parentIframe = $('#parentIframeDepartment'),
-                    allReceiveDepartment = [],
-                    itemId = parentIframe.find(".itemId");
-                for (var i = 0; i < itemId.length; i++) {
-                    allReceiveDepartment.push(itemId.eq(i).text());
-                }
-                if (allReceiveDepartment.length === 0) {
-                    return false;
-                } else {
-                    return allReceiveDepartment;
-                }
-            };
-
-            function getFatherIframeContentUser() {
-                var parentIframe = $('#parentIframeUser'),
-                    allReceiveUser = [],
-                    itemId = parentIframe.find(".itemId");
-                for (var i = 0; i < itemId.length; i++) {
-                    allReceiveUser.push(itemId.eq(i).text());
-                }
-                if (allReceiveUser.length === 0) {
-                    return false;
-                } else {
-                    return allReceiveUser;
-                }
-            };
             form.on('submit(form)', function (data) {
-                var a = getFatherIframeContent.init({
-                    parentIframe: 'parentIframeUser',
-                    itemId: '.itemId',
-                    isSetSession: false
-                });
-                umConfig.getContent();
-                alert(a);
                 if (a.length > 0) {
                     avoidDuplicationOfSubmission($('#formSubmitBtn'));
                     $.ajax({

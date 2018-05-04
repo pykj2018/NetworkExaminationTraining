@@ -13,6 +13,7 @@ var editorConfig = {
         editor = new this.E(config);
         // editor.customConfig.uploadImgServer = '/upload'
         editor.customConfig.zIndex = 1;
+        editor.customConfig.height = '150';
         editor.customConfig.uploadImgShowBase64 = true;
         editor.create();
     },
