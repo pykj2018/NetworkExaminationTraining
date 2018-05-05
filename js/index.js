@@ -100,18 +100,6 @@ var addInfoFromTableToIframe = {
 
 }
 
-//删除子项 arr格式为数组对象 对比属性为id
-function removeItem(arr, e) {
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i].id == e) {
-            arr.splice(i, 1);
-            // console.table(arr);
-            break;
-        }
-    }
-}
-
-
 /*****************************************************************
  * @description 获取父控件内容
  * @param parentIframe 父ID
@@ -135,13 +123,33 @@ var getFatherIframeContent = {
         return arr.length === 0 ? [] : arr;
     },
 }
-/****************************************
- * @description 避免重复方法按钮避免重复提交
- * @param btn 传入要禁用的按钮
- ****************************************/
+//删除子项 arr格式为数组对象 对比属性为id
+function removeItem(arr, e) {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i].id == e) {
+            arr.splice(i, 1);
+            // console.table(arr);
+            break;
+        }
+    }
+}
+//  @description 避免重复提交
+
 function avoidDuplicationOfSubmission(btn) {
     btn.addClass('layui-btn layui-btn-disabled');
     btn.attr('disabled', true);
+}
+
+//  @description 通用iframe弹出层方法
+function openIframe(url) {
+    layer.open({
+        type: 2,
+        area: ['700px', '550px'],
+        fixed: false, //不固定
+        maxmin: true,
+        scrollbar: false,
+        content: url
+    })
 }
 
 

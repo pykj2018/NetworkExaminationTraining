@@ -155,45 +155,33 @@
         layui.use(['form', 'layer'], function () {
             var form = layui.form,
                 layer = layui.layer,
-                clearPartDepartmentBtn = $('#clearPartDepartmentBtn'),
-                clearPartUserBtn = $('#clearPartUserBtn'),
                 parentIframeDepartment = $('#parentIframeDepartment'),
                 parentIframeUser = $('#parentIframeUser'),
-                addReceiveDepartment = $('#addReceiveDepartment'),
-                addReceiveUser = $('#addReceiveUser');
-            addReceiveDepartment.on('click', function () {
-                layer.open({
-                    type: 2,
-                    area: ['700px', '550px'],
-                    fixed: false, //不固定
-                    maxmin: true,
-                    scrollbar: false,
-                    content: '../others/receivedepartment.html'
-                });
-            });
-            addReceiveUser.on('click', function () {
-                layer.open({
-                    type: 2,
-                    area: ['700px', '550px'],
-                    fixed: false, //不固定
-                    maxmin: true,
-                    scrollbar: false,
-                    content: '../others/receiveuser.html',
-                });
+                allInputBtn = $(':button');
+            allInputBtn.on('click', function () {
+                var btnId = $(this).attr('id');
+                switch (btnId) {
+                    case 'addReceiveDepartment':
+                        openIframe('../others/receivedepartment.html')
+                        break;
+                    case 'addReceiveUser':
+                        openIframe('../others/receiveuser.html')
+                        break;
+                    case 'clearPartDepartmentBtn':
+                        var departmentContent = getFatherIframeContent.init({
+                            parentIframe: '#parentIframeDepartment',
+                        }).getAllContentArr();
+                        clearPrecinct(departmentContent, parentIframeDepartment, 'departmentArr');
+                        break;
+                    case 'clearPartUserBtn':
+                        var userContent = getFatherIframeContent.init({
+                            parentIframe: '#parentIframeUser',
+                        }).getAllContentArr();
+                        clearPrecinct(userContent, parentIframeUser, 'userArr');
+                        break;
+                }
             })
-            // 清空选区事件clearPrecinct
-            clearPartDepartmentBtn.on('click', function () {
-                var departmentContent = getFatherIframeContent.init({
-                    parentIframe: '#parentIframeDepartment',
-                }).getAllContentArr();
-                clearPrecinct(departmentContent, parentIframeDepartment, 'departmentArr');
-            });
-            clearPartUserBtn.on('click', function () {
-                var userContent = getFatherIframeContent.init({
-                    parentIframe: '#parentIframeUser',
-                }).getAllContentArr();
-                clearPrecinct(userContent, parentIframeUser, 'userArr');
-            });
+
             function clearPrecinct(arr, precinct, data) {
                 if (arr.length > 0) {
                     layer.confirm('确认清空?', {
@@ -230,14 +218,13 @@
                 $(this).parent('.userItm').remove();
                 var itemId = $(this).siblings('.itemId').text();
                 removeItem(object.userArr, itemId);
-            })
-
+            });
             $(document).on('click', '#delBtn_d', function () {
                 $(this).parent('.userItm').remove();
                 var itemId = $(this).siblings('.itemId').text();
                 removeItem(object.departmentArr, itemId);
-            })
-
+            });
+            
         });
         laydate.render({
             elem: '#StartTime',
