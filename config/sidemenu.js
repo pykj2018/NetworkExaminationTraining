@@ -39,11 +39,11 @@ var dataArray = [
         'item': '发布考试任务',
         'href': 'pages/train/push_exam.html',
         'submenu': [{
-            'xitem': '发布',
+            'xitem': '发布考试通知',
             'xhref': 'pages/train/push_exam.html'
         },
         {
-            'xitem': '发布1',
+            'xitem': '配置考试信息',
             'xhref': 'pages/train/push_exam.1.html'
         },
         {

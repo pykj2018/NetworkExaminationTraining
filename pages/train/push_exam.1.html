@@ -22,11 +22,11 @@
             line-height: 30px;
             margin: 0 auto 30px;
         }
-        
+
         .xtable {
             display: flex;
         }
-        
+
         .xtable table td input {
             width: 60%;
         }
@@ -41,27 +41,28 @@
         <div class="layui-card">
             <div class="layui-card-body">
                 <form class="layui-form" action="">
+                    <div class="layui-card-header">考试信息配置</div>
                     <div class="layui-form-item">
-                        <div class="layui-col-md3">
-                            <label class="layui-form-label">考试通知</label>
-                            <div class="layui-upload">
-                                <button id="upload_1" type="button" class="layui-btn layui-btn">上传考试通知</button>
-                                <input class="layui-upload-file" type="file" accept="" name="file">
-                                <span class="layui-inline layui-upload-choose"></span>
+                        <div class="layui-row layui-col-space10">
+                            <div class="layui-col-md4">
+                                <label class="layui-form-label">选择题库</label>
+                                <div class="layui-upload">
+                                    <button id="upload_2" type="button" class="layui-btn layui-btn">点击选择</button>
+                                    <input class="layui-upload-file" type="file" accept="" name="file">
+                                    <span class="layui-inline layui-upload-choose"></span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="layui-col-md3">
-                            <label class="layui-form-label">选择题库</label>
-                            <div class="layui-upload">
-                                <button id="upload_2" type="button" class="layui-btn layui-btn">点击选择</button>
-                                <input class="layui-upload-file" type="file" accept="" name="file">
-                                <span class="layui-inline layui-upload-choose"></span>
+                            <div class="layui-col-md4">
+                                <label class="layui-form-label">针对考试</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="title" placeholder="请输入" autocomplete="off" class="layui-input">
+                                </div>
                             </div>
-                        </div>
-                        <div class="layui-col-md3">
-                            <label class="layui-form-label">监考教师</label>
-                            <div class="layui-btn-group">
-                                <input type="button" class="layui-btn" value="+">
+                            <div class="layui-col-md4">
+                                <label class="layui-form-label">监考教师</label>
+                                <div class="layui-btn-group">
+                                    <input type="button" class="layui-btn" value="+">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -90,18 +91,6 @@
 
                     <div class="layui-form-item layui-row">
                         <div class="layui-col-md3">
-                            <label class="layui-form-label">车队</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="title" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-col-md3">
-                            <label class="layui-form-label">班组</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="title" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-col-md3">
                             <label class="layui-form-label">考试名称</label>
                             <div class="layui-input-block">
                                 <input type="text" name="title" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
@@ -115,19 +104,11 @@
                                 <label class="layui-form-label">考试时间</label>
                                 <div class="layui-form-item layui-inline">
                                     <div class="layui-input-inline">
-                                        <input type="text" placeholder="开始时间" id="StartTime" class="layui-input">
+                                        <input type="text" placeholder="考试时间" class="layui-input">
                                     </div>
-                                </div>
-
-                                <div class="layui-form-item layui-inline">
-                                    <div class="layui-input-inline">
-                                        <input type="text" placeholder="结束时间" id="EndTime" class="layui-input">
-                                    </div>
+                                    <div class="layui-form-mid layui-word-aux visualtext">分钟</div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="layui-col-md3 layui-col-md-offset1">
-                            <input type="checkbox" name="" title="是否留存培训影像资料" lay-skin="primary" checked>
                         </div>
                     </div>
 
@@ -227,7 +208,7 @@
 <script src="../../lib/laydate/laydate.js"></script>
 <script src="../../lib/layui/layui.js"></script>
 <script>
-    layui.use('element', function() {
+    layui.use('element', function () {
         var $ = layui.jquery,
             element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
 
@@ -235,21 +216,21 @@
         var xprecent = parseInt($('.layui-progress-bar').attr('lay-percent'));
         var active = {
             //设置进度
-            plus: function() {
+            plus: function () {
                 xprecent >= 100 ? xprecent == 100 : xprecent += 5;
                 element.progress('cent', xprecent + "%")
             },
-            subtract: function() {
+            subtract: function () {
                 xprecent <= 0 ? xprecent == 0 : xprecent -= 5;
                 element.progress('cent', xprecent + "%")
             },
-            loading: function(othis) {
+            loading: function (othis) {
                 var DISABLED = 'layui-btn-disabled';
                 if (othis.hasClass(DISABLED)) return;
 
                 //模拟loading
                 var n = 0,
-                    timer = setInterval(function() {
+                    timer = setInterval(function () {
                         n = n + Math.random() * 10 | 0;
                         if (n > 100) {
                             n = 100;
@@ -263,7 +244,7 @@
             }
         };
 
-        $('.site-active').on('click', function() {
+        $('.site-active').on('click', function () {
             console.log("demo")
             var othis = $(this),
                 type = $(this).data('type');
@@ -271,34 +252,34 @@
         });
     });
 
-    layui.use('form', function() {
+    layui.use('form', function () {
         var form = layui.form;
         //监听提交
-        form.on('submit(formDemo)', function(data) {
+        form.on('submit(formDemo)', function (data) {
             layer.confirm('提示消息', {
                 btn: ['确认', '取消'], //可以无限个按钮
-            }, function(index) {
+            }, function (index) {
                 //按钮【按钮一】的回调
-            }, function(index) {
+            }, function (index) {
                 //按钮【按钮二】的回调
             });
             return false;
         });
     });
 
-    layui.use('upload', function() {
+    layui.use('upload', function () {
         var upload = layui.upload;
         //执行实例
         var uploadInst = upload.render({
             elem: '#upload_1',
             auto: false,
             url: '/upload/' //上传接口
-                ,
-            done: function(res) {
+            ,
+            done: function (res) {
                 //上传完毕回调
             },
             accept: 'file',
-            error: function() {
+            error: function () {
                 //请求异常回调
             }
         });
@@ -306,12 +287,12 @@
             elem: '#upload_2',
             auto: false,
             url: '/upload/' //上传接口
-                ,
-            done: function(res) {
+            ,
+            done: function (res) {
                 //上传完毕回调
             },
             accept: 'file',
-            error: function() {
+            error: function () {
                 //请求异常回调
             }
         });

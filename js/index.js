@@ -25,6 +25,7 @@ var object = {
     userArr: [],
     departmentArr: []
 }
+
 var addInfoFromTableToIframe = {
     table: null,
     parent: null,
