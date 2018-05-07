@@ -38,7 +38,7 @@
                         <div class="layui-col-md4">
                             <label class="layui-form-label">培训名称:</label>
                             <div class="layui-input-block">
-                                <input type="text" name="title" required placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                <input type="text" name="title" placeholder="请输入标题" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-col-md4">
@@ -105,7 +105,7 @@
                         </div>
                     </div>
                     <hr>
-                    <div class="layui-form-item layui-row layui-col-space10">
+                    <div class="layui-row layui-col-space10">
                         <div class="layui-col-md12">
                             <label class="layui-form-label">参培部门</label>
                             <div class="layui-input-block">
@@ -124,7 +124,7 @@
                                 <input type="button" class="layui-btn" id='clearTrainers' value="清空">
                             </div>
                             <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px; ">
-                                <div id="parentIframe" style="margin: 0 auto;width: 90%">
+                                <div id="parentIframeUser" style="margin: 0 auto;width: 90%">
                                 </div>
                             </blockquote>
                         </div>
@@ -135,12 +135,12 @@
                                 <input type="button" class="layui-btn" id='clearCharger' value="清空">
                             </div>
                             <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px; ">
-                                <div id="parentIframe1" style="margin: 0 auto;width: 90%">
+                                <div id="parentIframeCharger" style="margin: 0 auto;width: 90%">
                                 </div>
                             </blockquote>
                         </div>
                         <div class="layui-col-md12">
-                            <div class="layui-form-item">
+                            <div class="">
                                 <label class="layui-form-label">培训资料</label>
                                 <div class="layui-input-block">
                                     <input type="button" class="layui-btn" id='addCourseInfo' value="增加">
@@ -148,7 +148,7 @@
                                 </div>
                             </div>
                             <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px; ">
-                                <div id="parentIframe" style="margin: 0 auto;width: 90%">
+                                <div id="parentIframeLibrarylist" style="margin: 0 auto;width: 90%">
                                 </div>
                             </blockquote>
                         </div>
@@ -180,7 +180,7 @@
                     <hr>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+                            <button class="layui-btn" lay-submit lay-filter="layui-form-label">立即提交</button>
                             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                         </div>
                     </div>
@@ -194,49 +194,112 @@
 <script src="../../lib/layui/layui.js"></script>
 <script src="../../js/index.js"></script>
 <script>
-    layui.use(['layer', 'form', 'upload'], function () {
+    layui.use(['layer', 'form', 'upload'], function() {
         var form = layui.form,
             layer = layui.layer,
             upload = layui.upload,
-            allInputBtn = $(':button');
-        allInputBtn.on('click', function () {
+            allInputBtn = $(':button'),
+            parentIframeDepartment = $('#parentIframeDepartment'),
+            parentIframeUser = $('#parentIframeUser'),
+            parentIframeCharger = $('#parentIframeCharger'),
+            parentIframeLibrarylist = $('#parentIframeLibrarylist');
+
+        allInputBtn.on('click', function() {
             var btnId = $(this).attr('id');
             switch (btnId) {
                 case 'addDepartment':
-                    openIframe('../others/trainers.html');
+                    openIframe('../others/receivedepartment.html');
                     break;
                 case 'addTrainers':
-                    openIframe('../others/trainers.html');
+                    openIframe('../others/receiveuser.html');
                     break;
                 case 'addCharger':
-                    openIframe('../others/trainers.html');
+                    openIframe('../others/charger.html');
                     break;
                 case 'addCourseInfo':
-                    openIframe('../others/trainers.html');
+                    openIframe('../others/librarylist.html');
                     break;
                 case 'clearDepartment':
+                    var departmentContent = getFatherIframeContent.init({
+                        parentIframe: '#parentIframeDepartment',
+                    }).getAllContentArr();
+                    clearPrecinct(departmentContent, parentIframeDepartment, 'departmentArr');
                     break;
                 case 'clearTrainers':
+                    var userContent = getFatherIframeContent.init({
+                        parentIframe: '#parentIframeUser',
+                    }).getAllContentArr();
+                    clearPrecinct(userContent, parentIframeUser, 'userArr');
                     break;
                 case 'clearCharger':
+                    var chargerContent = getFatherIframeContent.init({
+                        parentIframe: '#parentIframeCharger',
+                    }).getAllContentArr();
+                    clearPrecinct(chargerContent, parentIframeCharger, 'charger');
                     break;
                 case 'clearCourseInfo':
+                    var courserInfoContent = getFatherIframeContent.init({
+                        parentIframe: '#parentIframeLibrarylist',
+                    }).getAllContentArr();
+                    clearPrecinct(courserInfoContent, parentIframeLibrarylist, 'librarylist');
+                    break;
+                default:
                     break;
             }
         });
 
+        $(document).on('click', '#delBtn_u', function() {
+            $(this).parent('.userItm').remove();
+            var itemId = $(this).siblings('.itemId').text();
+            removeItem(object.userArr, itemId);
+        });
+        $(document).on('click', '#delBtn_d', function() {
+            $(this).parent('.userItm').remove();
+            var itemId = $(this).siblings('.itemId').text();
+            removeItem(object.departmentArr, itemId);
+        });
+        $(document).on('click', '#delBtn_c', function() {
+            $(this).parent('.userItm').remove();
+            var itemId = $(this).siblings('.itemId').text();
+            removeItem(object.userArr, itemId);
+        });
+        $(document).on('click', '#delBtn_l', function() {
+            $(this).parent('.userItm').remove();
+            var itemId = $(this).siblings('.itemId').text();
+            removeItem(object.departmentArr, itemId);
+        });
+
+        function clearPrecinct(arr, precinct, data) {
+            if (arr.length > 0) {
+                layer.confirm('确认清空?', {
+                    btn: ['确认', '取消'] //按钮
+                }, function() {
+                    layer.msg('清除成功', {
+                        icon: 1
+                    });
+                    precinct.children().remove();
+                    object[data] = [];
+                }, function() {
+                    layer.close();
+                });
+            } else {
+                layer.msg('内容为空');
+            }
+        }
+
         // 通知上传
         upload.render({
-            elem: '#uploadNoticeBtn'
-            , url: '/upload/'
-            , auto: false
-            //,multiple: true
-            , bindAction: '#uploadNoticeBtn'
-            , done: function (res) {
+            elem: '#uploadNoticeBtn',
+            url: '/upload/',
+            auto: false
+                //,multiple: true
+                ,
+            bindAction: '#uploadNoticeBtn',
+            done: function(res) {
                 console.log(res)
             }
         });
-        form.on('submit(*)', function (data) {
+        form.on('submit(form)', function(data) {
             console.log(data.filter);
             return false;
         });

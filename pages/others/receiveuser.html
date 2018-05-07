@@ -55,8 +55,7 @@
             </div>
         </div>
         <div>
-            <table id="receiveUserTable" class="layui-table" lay-data="{page:true, id:'receiveUserTable',limit:5,limits:[10,20,30]}"
-                lay-filter="receiveUserTable">
+            <table id="receiveUserTable" class="layui-table" lay-data="{page:true, id:'receiveUserTable',limit:5,limits:[10,20,30]}" lay-filter="receiveUserTable">
             </table>
         </div>
         <div class="layui-btn-container">
@@ -68,8 +67,7 @@
     <script src="../../lib/layui/layui.js"></script>
     <script src="../../js/index.js"></script>
     <script>
-
-        layui.use(['form', 'layer', 'table'], function () {
+        layui.use(['form', 'layer', 'table'], function() {
             var table = layui.table,
                 form = layui.form,
                 layer = layui.layer,
@@ -83,15 +81,25 @@
                 url: '../../config/table.js',
                 height: 330,
                 page: true,
-                cols: [[ //标题栏  
-                    { checkbox: true },
-                    { field: 'group_id', title: 'ID', width: 80 },
-                    { field: 'paycard', title: '姓名', width: 120 }
-                ]],
+                cols: [
+                    [ //标题栏  
+                        {
+                            checkbox: true
+                        }, {
+                            field: 'group_id',
+                            title: 'ID',
+                            width: 80
+                        }, {
+                            field: 'paycard',
+                            title: '姓名',
+                            width: 120
+                        }
+                    ]
+                ],
             })
             sessionStorage.getItem('parentIframeDepartment');
             // 搜索
-            searchBtn.on('click', function () {
+            searchBtn.on('click', function() {
                 table.reload('receiveUserTable', {
                     url: '../../config/table1.js',
                     method: 'POST',

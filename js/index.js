@@ -23,7 +23,9 @@ var m_util = {
 //数组存在object对象里 方便多页面的数组管理和调用 成!
 var object = {
     userArr: [],
-    departmentArr: []
+    departmentArr: [],
+    charger: [],
+    librarylist: []
 }
 
 var addInfoFromTableToIframe = {
@@ -38,7 +40,7 @@ var addInfoFromTableToIframe = {
     arrId: null,
     arrName: null,
     catchArr: [],
-    init: function (config) {
+    init: function(config) {
         this.$ = config.$;
         this.clickBtn = this.$(config.clickBtn);
         this.tableName = config.tableName;
@@ -51,17 +53,19 @@ var addInfoFromTableToIframe = {
         this.arrName = config.arrName;
         return this;
     },
-    bind: function () {
+    bind: function() {
         var self = this;
-        this.clickBtn.on('click', function () {
+        this.clickBtn.on('click', function() {
             var index = window.parent.layer.getFrameIndex(window.name)
             var checkStatus = self.table.checkStatus(self.tableName);
             var data = checkStatus.data;
+            console.log(data);
             self.render(data);
-            window.parent.layer.close(index);
-        })
+            // window.parent.layer.close(index);
+        });
+        console.log("this complete function bind!")
     },
-    getFinalData: function (data) {
+    getFinalData: function(data) {
         var catchArr = [];
         for (let i = 0; i < data.length; i++) { //遍历获取id
             catchArr.push({
@@ -71,21 +75,23 @@ var addInfoFromTableToIframe = {
         }
         return catchArr;
     },
-    render: function (data) {
+    render: function(data) {
         var catchArr = this.getFinalData(data);
+        console.log(catchArr)
         this.parent.object[this.arr] = this.unique(this.parent.object[this.arr].concat(catchArr)); //更新父层ifream，存储数据
         this.fatherIframe.empty(); //清空父元素，重新写入
         for (var i = 0; i < this.parent.object[this.arr].length; i++) {
             domStr = '<div class="layui-inline item userItm"><span class="itemId" style="display:none">' +
                 this.parent.object[this.arr][i].id + '</span><span style="margin-right:5px">' +
-                this.parent.object[this.arr][i].id + '</span><button id="' +
+                this.parent.object[this.arr][i].id + '</span><button type="button" id="' +
                 this.dId + '" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon" style="font-size:12px"></i></button></div>';
             this.fatherIframe.append(domStr);
         }
+        console.log("this complete function render!")
     },
     //验证去重
-    unique: function (array) {
-        itemToStrArr = array.map(function (i) {
+    unique: function(array) {
+        itemToStrArr = array.map(function(i) {
             return JSON.stringify(i);
         })
         var n = [];
@@ -94,7 +100,7 @@ var addInfoFromTableToIframe = {
                 n.push(itemToStrArr[i]);
             }
         }
-        return n.map(function (i) {
+        return n.map(function(i) {
             return JSON.parse(i);
         })
     }
@@ -110,21 +116,21 @@ var addInfoFromTableToIframe = {
  * @method setArrInSession session操作
  *****************************************************************/
 var getFatherIframeContent = {
-    parentIframe: null,
-    init: function (config) {
-        this.parentIframe = $(config.parentIframe);
-        return this;
-    },
-    getAllContentArr: function () {
-        var _itemId = this.parentIframe.find('.itemId'),
-            arr = [];
-        for (var i = 0; i < _itemId.length; i++) {
-            arr.push(_itemId.eq(i).text());
-        }
-        return arr.length === 0 ? [] : arr;
-    },
-}
-//删除子项 arr格式为数组对象 对比属性为id
+        parentIframe: null,
+        init: function(config) {
+            this.parentIframe = $(config.parentIframe);
+            return this;
+        },
+        getAllContentArr: function() {
+            var _itemId = this.parentIframe.find('.itemId'),
+                arr = [];
+            for (var i = 0; i < _itemId.length; i++) {
+                arr.push(_itemId.eq(i).text());
+            }
+            return arr.length === 0 ? [] : arr;
+        },
+    }
+    //删除子项 arr格式为数组对象 对比属性为id
 function removeItem(arr, e) {
     for (let i = 0; i < arr.length; i++) {
         if (arr[i].id == e) {
@@ -161,84 +167,84 @@ function openIframe(url) {
  * 
  */
 var addExercises = {
-    selectName: null,
-    contentName: null,
-    form: null,
-    init: function (config) {
-        this.selectName = 'select(' + config.selectName + ')';
-        this.contentName = config.contentName;
-        this.form = config.form;
-        this.bind();
-        return this;
-    },
-    bind: function () {
-        var self = this;
-        this.form.on(this.selectName, function (data) {
-            var optionVal = data.value;
-            self.render(optionVal);
-        });
-    },
-    render: function (optionVal) {
-        if (optionVal === '0') {
-            // 单选题 
-            questionSet.qSingleChoice(this.contentName);
-            console.log('单选');
-        } else if (optionVal === '1') {
-            // 多选
-            questionSet.qMultipleChoice(this.contentName)
-            console.log('多选');
-        } else if (optionVal === '2') {
-            // 判断
-            questionSet.qJudgment(this.contentName)
-            console.log('判断');
-        } else if (optionVal === '3') {
-            // 填空
-            questionSet.qCompletion(this.contentName)
-            console.log('填空');
-        } else if (optionVal === '4') {
-            // 问答
-            questionSet.qAnswer(this.contentName)
-            console.log('问答');
-        } else {
-            // 暂无题型
-            console.log('暂无');
+        selectName: null,
+        contentName: null,
+        form: null,
+        init: function(config) {
+            this.selectName = 'select(' + config.selectName + ')';
+            this.contentName = config.contentName;
+            this.form = config.form;
+            this.bind();
+            return this;
+        },
+        bind: function() {
+            var self = this;
+            this.form.on(this.selectName, function(data) {
+                var optionVal = data.value;
+                self.render(optionVal);
+            });
+        },
+        render: function(optionVal) {
+            if (optionVal === '0') {
+                // 单选题 
+                questionSet.qSingleChoice(this.contentName);
+                console.log('单选');
+            } else if (optionVal === '1') {
+                // 多选
+                questionSet.qMultipleChoice(this.contentName)
+                console.log('多选');
+            } else if (optionVal === '2') {
+                // 判断
+                questionSet.qJudgment(this.contentName)
+                console.log('判断');
+            } else if (optionVal === '3') {
+                // 填空
+                questionSet.qCompletion(this.contentName)
+                console.log('填空');
+            } else if (optionVal === '4') {
+                // 问答
+                questionSet.qAnswer(this.contentName)
+                console.log('问答');
+            } else {
+                // 暂无题型
+                console.log('暂无');
+            }
         }
-    }
 
-}
-/**
- * @description 题目集合
- */
+    }
+    /**
+     * @description 题目集合
+     */
 var questionSet = {
-    qSingleChoice: function (contentName) {
-        var str = '<div class="layui-card">'
-            + '<div class="layui-card-header">'
-            + '单选题'
-            + '</div>'
-            + '<div class="layui-card-body">'
-            + '这里是单选题的内容区域'
-            + '</div>'
-            + '</div>'
+    qSingleChoice: function(contentName) {
+        var str = '<div class="layui-card">' +
+            '<div class="layui-card-header">' +
+            '单选题' +
+            '</div>' +
+            '<div class="layui-card-body">' +
+            '这里是单选题的内容区域' +
+            '</div>' +
+            '</div>'
         contentName.html(str);
     },
-    qMultipleChoice: function (contentName) {
+    qMultipleChoice: function(contentName) {
         contentName.html('2');
     },
-    qJudgment: function (contentName) {
+    qJudgment: function(contentName) {
         contentName.html('3');
     },
-    qCompletion: function (contentName) {
+    qCompletion: function(contentName) {
         contentName.html('4');
     },
-    qAnswer: function (contentName) {
+    qAnswer: function(contentName) {
         contentName.html('5');
     },
-    add: function () {
-        $(document).on('click', function () {
+    add: function() {
+        $(document).on('click', function() {
 
         })
     },
-    del: function () {
+    del: function() {
 
     }
 }
