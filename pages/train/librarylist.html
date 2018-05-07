@@ -37,15 +37,15 @@
                             <th lay-data="{field:'group_name', width:100}">资料分类</th>
                             <th lay-data="{field:'group_name', width:100}">资料名</th>
                             <th lay-data="{field:'group_name', width:100}">创建日期</th>
-                            <!-- <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}"></th> -->
+                            <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}"></th>
                         </tr>
                     </thead>
                 </table>
-                <!-- <script type="text/html" id="barDemo">
+                <script type="text/html" id="barDemo">
                     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
                     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
                     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-                </script> -->
+                </script>
                 <div class="layui-btn-container">
                     <button id="getTableBtn" class="layui-btn">确定</button>
                 </div>
@@ -99,17 +99,6 @@
                     layer.msg(checkStatus.isAll ? '全选' : '未全选')
                 }
             };
-            // 获得表格内容传入父层
-            // getTableBtn.on('click', function() {
-            //     // parent.layer.close(index);
-            //     var checkStatus = table.checkStatus('libraryTable'),
-            //         data = checkStatus.data,
-            //         domStr = '<div class="item"><button class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button></div>';
-            //     for (var i = 0; i < data.length; i++) {
-            //         domStr = '<div class="layui-inline item userItm"><span style="margin-right:5px">' + data[i].id + '</span><span class=itemId style="display:none">' + data[i].id + '</span><button id="delBtn" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon" style="font-size:12px"></i></button></div>';
-            //         parent.$('#parentIframe1').append(domStr);
-            //     }
-            // });
             // 搜索
             searchBtn.on('click', function() {
                 // 重新渲染表格
@@ -125,21 +114,6 @@
                     layer.msg('搜索内容不能为空');
                 }
             });
-
-            // 获得表格内容传入父层
-            addInfoFromTableToIframe.init({
-                clickBtn: '#getTableBtn',
-                tableName: 'librarylistTable',
-                fatherIframe: parent.$('#parentIframeLibrarylist'),
-                layer: layer,
-                dId: 'delBtn_l',
-                arr: 'librarylist',
-                table: table,
-                parent: parent,
-                $: $,
-                arrId: 'group_id',
-                arrName: 'group_name',
-            }).bind();
         });
     </script>
 </body>
