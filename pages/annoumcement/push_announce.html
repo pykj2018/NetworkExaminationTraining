@@ -64,6 +64,8 @@
                         <div class="layui-card-header">公告内容</div>
                         <div class="layui-card-body">
                             <div id="myEditor"></div>
+                            <div id="myEditor1"></div>
+                            <div id="myEditor2"></div>
                         </div>
                     </div>
                 </div>
@@ -148,7 +150,8 @@
     <script type="text/javascript" src="../../lib/wangeditor/wangEditor.js"></script>
     <script type="text/javascript" src="../../js/editor_config.js"></script>
     <script>
-        editorConfig.init('#myEditor');
+        var editor = new EditorConfig('#myEditor');
+        editor._create();
         var $ = layui.jquery;
         //需要全局声明，子ifream才能取到
         layui.use(['form', 'layer'], function () {
@@ -199,18 +202,7 @@
                 }
             }
             form.on('submit(form)', function (data) {
-                if (a.length > 0) {
-                    avoidDuplicationOfSubmission($('#formSubmitBtn'));
-                    $.ajax({
-                        url: '',
-                        type: '',
-                        success: function (res) {
-                            self.location.reload();
-                        }
-                    })
-                } else {
-                    layer.alert('请检查部门参数等不能为空!');
-                }
+                console.log(editor.getContent());
                 return false;
             });
             $(document).on('click', '#delBtn_u', function () {
