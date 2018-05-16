@@ -17,10 +17,7 @@ function EditorConfig(config) {
     }
     this.getContent = function () {
         var con = this.editor.txt.html();
+        // console.log(con)
         return con;
     }
 }
-
-// $('.layui-card-header').on('click', function () {
-//     editorConfig.getContent();
-// })
