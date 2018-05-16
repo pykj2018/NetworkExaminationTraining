@@ -36,6 +36,17 @@
             display: flex;
             justify-content: space-evenly;
         }
+        
+        .ly-icon {
+            padding: 5px;
+            border: 1px solid #000;
+            margin-right: 5px;
+        }
+        
+        .ly-form-item {
+            display: flex;
+            align-items: center;
+        }
     </style>
 </head>
 
@@ -44,6 +55,36 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                添加
+            </div>
+            <div class="layui-card-body layui-row">
+                <div class="">
+                    <label class="layui-form-label">类别</label>
+                    <div class="layui-input-block">
+                        <input class="layui-input category" type="text" name="title" placeholder="请输入标题" value="教学评价">
+                    </div>
+                </div>
+                <div class="">
+                    <label class="layui-form-label">题目</label>
+                    <div class="layui-input-block">
+                        <input class="layui-input subject" type="text" name="title" placeholder="请输入内容" value="题目">
+                    </div>
+                </div>
+                <div class="">
+                    <label class="layui-form-label">选项</label>
+                    <div class="layui-input-block">
+                        <input class="layui-input subject_item" type="text" name="title" placeholder="依次输入选项，以逗号分隔" value="好/较好/一般/需改进">
+                    </div>
+                </div>
+                <div class="" style="text-align: center">
+                    <!-- <input class="layui-btn addCategory" type="button" value="添加类别">
+                    <input class="layui-btn addSubject" type="button" value="添加题目"> -->
+                    <input class="layui-btn addComplete" type="button" value="添加">
+                </div>
+            </div>
+        </div>
         <form class="layui-form" action="">
             <div class="layui-card" style="padding: 10px;">
                 <div class="layui-form-item">
@@ -51,19 +92,7 @@
                     <hr class="layui-bg-green">
                 </div>
 
-                <div class="layui-form-item">
-                    <h2 class="h2">教学评价</h2>
-                    <hr class="layui-bg-green">
-                </div>
-
-                <div id="view"></div>
-
-                <div class="layui-form-item">
-                    <h2 class="h2">培训质量调查</h2>
-                    <hr class="layui-bg-green">
-                </div>
-
-                <div id="view2"></div>
+                <div class="view-container"></div>
 
                 <div class="layui-row progress layui-row">
                     <div class="layui-col-md2 layui-col-md-offset1 layui-col-sm10">请选择调查比例</div>
@@ -93,8 +122,8 @@
 
 <script>
     layui.use('element', function() {
-        var $ = layui.jquery,
-            element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+        var $ = layui.jquery;
+        var element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
         //触发事件
         var xprecent = parseInt($('.layui-progress-bar').attr('lay-percent'));
         var active = {
@@ -137,67 +166,129 @@
 
 
     layui.use('form', function() {
+        var $ = layui.jquery;
         var form = layui.form;
-        setTimeout(() => {
-            layui.use('laytpl', function() {
-                var laytpl = layui.laytpl;
-                var data = {
-                    "name": "data",
-                    "list": [{
-                        "title": "内容设计",
-                        "item": ["好", "较好", "一般", "需改进"]
-                    }, {
-                        "title": "教学方法",
-                        "item": ["好", "较好", "一般", "需改进"]
-                    }, {
-                        "title": "表达能力",
-                        "item": ["好", "较好", "一般", "需改进"]
-                    }]
-                };
-                var data2 = {
-                    "name": "data2",
-                    "list": [{
-                        "title": "您认为培训课程的安排",
-                        "item": ["很合理", "合理", "较合理", "一般", "不合理"]
-                    }, {
-                        "title": "您认为培训课程的安排",
-                        "item": ["很合理", "合理", "较合理", "一般", "不合理"]
-                    }, {
-                        "title": "您认为培训课程的安排",
-                        "item": ["很合理", "合理", "较合理", "一般", "不合理"]
-                    }, {
-                        "title": "您认为培训课程的安排",
-                        "item": ["很合理", "合理", "较合理", "一般", "不合理"]
-                    }, {
-                        "title": "您认为培训课程的安排",
-                        "item": ["很合理", "合理", "较合理", "一般", "不合理"]
-                    }, {
-                        "title": "您认为培训课程的安排",
-                        "item": ["很合理", "合理", "较合理", "一般", "不合理"]
-                    }]
-                };
 
-                var getTpl = site.innerHTML;
-                view = document.getElementById('view');
-                laytpl(getTpl).render(data, function(html) {
-                    view.innerHTML = html;
-                });
+        layui.use('laytpl', function() {
+            var laytpl = layui.laytpl;
 
-                view2 = document.getElementById('view2');
-                laytpl(getTpl).render(data2, function(html) {
-                    view2.innerHTML = html;
+            // laytpl(site.innerHTML).render(data[0], function(html) {
+            //     document.getElementById('view1').innerHTML = html;
+            // });
+            var data = [{
+                "name": "view_1",
+                "order": 1,
+                "sub_title": '教学评价',
+                "list": [{
+                    "title": "内容设计",
+                    "item": ["好", "较好", "一般", "需改进"]
+                }, {
+                    "title": "教学方法",
+                    "item": ["好", "较好", "一般", "需改进"]
+                }, {
+                    "title": "表达能力",
+                    "item": ["好", "较好", "一般", "需改进"]
+                }]
+            }, {
+                "name": "view_2",
+                "order": 2,
+                "sub_title": "培训质量调查",
+                "list": [{
+                    "title": "您认为培训课程的安排",
+                    "item": ["很合理", "合理", "较合理", "一般", "不合理"]
+                }, {
+                    "title": "您认为培训课程的安排",
+                    "item": ["很合理", "合理", "较合理", "一般", "不合理"]
+                }, {
+                    "title": "您认为培训课程的安排",
+                    "item": ["很合理", "合理", "较合理", "一般", "不合理"]
+                }]
+            }]
+
+            //渲染
+            var renderTpl = (data, domId) => {
+                laytpl(site.innerHTML).render(data, function(html) {
+                    document.getElementById(domId).innerHTML = html;
                 });
                 form.render();
-            })
-        }, 200);
+            };
+            var renderFor = () => {
+                $('.view-container').empty();
+                for (let i = 0; i < data.length; i++) {
+                    var view_container = "<div id=" + data[i].name + " class='view' name=" + data[i]
+                        .name + "></div>";
+                    $('.view-container').append(view_container);
+                    renderTpl(data[i], data[i].name);
+                    form.render();
+                }
+            }
+            renderFor();
 
+            // $('.addCategory').click(function() {})
+            // $('.addSubject').click(function() {})
+            $('.addComplete').click(function() {
+                var switchs = false;
+                var subject_item = $('.subject_item').val().split('/');
+                // 长度限制
+                if (subject_item.length > 5) {
+                    subject_item.splice(5);
+                }
+                data.forEach((item, index) => {
+                    if (item.sub_title === $('.category').val()) {
+                        item.list.push({
+                            "title": $('.subject').val(),
+                            "item": subject_item
+                        })
+                        switchs = true;
+                    }
+                    return;
+                });
+                if (!switchs) {
+                    var prevIndex;
+                    if (data.length == 0) {
+                        prevIndex = 1;
+                    } else {
+                        prevIndex = data[data.length - 1].order;
+                    }
+
+                    data.push({
+                        'name': 'view_' + (prevIndex + 1),
+                        'order': prevIndex + 1,
+                        'sub_title': $('.category').val(),
+                        'list': [{
+                            "title": $('.subject').val(),
+                            "item": subject_item
+                        }]
+                    })
+                    console.log(data)
+                }
+                renderFor();
+            })
+            $(document).on('click', '#subTitle', function() {
+                data.splice($(this).parents('.view').index(), 1);
+                renderFor();
+            });
+            $(document).on('click', '#listItem', function() {
+                var parent = $(this).parents('.view').index();
+                var index = $(this).parents('.ly-form-item').index() - 1;
+                data[parent].list.splice(index, 1);
+                renderFor();
+            })
+        })
     });
 </script>
 <script id="site" type="text/html">
-    {{# layui.each(d.list, function(index, item){ }}
     <div class="layui-form-item">
+        <h2 class="h2">
+            <span class="layui-icon layui-icon-delete ly-icon" id="subTitle"></span> {{d.sub_title}}
+        </h2>
+        <hr class="layui-bg-green">
+    </div>
+    <!-- 分隔 -->
+    {{# layui.each(d.list, function(index, item){ }}
+    <div class="layui-form-item ly-form-item">
         <div class="layui-col-md3 layui-col-md-offset1 layui-col-sm12">
-            {{item.title}}
+            <span class="layui-icon layui-icon-delete ly-icon" id="listItem"></span>{{item.title}}
         </div>
         <div class="layui-col-md8 layui-col-sm12">
             <div class="layui-row">
@@ -206,12 +297,6 @@
                     <div class="">
                         <input type="radio" name="{{d.name+'-'+index}}" value="{{xtemp}}" title="{{xtemp}}">
                     </div>
-                    <!-- <label class="layui-form-label">{{xtemp}}</label> -->
-                    <!-- <input type="radio" name="role" value="" title="{{xtemp}}"> -->
-                    <!-- <div class="layui-unselect layui-form-radio">
-                        <i class="layui-anim layui-icon"></i>
-                        <div>{{xtemp}}</div>
-                    </div> -->
                 </div>
                 {{# }); }} {{# if(d.list[index].title.length === 0){ }} 无数据 {{# } }}
             </div>
