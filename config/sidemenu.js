@@ -15,7 +15,6 @@ var dataArray = [
     }],
     [{
         'item': '培训任务',
-        'href': 'pages/train/training_tasks.html',
         'submenu': [{
             'xitem': '当前培训任务',
             'xhref': 'pages/train/training_tasks.html'
@@ -37,39 +36,44 @@ var dataArray = [
         }]
     }, {
         'item': '发布考试任务',
-        'href': 'pages/train/push_exam.html',
         'submenu': [{
-            'xitem': '发布考试通知',
-            'xhref': 'pages/train/push_exam.html'
-        },
-        {
-            'xitem': '配置考试信息',
-            'xhref': 'pages/train/push_exam.1.html'
-        },
-        {
-            'xitem': '考试任务查询',
-            'xhref': 'pages/train/push_exam.2.html'
-        }]
+                'xitem': '发布考试通知',
+                'xhref': 'pages/train/push_exam.html'
+            },
+            {
+                'xitem': '配置考试信息',
+                'xhref': 'pages/train/push_exam.1.html'
+            },
+            {
+                'xitem': '考试任务查询',
+                'xhref': 'pages/train/push_exam.2.html'
+            }
+        ]
     }, {
         'item': '考试影像分析',
         'href': 'pages/train/analysis_video.html',
         'submenu': []
     }, {
         'item': '调查问卷管理',
-        'href': 'pages/train/libraryUpload.html',
         'submenu': [{
-            'xitem': '调查问卷添加',
-            'xhref': 'pages/train/questionnaire.html',
-        },
-        {
-            'xitem': '调查问卷查询',
-            'xhref': 'pages/train/questionnaire1.html'
-        },
-        {
-            'xitem': '调查问卷分析',
-            'xhref': 'pages/train/questionnaire2.html'
-        }]
-    }], [{
+                'xitem': '调查问卷添加',
+                'xhref': 'pages/train/questionnaire.html',
+            },
+            {
+                'xitem': '调查问卷上传',
+                'xhref': 'pages/train/libraryUpload.html',
+            },
+            {
+                'xitem': '调查问卷查询',
+                'xhref': 'pages/train/questionnaire1.html'
+            },
+            {
+                'xitem': '调查问卷分析',
+                'xhref': 'pages/train/questionnaire2.html'
+            }
+        ]
+    }],
+    [{
         'item': '新增题库',
         'href': 'pages/questionbank/add_bank.html',
         'submenu': []
@@ -89,5 +93,5 @@ var dataArray = [
         'item': '批量导入试题',
         'href': 'pages/questionbank/query_announce.html',
         'submenu': []
-    }],
+    }]
 ]

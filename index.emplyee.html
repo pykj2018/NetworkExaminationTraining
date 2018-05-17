@@ -10,7 +10,7 @@
     <!--<![endif]-->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>机务段后台</title>
+    <title>职工技术档案</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="lib/layui/css/layui.css">
     <script type="text/javascript" src="lib/jQuery.js"></script>
@@ -23,26 +23,20 @@
     <div class="layui-layout layui-layout-admin">
         <!-- 内容 -->
         <div class="layui-header">
-            <div class="layui-logo">机务段</div>
+            <div class="layui-logo">职工技术档案</div>
             <!-- 头部区域（可配合layui已有的水平导航） -->
             <ul class="layui-nav layui-layout-left" lay-filter="nav">
                 <li class="layui-nav-item layui-this">
-                    <a href="javascript:;" data-index='0'>系统首页</a>
+                    <a href="javascript:;" data-index='0'>基本信息</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;" data-index='1'>培训管理</a>
+                    <a href="javascript:;" data-index='1'>星级评定</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;" data-index='2'>题库管理</a>
+                    <a href="javascript:;" data-index='2'>职工素质</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;" data-index='3'>考务管理</a>
-                </li>
-                <!-- <li class="layui-nav-item">
-                    <a href="javascript:;" data-index='4'>员工信息</a>
-                </li> -->
-                <li class="layui-nav-item">
-                    <a href="javascript:;" data-index='5'>其它系统</a>
+                    <a href="javascript:;" data-index='3'>系统管理</a>
                 </li>
             </ul>
             <ul class="layui-nav layui-layout-right">
@@ -80,14 +74,14 @@
             <div id="iframe_box">
                 <div class="loading"></div>
                 <div class="show-iframe">
-                    <iframe src="pages/annoumcement/index_announce.html" name="myIframe"></iframe>
+                    <iframe src="pages/employee/baseInfo/infoImport.html" name="myIframe"></iframe>
                 </div>
             </div>
         </div>
 </body>
 <script type="text/javascript" src="./lib/laydate/laydate.js"></script>
 <script type="text/javascript" src="lib/layui/layui.js"></script>
-<script type="text/javascript" src="config/sidemenu.js"></script>
+<script type="text/javascript" src="config/sidemenu.emplyee.js"></script>
 <script>
     //JavaScript代码区域
 
@@ -124,7 +118,9 @@
         <a class="" target='myIframe' href="{{item.href?item.href:item.submenu[0].xhref}}">{{item.item}}</a> {{# if(item.submenu.length){ }}
         <dl class="layui-nav-child">
             {{# layui.each(item.submenu, function(index, xitem){ }}
-            <dd><a target='myIframe' href="{{xitem.xhref?xitem.xhref:''}}">{{xitem.xitem}}</a></dd>
+            <dd>
+                <a target='myIframe' href="{{xitem.xhref?xitem.xhref:''}}">{{xitem.xitem}}</a>
+            </dd>
             {{# }); }} {{# if(item.submenu.length === 0){ }} {{# } }}
         </dl>
         {{# } else { }} {{# } }}
