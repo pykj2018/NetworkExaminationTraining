@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>题库列表</title>
+    <link rel="stylesheet" href="../../lib/layui/css/layui.css">
+</head>
+
+<body>
+    <div class="layui-fluid">
+        <div class="layui-card layui-form">
+            <div class="layui-card-header">
+                用TXT方式导入
+            </div>
+            <div class="layui-card-body layui-row">
+                <div class="layui-form-item layui-col-md3">
+                    <label class="layui-form-label">所属题库:</label>
+                    <div class="layui-input-block">
+                        <select name="city" lay-verify="exerciseType">
+                            <option value="">选个题型</option>
+                            <option value="0">单选题</option>
+                            <option value="1">多选题</option>
+                            <option value="2">判断题</option>
+                            <option value="3">填空题</option>
+                            <option value="4">问答题</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-col-md3">
+                    <label class="layui-form-label">重复数据:</label>
+                    <button type="button" class="layui-btn layui-btn-normal" id="uploadNoticeBtn">选择文件</button>
+                </div>
+                <div class="layui-form-item layui-col-md3">
+                    <label class="layui-form-label">重复数据:</label>
+                    <div class="layui-input-block">
+                        <select name="city" lay-verify="exerciseType">
+                            <option value="">选个题型</option>
+                            <option value="0">单选题</option>
+                            <option value="1">多选题</option>
+                            <option value="2">判断题</option>
+                            <option value="3">填空题</option>
+                            <option value="4">问答题</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-col-md3">
+                    <label class="layui-form-label"></label>
+                    <input type="button" value="提交" class="layui-btn">
+                    <input type="button" value="取消" class="layui-btn">
+                </div>
+                <div class="layui-form-item layui-col-md6">
+                    <fieldset class="layui-elem-field">
+                        <legend>提示</legend>
+                        <div class="layui-field-box">
+                            <p>1.使用TXT文本做为模板文件，请注意格式要求，并且文件编码必须为UTF8。</p>
+                            <p>2.下载Txt格式模板 请下载模板，并按照格式填写，填写完成后，上传文件即可完成导入。</p>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <div class="layui-card layui-form">
+            <div class="layui-card-header">
+                用EXCEL方式导入
+            </div>
+            <div class="layui-card-body layui-row">
+                <div class="layui-form-item layui-col-md3">
+                    <label class="layui-form-label">所属题库:</label>
+                    <div class="layui-input-block">
+                        <select name="city" lay-verify="exerciseType">
+                            <option value="">选个题型</option>
+                            <option value="0">单选题</option>
+                            <option value="1">多选题</option>
+                            <option value="2">判断题</option>
+                            <option value="3">填空题</option>
+                            <option value="4">问答题</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-col-md3">
+                    <label class="layui-form-label">重复数据:</label>
+                    <button type="button" class="layui-btn layui-btn-normal" id="uploadNoticeBtn">选择文件</button>
+                </div>
+                <div class="layui-form-item layui-col-md3">
+                    <label class="layui-form-label">重复数据:</label>
+                    <div class="layui-input-block">
+                        <select name="city" lay-verify="exerciseType">
+                            <option value="">选个题型</option>
+                            <option value="0">单选题</option>
+                            <option value="1">多选题</option>
+                            <option value="2">判断题</option>
+                            <option value="3">填空题</option>
+                            <option value="4">问答题</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-col-md3">
+                    <label class="layui-form-label"></label>
+                    <input type="button" value="提交" class="layui-btn">
+                    <input type="button" value="取消" class="layui-btn">
+                </div>
+                <div class="layui-form-item layui-col-md6">
+                    <fieldset class="layui-elem-field">
+                        <legend>提示</legend>
+                        <div class="layui-field-box">
+                            <p>1.使用EXCEL做为模板文件，请注意格式要求，一种题型一个文件，多余的单元格可留空。</p>
+                            <p>2.请确保EXCEL文件版本为97-2003，并请勿删除（或新增）模板文件中的列，确保文件能顺利解析。</p>
+                            <p>3.请核对EXCEL文件中的填写日期单元格，其属性为“文本”。</p>
+                            <p>4.下载Excel格式模板 请下载模板，并按照格式填写，填写完成后，上传文件即可完成导入。</p>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript" src="../../lib/jQuery.js"></script>
+    <script type="text/javascript" src="../../lib/laydate/laydate.js"></script>
+    <script type="text/javascript" src="../../lib/layui/layui.js"></script>
+    <script>
+        layui.use(['table', 'form', 'upload'], function() {
+            var table = layui.table,
+                form = layui.form,
+                upload = layui.upload;
+
+            // 通知上传
+            upload.render({
+                elem: '#uploadNoticeBtn',
+                url: '/upload/',
+                auto: false
+                    //,multiple: true
+                    ,
+                bindAction: '#uploadNoticeBtn',
+                done: function(res) {
+                    console.log(res)
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>

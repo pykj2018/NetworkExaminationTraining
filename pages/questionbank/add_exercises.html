@@ -7,130 +7,290 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="../../lib/layui/css/layui.css">
+    <style>
+        .ly-span {
+            height: 38px;
+            line-height: 38px;
+        }
+        
+        .zindex102 {
+            z-index: 10002;
+        }
+        
+        .zindex103 {
+            z-index: 10003;
+        }
+    </style>
 </head>
 
 <body>
     <div class="layui-fluid layui-form">
         <div class="layui-card">
-            <div class="layui-card-header">添加试题基本信息</div>
-            <div class="layui-card-body layui-row">
-                <div class="layui-col-xs6 layui-col-md6">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">试题类型:</label>
-                        <div class="layui-input-inline">
-                            <select id="exerciseType" lay-filter="exerciseType">
-                                <option value="">选个题型</option>
-                                <option value="0">单选题</option>
-                                <option value="1">多选题</option>
-                                <option value="2">判断题</option>
-                                <option value="3">填空题</option>
-                                <option value="4">问答题</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-col-xs6 layui-col-md6">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">试题难度: </label>
-                        <div class="layui-input-inline">
-                            <select>
-                                <option value="">选个难度</option>
-                                <option value="0">简单</option>
-                                <option value="1">中等</option>
-                                <option value="2">困难</option>
-                                <option value="3">极难</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-col-xs6 layui-col-md6">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">所属题库:</label>
-                        <div class="layui-input-inline">
-                            <select>
-                                <option value="">选个题库</option>
-                                <option value="0">题库一</option>
-                                <option value="1">题库二</option>
-                                <option value="2">题库三</option>
-                                <option value="3">题库四</option>
-                                <option value="4">题库五</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-col-xs6 layui-col-md6">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">试题来源:</label>
-                        <div class="layui-input-inline">
-                            <input class="layui-input" type="text" name="" id="" placeholder="原创">
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-col-xs6 layui-col-md8">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">试题状态:</label>
-                        <div class="layui-input-inline" style="width:auto;">
-                            <input type="checkbox" name="switch" lay-skin="switch" lay-filter="isVisual" lay-text="ON|OFF">
-                        </div>
-                        <div class="layui-form-mid layui-word-aux visualtext">学生自测不可见</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="layui-card">
-            <div class="layui-card-header">试题题干</div>
+            <!-- <div class="layui-card-header"></div> -->
             <div class="layui-card-body">
-                <div id="stem"></div>
-            </div>
-        </div>
-        <div class="layui-card">
-            <div class="layui-card-header">试题区域</div>
-            <div class="layui-card-body" id="exerciseContent">
-                <div class="layui-row">
-                    <div class="layui-col-md12 layui-col-xs12">单项选则题</div>
-                    <div class="layui-col-md12 layui-col-xs12">
-                        <div class="layui-row  layui-form-item">
-                            <div class="layui-col-md1">
-                                <div class="layui-input-inline">
-                                    <input type="radio">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>添加试题基本信息</legend>
+                    <div class="layui-field-box">
+                        <div class="layui-row">
+                            <div class="layui-col-xs6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">试题类型:</label>
+                                    <div class="layui-input-block zindex103 question_type">
+                                        <select name="city" lay-verify="question_type" lay-filter="question_type">
+                                            <option value="">选个题型</option>
+                                            <option value="0">单选题</option>
+                                            <option value="1">多选题</option>
+                                            <option value="2">判断题</option>
+                                            <option value="3">填空题</option>
+                                            <option value="4">问答题</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="layui-col-md8">
-                                <div class="layui-input-block">
-                                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                            <div class="layui-col-xs6 layui-col-md6">
+                                <div class="layui-form-item zindex103">
+                                    <label class="layui-form-label">试题难度: </label>
+                                    <div class="layui-input-block">
+                                        <select>
+                                            <option value="">选个难度</option>
+                                            <option value="0">简单</option>
+                                            <option value="1">中等</option>
+                                            <option value="2">困难</option>
+                                            <option value="3">极难</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="layui-col-md3"></div>
+                            <div class="layui-col-xs6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">所属题库:</label>
+                                    <div class="layui-input-block zindex102">
+                                        <select>
+                                            <option value="">选个题库</option>
+                                            <option value="0">题库一</option>
+                                            <option value="1">题库二</option>
+                                            <option value="2">题库三</option>
+                                            <option value="3">题库四</option>
+                                            <option value="4">题库五</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">试题来源:</label>
+                                    <div class="layui-input-block">
+                                        <input class="layui-input" type="text" name="" id="" placeholder="原创">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 layui-col-md8">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">试题状态:</label>
+                                    <div class="layui-input-inline" style="width:auto;">
+                                        <input type="checkbox" name="switch" lay-skin="switch" lay-filter="isVisual" lay-text="ON|OFF">
+                                    </div>
+                                    <div class="layui-form-mid layui-word-aux visualtext">学生自测不可见</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </fieldset>
+
+                <!-- <fieldset class="layui-elem-field layui-field-title">
+                    <legend>试题题干</legend>
+                    <div class="layui-field-box">
+                        <div id="editor"></div>
+                    </div>
+                </fieldset> -->
+
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>选项设置</legend>
+                    <div class="layui-field-box">
+                        <div id="exerciseContent">
+                            <div class="layui-row" id="view"></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>试题解析</legend>
+                    <div class="layui-field-box">
+                        <div id="editor2"></div>
+                    </div>
+                    <div class="layui-field-box">
+                        <label class="layui-form-label"></label>
+                        <input type="button" value="提交" class="layui-btn">
+                        <input type="button" value="取消" class="layui-btn">
+                    </div>
+                </fieldset>
             </div>
         </div>
     </div>
-    <script src="../../lib/jQuery.js"></script>
     <script type="text/javascript" src="../../lib/laydate/laydate.js"></script>
     <script type="text/javascript" src="../../lib/layui/layui.js"></script>
-    <script type="text/javascript" src="../../lib/wangeditor/wangEditor.js"></script>
+    <script type="text/javascript" src="../../lib/wangeditor/wangEditor.min.js"></script>
     <script type="text/javascript" src="../../js/editor_config.js"></script>
     <script src="../../js/index.js"></script>
+    <script src="../../lib/layui/lay/modules/laytpl.js"></script>
+    <style>
+        .w-e-text-container {
+            height: 200px !important;
+        }
+    </style>
     <script>
-        editorConfig.init('#stem');
-        layui.use(['form'], function () {
+        var E = window.wangEditor;
+        var editor = new E('#editor');
+        editor.create();
+        var editor2 = new E('#editor2');
+        editor2.create();
+
+        layui.use(['form', 'laytpl'], function() {
+            var $ = layui.jquery;
             var form = layui.form;
+            var laytpl = layui.laytpl;
+
             addExercises.init({
                 form: form,
                 selectName: 'exerciseType',
                 contentName: $('#exerciseContent')
             });
-            form.on('switch(isVisual)', function (data) {
+            form.on('switch(isVisual)', function(data) {
                 if (this.checked) {
                     $('.visualtext').text('学生自测可见');
                 } else {
                     $('.visualtext').text('学生自测不可见');
                 }
             });
+
+            form.on('select(question_type)', function(data) {
+                console.log(data.value); //得到被选中的值
+                switch (data.value) {
+                    case '0':
+                        renderTpl(radio, radio_data);
+                        break;
+                    case '1':
+                        renderTpl(checkBox, checkBox_data);
+                        break;
+                    case '2':
+                        renderTpl(tfng, tfng_data);
+                        break;
+                    case '3':
+                        renderTpl(gap, gap_data);
+                        break;
+                    case '4':
+                        renderTpl(answer, answer_data);
+                        break;
+                    default:
+                        break;
+                }
+            });
+
+            var radio_data = ['A', 'B', 'C', 'D']; //单选
+            var checkBox_data = ['A', 'B', 'C', 'D']; //多选
+            var tfng_data = ['是', '否']; //判断
+            var gap_data = ['']; //填空
+            var answer_data = ['']; //问答
+
+            var renderTpl = function(Tpl, data) {
+                laytpl(Tpl.innerHTML).render(data, function(html) {
+                    document.getElementById("view").innerHTML = html;
+                });
+                form.render();
+            };
+            renderTpl(answer, answer_data);
+
         })
     </script>
 </body>
+
+<!-- 单项选择模板 -->
+<script id="radio" type="text/html">
+    <fieldset class="layui-elem-field">
+        <legend>单项选则题</legend>
+        <div class="layui-field-box" style="padding-left:30px;">
+            {{# layui.each(d, function(index, item){ }}
+            <div class="layui-row layui-form-item layui-col-md6">
+                <div class="layui-input-inline" style="width:100px">
+                    <input type="radio" name="sex" value="选项{{item}}" title="选项{{item}}">
+                </div>
+                <div class="layui-input-block layui-col-md10" style="margin-left:0">
+                    <input type="text" name="title" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                </div>
+                <!-- <div class="ly-span">
+                    <span class="layui-icon layui-icon-close" style="float:right"></span>
+                </div> -->
+            </div>
+            {{# }); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
+        </div>
+    </fieldset>
+</script>
+
+<!-- 多项选择模板 -->
+<script id="checkBox" type="text/html">
+    <fieldset class="layui-elem-field">
+        <legend>多项选则题</legend>
+        <div class="layui-field-box" style="padding-left:30px;">
+            {{# layui.each(d, function(index, item){ }}
+            <div class="layui-row layui-form-item layui-col-md6">
+                <div class="layui-input-inline" style="width:100px">
+                    <input type="checkbox" name="" lay-skin="primary" title="选项{{item}}">
+                </div>
+                <div class="layui-input-block layui-col-md10" style="margin-left:0">
+                    <input type="text" name="title" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            {{# }); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
+        </div>
+    </fieldset>
+</script>
+
+<!-- 判断题模板 -->
+<script id="tfng" type="text/html">
+    <fieldset class="layui-elem-field">
+        <legend>判断题</legend>
+        <div class="layui-field-box" style="padding-left:30px;">
+            {{# layui.each(d, function(index, item){ }}
+            <div class="layui-row layui-form-item layui-col-md6">
+                <div class="layui-input-inline" style="width:100px">
+                    <input type="radio" name="sex" value="{{item}}" title="{{item}}">
+                </div>
+            </div>
+            {{# }); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
+        </div>
+    </fieldset>
+</script>
+
+<!-- 填空题模板 -->
+<script id="gap" type="text/html">
+    <fieldset class="layui-elem-field">
+        <legend>填空题</legend>
+        <div class="layui-field-box" style="padding-left:30px;">
+            {{# layui.each(d, function(index, item){ }}
+            <div class="layui-row layui-form-item layui-col-md6">
+                <div class="layui-input-block layui-col-md10" style="margin-left:0">
+                    <input type="text" name="title" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            {{# }); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
+        </div>
+    </fieldset>
+</script>
+
+<!-- 问答题模板 -->
+<script id="answer" type="text/html">
+    <fieldset class="layui-elem-field">
+        <legend>填空题</legend>
+        <div class="layui-field-box" style="padding-left:30px;">
+            {{# layui.each(d, function(index, item){ }}
+            <div class="layui-form-item layui-form-text">
+                <div class="layui-input-block layui-col-md8" style="margin-left:0">
+                    <textarea placeholder="答案设置" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            {{# }); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
+        </div>
+    </fieldset>
+</script>
 
 </html>

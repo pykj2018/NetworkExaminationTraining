@@ -87,11 +87,11 @@ var dataArray = [
         'submenu': []
     }, {
         'item': '管理试题',
-        'href': 'pages/questionbank/query_announce.html',
+        'href': 'pages/questionbank/manage_question.html',
         'submenu': []
     }, {
         'item': '批量导入试题',
-        'href': 'pages/questionbank/query_announce.html',
+        'href': 'pages/questionbank/import_question.html',
         'submenu': []
     }],
     [{
