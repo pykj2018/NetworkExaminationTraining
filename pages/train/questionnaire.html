@@ -19,11 +19,11 @@
             text-align: center;
             font-size: 22px;
         }
-
+        
         .h2 {
             font-size: 18px;
         }
-
+        
         .progress {
             display: flex;
             align-items: center;
@@ -31,21 +31,26 @@
             line-height: 30px;
             margin: 0 auto 30px;
         }
-
+        
         .button {
             display: flex;
             justify-content: space-evenly;
         }
-
+        
         .ly-icon {
             padding: 5px;
             border: 1px solid #000;
             margin-right: 5px;
         }
-
+        
         .ly-form-item {
             display: flex;
             align-items: center;
+        }
+        
+        .ly-inline {
+            margin-bottom: 5px;
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -60,25 +65,26 @@
                 添加
             </div>
             <div class="layui-card-body layui-row">
-                <div class="">
+                <div class="layui-inline-block ly-inline">
                     <label class="layui-form-label">类别</label>
                     <div class="layui-input-block">
                         <input class="layui-input category" type="text" name="title" placeholder="请输入标题" value="教学评价">
                     </div>
                 </div>
-                <div class="">
+                <div class="layui-inline-block ly-inline">
                     <label class="layui-form-label">题目</label>
                     <div class="layui-input-block">
                         <input class="layui-input subject" type="text" name="title" placeholder="请输入内容" value="题目">
                     </div>
                 </div>
-                <div class="">
+                <div class="layui-inline-block ly-inline">
                     <label class="layui-form-label">选项</label>
                     <div class="layui-input-block">
                         <input class="layui-input subject_item" type="text" name="title" placeholder="依次输入选项，以逗号分隔" value="好/较好/一般/需改进">
                     </div>
                 </div>
-                <div class="" style="text-align: center">
+                <div class="">
+                    <label class="layui-form-label"></label>
                     <!-- <input class="layui-btn addCategory" type="button" value="添加类别">
                     <input class="layui-btn addSubject" type="button" value="添加题目"> -->
                     <input class="layui-btn addComplete" type="button" value="添加">
@@ -121,28 +127,28 @@
 <script src="../../lib/layui/lay/modules/laytpl.js"></script>
 
 <script>
-    layui.use('element', function () {
+    layui.use('element', function() {
         var $ = layui.jquery;
         var element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
         //触发事件
         var xprecent = parseInt($('.layui-progress-bar').attr('lay-percent'));
         var active = {
             //设置进度
-            plus: function () {
+            plus: function() {
                 xprecent >= 100 ? xprecent == 100 : xprecent += 5;
                 element.progress('cent', xprecent + "%")
             },
-            subtract: function () {
+            subtract: function() {
                 xprecent <= 0 ? xprecent == 0 : xprecent -= 5;
                 element.progress('cent', xprecent + "%")
             },
-            loading: function (othis) {
+            loading: function(othis) {
                 var DISABLED = 'layui-btn-disabled';
                 if (othis.hasClass(DISABLED)) return;
 
                 //模拟loading
                 var n = 0,
-                    timer = setInterval(function () {
+                    timer = setInterval(function() {
                         n = n + Math.random() * 10 | 0;
                         if (n > 100) {
                             n = 100;
@@ -156,7 +162,7 @@
             }
         };
 
-        $('.site-active').on('click', function () {
+        $('.site-active').on('click', function() {
             console.log("demo")
             var othis = $(this),
                 type = $(this).data('type');
@@ -165,11 +171,11 @@
     });
 
 
-    layui.use('form', function () {
+    layui.use('form', function() {
         var $ = layui.jquery;
         var form = layui.form;
 
-        layui.use('laytpl', function () {
+        layui.use('laytpl', function() {
             var laytpl = layui.laytpl;
 
             // laytpl(site.innerHTML).render(data[0], function(html) {
@@ -206,13 +212,13 @@
             }]
 
             //渲染
-            var renderTpl = function (data, domId) {
-                laytpl(site.innerHTML).render(data, function (html) {
+            var renderTpl = function(data, domId) {
+                laytpl(site.innerHTML).render(data, function(html) {
                     document.getElementById(domId).innerHTML = html;
                 });
                 form.render();
             };
-            var renderFor = function () {
+            var renderFor = function() {
                 $('.view-container').empty();
                 for (let i = 0; i < data.length; i++) {
                     var view_container = "<div id=" + data[i].name + " class='view' name=" + data[i]
@@ -226,7 +232,7 @@
 
             // $('.addCategory').click(function() {})
             // $('.addSubject').click(function() {})
-            $('.addComplete').click(function () {
+            $('.addComplete').click(function() {
                 var switchs = false;
                 var subject_item = $('.subject_item').val().split('/');
                 // 长度限制
@@ -264,11 +270,11 @@
                 }
                 renderFor();
             })
-            $(document).on('click', '#subTitle', function () {
+            $(document).on('click', '#subTitle', function() {
                 data.splice($(this).parents('.view').index(), 1);
                 renderFor();
             });
-            $(document).on('click', '#listItem', function () {
+            $(document).on('click', '#listItem', function() {
                 var parent = $(this).parents('.view').index();
                 var index = $(this).parents('.ly-form-item').index() - 1;
                 data[parent].list.splice(index, 1);

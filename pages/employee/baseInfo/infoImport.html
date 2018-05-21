@@ -91,12 +91,22 @@
             <div class="layui-card-body">
                 <table class="layui-table" id="queryTrain" lay-filter="queryTrain"></table>
             </div>
+            <div id="test1"></div>
         </div>
     </div>
 </body>
 <script src="../../../lib/laydate/laydate.js"></script>
 <script src="../../../lib/layui/layui.js"></script>
 <script>
+    layui.use(['rate'], function() {
+        var rate = layui.rate;
+        //半星效果
+        rate.render({
+            elem: '#test1',
+            value: 2.5, //初始值
+            half: true //开启半星
+        })
+    });
     layui.use(['element', 'form', 'table'], function() {
         var form = layui.form,
             table = layui.table;

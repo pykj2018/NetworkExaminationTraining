@@ -25,9 +25,9 @@
             <div class="layui-card" style="padding-top: 10px;padding-bottom: 10px;">
                 <div class="layui-card-body">
                     <form class="layui-form" action="">
-                        <div class="layui-form-item layui-row">
+                        <div class="layui-form-item">
                             <div class="layui-col-md3">
-                                <label class="all-text-label">培训考试主题</label>
+                                <label class="layui-form-label">培训主题</label>
                                 <div class="layui-input-block">
                                     <select name="city" lay-verify="required">
                                             <option value=""></option>
@@ -36,17 +36,22 @@
                                         </select>
                                 </div>
                             </div>
-
                             <div class="layui-col-md3">
+                                <label class="layui-form-label">关键字搜索</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <!-- <div class="layui-col-md3">
                                 <label class="layui-form-label">教师姓名</label>
                                 <div class="layui-input-block">
                                     <input type="text" name="title" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
-                        <div class="layui-form-item layui-row">
 
-                            <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <div class="layui-col-md8 layui-col-xs10">
                                 <div class="layui-inline">
                                     <label class="layui-form-label">考试时间</label>
                                     <div class="layui-form-item layui-inline">
@@ -62,8 +67,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="layui-col-md3">
-                                <label class="layui-form-label"></label>
+
+                            <div class="layui-col-md2 layui-col-xs2">
                                 <input type="button" class="layui-btn" value="查询">
                             </div>
                         </div>
@@ -71,9 +76,15 @@
                 </div>
             </div>
             <div class="layui-card">
-                <div class="layui-card-body layui-row">
-                    <div class="layui-col-md6">123</div>
-                    <div class="layui-col-md6">123</div>
+                <div class="layui-card-body">
+                    <table class="layui-table">
+                        <colgroup>
+                        </colgroup>
+                        <thead>
+                            <tr id="view1"></tr>
+                        </thead>
+                        <tbody id="view2"></tbody>
+                    </table>
                 </div>
             </div>
         </div>

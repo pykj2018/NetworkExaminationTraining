@@ -65,11 +65,11 @@ var dataArray = [
             },
             {
                 'xitem': '调查问卷查询',
-                'xhref': 'pages/train/questionnaire1.html'
+                'xhref': 'pages/train/questionnaireQuery.html'
             },
             {
                 'xitem': '调查问卷分析',
-                'xhref': 'pages/train/questionnaire2.html'
+                'xhref': 'pages/train/questionnaireAnalyze.html'
             }
         ]
     }],
@@ -93,5 +93,15 @@ var dataArray = [
         'item': '批量导入试题',
         'href': 'pages/questionbank/query_announce.html',
         'submenu': []
-    }]
+    }],
+    [{
+        'item': '替代',
+        'href': 'pages/questionbank/add_bank.html',
+        'submenu': []
+    }],
+    [{
+        'item': '新增题库',
+        'href': 'pages/questionbank/add_bank.html',
+        'submenu': []
+    }],
 ]
