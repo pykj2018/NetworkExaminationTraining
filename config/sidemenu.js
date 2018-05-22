@@ -74,25 +74,43 @@ var dataArray = [
         ]
     }],
     [{
-        'item': '新增题库',
+        'item': '题库管理',
         'href': 'pages/questionbank/add_bank.html',
-        'submenu': []
+        'submenu': [{
+            'xitem': '新增题库',
+            'xhref': 'pages/questionbank/add_bank.html',
+        }, {
+            'xitem': '题库列表',
+            'xhref': 'pages/questionbank/bank_list.html',
+        }, {
+            'xitem': '新增试题',
+            'xhref': 'pages/questionbank/add_exercises.html',
+        }, {
+            'xitem': '管理试题',
+            'xhref': 'pages/questionbank/manage_question.html',
+        }, {
+            'xitem': '批量导入试题',
+            'xhref': 'pages/questionbank/import_question.html',
+        }]
     }, {
-        'item': '题库列表',
-        'href': 'pages/questionbank/bank_list.html',
-        'submenu': []
-    }, {
-        'item': '新增试题',
-        'href': 'pages/questionbank/add_exercises.html',
-        'submenu': []
-    }, {
-        'item': '管理试题',
-        'href': 'pages/questionbank/manage_question.html',
-        'submenu': []
-    }, {
-        'item': '批量导入试题',
-        'href': 'pages/questionbank/import_question.html',
-        'submenu': []
+        'item': '试卷管理',
+        'href': 'pages/questionbank/add_bank.html',
+        'submenu': [{
+            'xitem': '新增题库',
+            'xhref': 'pages/questionbank/add_bank.html',
+        }, {
+            'xitem': '题库列表',
+            'xhref': 'pages/questionbank/bank_list.html',
+        }, {
+            'xitem': '新增试题',
+            'xhref': 'pages/questionbank/add_exercises.html',
+        }, {
+            'xitem': '管理试题',
+            'xhref': 'pages/questionbank/manage_question.html',
+        }, {
+            'xitem': '批量导入试题',
+            'xhref': 'pages/questionbank/import_question.html',
+        }]
     }],
     [{
         'item': '替代',

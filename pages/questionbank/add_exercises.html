@@ -36,9 +36,9 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">试题类型:</label>
                                     <div class="layui-input-block zindex103 question_type">
-                                        <select name="city" lay-verify="question_type" lay-filter="question_type">
+                                        <select name="Qtype" lay-verify="required" lay-filter="question_type">
                                             <option value="">选个题型</option>
-                                            <option value="0">单选题</option>
+                                            <option value="0" selected>单选题</option>
                                             <option value="1">多选题</option>
                                             <option value="2">判断题</option>
                                             <option value="3">填空题</option>
@@ -51,10 +51,10 @@
                                 <div class="layui-form-item zindex103">
                                     <label class="layui-form-label">试题难度: </label>
                                     <div class="layui-input-block">
-                                        <select>
+                                        <select name="Qdifficult" lay-verify="required">
                                             <option value="">选个难度</option>
                                             <option value="0">简单</option>
-                                            <option value="1">中等</option>
+                                            <option value="1" selected>中等</option>
                                             <option value="2">困难</option>
                                             <option value="3">极难</option>
                                         </select>
@@ -65,10 +65,10 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">所属题库:</label>
                                     <div class="layui-input-block zindex102">
-                                        <select>
+                                        <select name="Qbank" lay-verify="required">
                                             <option value="">选个题库</option>
                                             <option value="0">题库一</option>
-                                            <option value="1">题库二</option>
+                                            <option value="1" selected>题库二</option>
                                             <option value="2">题库三</option>
                                             <option value="3">题库四</option>
                                             <option value="4">题库五</option>
@@ -80,7 +80,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">试题来源:</label>
                                     <div class="layui-input-block">
-                                        <input class="layui-input" type="text" name="" id="" placeholder="原创">
+                                        <input class="layui-input" type="text" name="Qsource" id="" placeholder="原创" lay-verify="required" value="原创">
                                     </div>
                                 </div>
                             </div>
@@ -97,12 +97,12 @@
                     </div>
                 </fieldset>
 
-                <!-- <fieldset class="layui-elem-field layui-field-title">
+                <fieldset class="layui-elem-field layui-field-title">
                     <legend>试题题干</legend>
                     <div class="layui-field-box">
                         <div id="editor"></div>
                     </div>
-                </fieldset> -->
+                </fieldset>
 
                 <fieldset class="layui-elem-field layui-field-title">
                     <legend>选项设置</legend>
@@ -120,8 +120,8 @@
                     </div>
                     <div class="layui-field-box">
                         <label class="layui-form-label"></label>
-                        <input type="button" value="提交" class="layui-btn">
-                        <input type="button" value="取消" class="layui-btn">
+                        <input type="button" lay-submit lay-filter="*" value="提交" class="layui-btn">
+                        <input type="reset" value="取消" class="layui-btn layui-btn-primary">
                     </div>
                 </fieldset>
             </div>
@@ -185,6 +185,10 @@
                         break;
                 }
             });
+            form.on('submit(*)', function(data) {
+                console.table(data.field);
+                return false;
+            })
 
             var radio_data = ['A', 'B', 'C', 'D']; //单选
             var checkBox_data = ['A', 'B', 'C', 'D']; //多选
@@ -211,12 +215,12 @@
         <div class="layui-field-box" style="padding-left:30px;">
             {{# layui.each(d, function(index, item){ }}
             <div class="layui-row layui-form-item layui-col-md6">
-                <div class="layui-input-inline" style="width:100px">
-                    <input type="radio" name="sex" value="选项{{item}}" title="选项{{item}}">
-                </div>
-                <div class="layui-input-block layui-col-md10" style="margin-left:0">
-                    <input type="text" name="title" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
-                </div>
+                <blockquote>
+                    <input type="radio" name="choice" value="选项{{item}}" title="选项{{item}}" required lay-verify="required">
+                    <input type="text" name="radio_{{index}}" lay-verify="required" placeholder="请输入" class="layui-input" value="{{item}}">
+                </blockquote>
+                <!-- <div class="layui-input-inline" style="width:100px"></div>
+                <div class="layui-input-block layui-col-md10" style="margin-left:0"></div> -->
                 <!-- <div class="ly-span">
                     <span class="layui-icon layui-icon-close" style="float:right"></span>
                 </div> -->
@@ -233,12 +237,12 @@
         <div class="layui-field-box" style="padding-left:30px;">
             {{# layui.each(d, function(index, item){ }}
             <div class="layui-row layui-form-item layui-col-md6">
-                <div class="layui-input-inline" style="width:100px">
-                    <input type="checkbox" name="" lay-skin="primary" title="选项{{item}}">
-                </div>
-                <div class="layui-input-block layui-col-md10" style="margin-left:0">
-                    <input type="text" name="title" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
-                </div>
+                <blockquote>
+                    <input type="checkbox" name="checkBox_item_{{index}}" value="选项{{item}}" lay-skin="primary" title="选项{{item}}" required lay-verify="required">
+                    <input type="text" name="checkBox_{{index}}" lay-verify="required" placeholder="请输入" class="layui-input" value="{{item}}">
+                </blockquote>
+                <!-- <div class="layui-input-inline" style="width:100px"></div>
+                <div class="layui-input-block layui-col-md10" style="margin-left:0"></div> -->
             </div>
             {{# }); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
         </div>
@@ -253,7 +257,7 @@
             {{# layui.each(d, function(index, item){ }}
             <div class="layui-row layui-form-item layui-col-md6">
                 <div class="layui-input-inline" style="width:100px">
-                    <input type="radio" name="sex" value="{{item}}" title="{{item}}">
+                    <input type="radio" name="tfng_{{index}}" value="{{item}}" title="{{item}}" lay-verify="required">
                 </div>
             </div>
             {{# }); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
@@ -267,9 +271,9 @@
         <legend>填空题</legend>
         <div class="layui-field-box" style="padding-left:30px;">
             {{# layui.each(d, function(index, item){ }}
-            <div class="layui-row layui-form-item layui-col-md6">
-                <div class="layui-input-block layui-col-md10" style="margin-left:0">
-                    <input type="text" name="title" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+            <div class="layui-row layui-col-md6">
+                <div class="layui-input-block layui-col-md10 layui-form-item" style="margin-left:0">
+                    <input type="text" name="gap" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                 </div>
             </div>
             {{# }); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
@@ -285,7 +289,7 @@
             {{# layui.each(d, function(index, item){ }}
             <div class="layui-form-item layui-form-text">
                 <div class="layui-input-block layui-col-md8" style="margin-left:0">
-                    <textarea placeholder="答案设置" class="layui-textarea"></textarea>
+                    <textarea placeholder="答案设置" name="answer" class="layui-textarea" required lay-verify="required"></textarea>
                 </div>
             </div>
             {{# }); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
