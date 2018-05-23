@@ -5,6 +5,7 @@ frames/
 .project
 .vscode
 *.rar
+*.gz
 
 # webapp
 private.conf
