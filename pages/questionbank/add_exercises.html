@@ -82,17 +82,8 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">试题来源:</label>
                                     <div class="layui-input-block">
-                                        <input class="layui-input" type="text" name="Qsource" id="" placeholder="原创" lay-verify="required" value="原创">
+                                        <input class="layui-input" type="text" name="Qsource" id="" placeholder="例如:原创" lay-verify="required" value="">
                                     </div>
-                                </div>
-                            </div>
-                            <div class="layui-col-xs6 layui-col-md8">
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">试题状态:</label>
-                                    <div class="layui-input-inline" style="width:auto;">
-                                        <input type="checkbox" name="switch" lay-skin="switch" lay-filter="isVisual" lay-text="ON|OFF">
-                                    </div>
-                                    <div class="layui-form-mid layui-word-aux visualtext">学生自测不可见</div>
                                 </div>
                             </div>
                         </div>
@@ -167,6 +158,7 @@
 
             form.on('select(question_type)', function(data) {
                 console.log(data.value); //得到被选中的值
+                $('#editor .w-e-text p').empty(); //清空题干值
                 switch (data.value) {
                     case '0':
                         renderTpl(radio, radio_data);
@@ -178,6 +170,7 @@
                         renderTpl(tfng, tfng_data);
                         break;
                     case '3':
+                        gap_data = [];
                         renderTpl(gap, gap_data);
                         break;
                     case '4':
@@ -187,25 +180,46 @@
                         break;
                 }
             });
+
+            //数据提交函数
             form.on('submit(*)', function(data) {
+                $('.jqk').removeAttr('checked'); //radio 和 checkbox 去掉勾选
+                var editor = $('#editor .w-e-text p').text(); //试题题干
+                var editor2 = $('#editor2 .w-e-text p').text(); //试题解析
+                var view = $('#view').html(); //题目内容
+                data.field.editor = editor;
+                data.field.editor2 = editor2;
+                data.field.view = view;
                 console.table(data.field);
                 return false;
             });
 
+            $(document).on('blur', '.input-gap', function() { //填空题的数据缓存
+                // console.log($(this).val());
+                // console.log($(this).attr('name').split('_')[1]);
+                var this_index = $(this).attr('name').split('_')[1];
+                var this_val = $(this).val();
+                gap_data[this_index]['text'] = this_val;
+                console.log(gap_data)
+            })
+
             var index = 1;
-            $(document).on('click', '.addGap', function() {
+            $(document).on('click', '.addGap', function() { //填空题 添加按钮
                 var temp_gap_data = {
-                    'order': index++
+                    'order': index++,
+                    'text': ''
                 };
+
                 $('#editor .w-e-text p').append(
-                    '<span data-order=' + temp_gap_data.order + '>[BlankArea' + temp_gap_data.order +
+                    '<span data-order=' + temp_gap_data.order +
+                    '>[BlankArea' + temp_gap_data.order +
                     ']</span>'
                 );
                 gap_data.push(temp_gap_data);
                 renderTpl(gap, gap_data);
             });
 
-            $(document).on('click', '.closeGap', function() {
+            $(document).on('click', '.closeGap', function() { //填空题 关闭按钮
                 var close_gap_index = $(this).attr('data-index');
                 var close_gap_order = $(this).attr('data-order');
 
@@ -219,19 +233,20 @@
                 renderTpl(gap, gap_data);
             })
 
+            //模板数据变量
             var radio_data = ['A', 'B', 'C', 'D']; //单选
             var checkBox_data = ['A', 'B', 'C', 'D']; //多选
             var tfng_data = ['是', '否']; //判断
             var gap_data = []; //填空
             var answer_data = ['']; //问答
 
-            var renderTpl = function(Tpl, data) {
+            var renderTpl = function(Tpl, data) { //渲染模板
                 laytpl(Tpl.innerHTML).render(data, function(html) {
                     document.getElementById("view").innerHTML = html;
                 });
                 form.render();
             };
-            renderTpl(answer, answer_data);
+            renderTpl(radio, radio_data);
 
         })
     </script>
@@ -244,15 +259,12 @@
         <div class="layui-field-box" style="padding-left:30px;">
             {{# layui.each(d, function(index, item){ }}
             <div class="layui-row layui-form-item layui-col-md6">
-                <blockquote>
-                    <input type="radio" name="choice" value="选项{{item}}" title="选项{{item}}" required lay-verify="required">
-                    <input type="text" name="radio_{{index}}" lay-verify="required" placeholder="请输入" class="layui-input" value="{{item}}">
-                </blockquote>
-                <!-- <div class="layui-input-inline" style="width:100px"></div>
-                <div class="layui-input-block layui-col-md10" style="margin-left:0"></div> -->
-                <!-- <div class="ly-span">
-                    <span class="layui-icon layui-icon-close" style="float:right"></span>
-                </div> -->
+                <div class="layui-form-item" style="display:flex">
+                    <div style="width:120px">
+                        <input type="radio" class="jqk" name="choice" value="选项{{item}}" title="选项{{item}}" required lay-verify="required">
+                    </div>
+                    <input type="text" name="radio_{{index}}" lay-verify="required" placeholder="请输入" class="layui-input" value="">
+                </div>
             </div>
             {{# }); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
         </div>
@@ -266,12 +278,12 @@
         <div class="layui-field-box" style="padding-left:30px;">
             {{# layui.each(d, function(index, item){ }}
             <div class="layui-row layui-form-item layui-col-md6">
-                <blockquote>
-                    <input type="checkbox" name="checkBox_item_{{index}}" value="选项{{item}}" lay-skin="primary" title="选项{{item}}" required lay-verify="required">
-                    <input type="text" name="checkBox_{{index}}" lay-verify="required" placeholder="请输入" class="layui-input" value="{{item}}">
-                </blockquote>
-                <!-- <div class="layui-input-inline" style="width:100px"></div>
-                <div class="layui-input-block layui-col-md10" style="margin-left:0"></div> -->
+                <div class="layui-form-item" style="display:flex">
+                    <div style="width:120px">
+                        <input class="jqk" type="checkbox" name="checkBox_item_{{index}}" value="选项{{item}}" lay-skin="primary" title="选项{{item}}" required lay-verify="required">
+                    </div>
+                    <input type="text" name="checkBox_{{index}}" lay-verify="required" placeholder="请输入" class="layui-input" value="">
+                </div>
             </div>
             {{# }); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
         </div>
@@ -286,7 +298,7 @@
             {{# layui.each(d, function(index, item){ }}
             <div class="layui-row layui-form-item layui-col-md6">
                 <div class="layui-input-inline" style="width:100px">
-                    <input type="radio" name="tfng_{{index}}" value="{{item}}" title="{{item}}" lay-verify="required">
+                    <input class="jqk" type="radio" name="tfng" value="{{item}}" title="{{item}}" lay-verify="required">
                 </div>
             </div>
             {{# }); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
@@ -305,10 +317,9 @@
                 {{# layui.each(d, function(index, item){ }}
                 <div class="layui-col-md3 ly-span">
                     {{item.order}}.&nbsp;&nbsp;
-                    <input type="text" class="layui-input input-gap" name="gap_{{index}}" required lay-verify="required">
+                    <input type="text" class="layui-input input-gap" name="gap_{{index}}" required lay-verify="required" value="{{item.text?item.text:''}}">
                     <span class="layui-icon layui-icon-close closeGap" data-index="{{index}}" data-order="{{item.order}}" style="padding: 0 10px"></span>
                 </div>
-                <!-- <input type="text" name="gap" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input"> -->
                 {{# }); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
             </div>
         </div>
