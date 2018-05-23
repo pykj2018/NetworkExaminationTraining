@@ -40,11 +40,10 @@
                                     <div class="layui-input-block zindex103 question_type">
                                         <select name="Qtype" lay-verify="required" lay-filter="question_type">
                                             <option value="">选个题型</option>
-                                            <option value="0">单选题</option>
+                                            <option value="0" selected>单选题</option>
                                             <option value="1">多选题</option>
                                             <option value="2">判断题</option>
-                                            <option value="3">填空题</option>
-                                            <option value="4">问答题</option>
+                                            <option value="3">问答题</option>
                                         </select>
                                     </div>
                                 </div>
@@ -55,7 +54,7 @@
                                     <div class="layui-input-block">
                                         <select name="Qdifficult" lay-verify="required">
                                             <option value="">选个难度</option>
-                                            <option value="0">简单</option>
+                                            <option value="0" selected>简单</option>
                                             <option value="1">中等</option>
                                             <option value="2">困难</option>
                                             <option value="3">极难</option>
@@ -69,7 +68,7 @@
                                     <div class="layui-input-block zindex102">
                                         <select name="Qbank" lay-verify="required">
                                             <option value="">选个题库</option>
-                                            <option value="0">题库一</option>
+                                            <option value="0" selected>题库一</option>
                                             <option value="1">题库二</option>
                                             <option value="2">题库三</option>
                                             <option value="3">题库四</option>
@@ -82,7 +81,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">试题来源:</label>
                                     <div class="layui-input-block">
-                                        <input class="layui-input" type="text" name="Qsource" id="" placeholder="例如:原创" lay-verify="required" value="">
+                                        <input class="layui-input" type="text" name="Qsource" id="" placeholder="原创" lay-verify="required" value="原创">
                                     </div>
                                 </div>
                             </div>
@@ -157,8 +156,8 @@
             });
 
             form.on('select(question_type)', function(data) {
-                console.log(data.value); //得到被选中的值
-                $('#editor .w-e-text p').empty(); //清空题干值
+                // console.log(data.value); //得到被选中的值
+                editor.txt.clear(); //清空题干值
                 switch (data.value) {
                     case '0':
                         renderTpl(radio, radio_data);
@@ -170,10 +169,6 @@
                         renderTpl(tfng, tfng_data);
                         break;
                     case '3':
-                        gap_data = [];
-                        renderTpl(gap, gap_data);
-                        break;
-                    case '4':
                         renderTpl(answer, answer_data);
                         break;
                     default:
@@ -184,12 +179,31 @@
             //数据提交函数
             form.on('submit(*)', function(data) {
                 $('.jqk').removeAttr('checked'); //radio 和 checkbox 去掉勾选
-                var editor = $('#editor .w-e-text p').text(); //试题题干
-                var editor2 = $('#editor2 .w-e-text p').text(); //试题解析
-                var view = $('#view').html(); //题目内容
-                data.field.editor = editor;
-                data.field.editor2 = editor2;
-                data.field.view = view;
+                var key = [];
+                if (data.field.Qtype == 0) {
+                    if (data.field.hasOwnProperty('choice')) {
+                        key.push(data.field.choice);
+                        delete data.field.choice;
+                    };
+                } else if (data.field.Qtype == 1) {
+                    for (let i = 0; i < 4; i++) {
+                        if (data.field.hasOwnProperty('checkBox_item_' + i)) {
+                            key.push(data.field['checkBox_item_' + i]);
+                            delete data.field['checkBox_item_' + i];
+                        }
+                    };
+                } else if (data.field.Qtype == 2) {
+                    if (data.field.hasOwnProperty('tfng')) {
+                        console.log(2)
+                        key.push(data.field.tfng);
+                        delete data.field.tfng;
+                    }
+                }
+
+                data.field.editor = editor.txt.text(); //试题题干
+                data.field.editor2 = editor2.txt.text(); //试题解析
+                data.field.view = $('#view').html(); //题目内容
+                data.field.key = key.join(',');
                 console.table(data.field);
                 return false;
             });
@@ -209,8 +223,8 @@
                     'order': index++,
                     'text': ''
                 };
-
-                $('#editor .w-e-text p').append(
+                // $('#editor .w-e-text p')
+                editor.txt.append(
                     '<span data-order=' + temp_gap_data.order +
                     '>[BlankArea' + temp_gap_data.order +
                     ']</span>'
@@ -237,7 +251,7 @@
             var radio_data = ['A', 'B', 'C', 'D']; //单选
             var checkBox_data = ['A', 'B', 'C', 'D']; //多选
             var tfng_data = ['是', '否']; //判断
-            var gap_data = []; //填空
+            // var gap_data = []; //填空
             var answer_data = ['']; //问答
 
             var renderTpl = function(Tpl, data) { //渲染模板
@@ -261,9 +275,9 @@
             <div class="layui-row layui-form-item layui-col-md6">
                 <div class="layui-form-item" style="display:flex">
                     <div style="width:120px">
-                        <input type="radio" class="jqk" name="choice" value="选项{{item}}" title="选项{{item}}" required lay-verify="required">
+                        <input type="radio" class="jqk" name="choice" value="{{item}}" title="选项{{item}}">
                     </div>
-                    <input type="text" name="radio_{{index}}" lay-verify="required" placeholder="请输入" class="layui-input" value="">
+                    <input type="text" name="radio_{{index}}" lay-verify="required" placeholder="请输入" class="layui-input" value="{{item}}">
                 </div>
             </div>
             {{# }); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
@@ -280,9 +294,9 @@
             <div class="layui-row layui-form-item layui-col-md6">
                 <div class="layui-form-item" style="display:flex">
                     <div style="width:120px">
-                        <input class="jqk" type="checkbox" name="checkBox_item_{{index}}" value="选项{{item}}" lay-skin="primary" title="选项{{item}}" required lay-verify="required">
+                        <input class="jqk" type="checkbox" name="checkBox_item_{{index}}" value="{{item}}" lay-skin="primary" title="选项{{item}}">
                     </div>
-                    <input type="text" name="checkBox_{{index}}" lay-verify="required" placeholder="请输入" class="layui-input" value="">
+                    <input type="text" name="checkBox_{{index}}" lay-verify="required" placeholder="请输入" class="layui-input" value="{{item}}">
                 </div>
             </div>
             {{# }); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
@@ -298,7 +312,7 @@
             {{# layui.each(d, function(index, item){ }}
             <div class="layui-row layui-form-item layui-col-md6">
                 <div class="layui-input-inline" style="width:100px">
-                    <input class="jqk" type="radio" name="tfng" value="{{item}}" title="{{item}}" lay-verify="required">
+                    <input class="jqk" type="radio" name="tfng" value="{{item=='是'?true:false}}" title="{{item}}" lay-verify="required">
                 </div>
             </div>
             {{# }); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
