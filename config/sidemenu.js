@@ -94,22 +94,19 @@ var dataArray = [
         }]
     }, {
         'item': '试卷管理',
-        'href': 'pages/questionbank/add_bank.html',
+        'href': 'pages/questionbank/creat_paper.html',
         'submenu': [{
-            'xitem': '新增题库',
-            'xhref': 'pages/questionbank/add_bank.html',
+            'xitem': '创建试卷',
+            'xhref': 'pages/questionbank/creat_paper.html',
         }, {
-            'xitem': '题库列表',
-            'xhref': 'pages/questionbank/bank_list.html',
+            'xitem': '快速创建试卷',
+            'xhref': 'pages/questionbank/fast_creat_paper.html',
         }, {
-            'xitem': '新增试题',
-            'xhref': 'pages/questionbank/add_exercises.html',
+            'xitem': '试卷管理',
+            'xhref': 'pages/questionbank/manage_paper.html',
         }, {
-            'xitem': '管理试题',
-            'xhref': 'pages/questionbank/manage_question.html',
-        }, {
-            'xitem': '批量导入试题',
-            'xhref': 'pages/questionbank/import_question.html',
+            'xitem': '试卷分类',
+            'xhref': 'pages/questionbank/classify_paper.html',
         }]
     }],
     [{

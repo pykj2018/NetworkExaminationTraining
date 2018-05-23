@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>创建试卷</title>
+    <link rel="stylesheet" href="../../lib/layui/css/layui.css">
+</head>
+
+<body>
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <a href="javascript:;" class="layui-btn layui-btn-primary">试卷分类</a>
+                <a href="../questionbank/add_classify_paper.html" class="layui-btn">新增试卷分类</a>
+            </div>
+        </div>
+        <div class="layui-card layui-form">
+            <table class="layui-table" id="classify_tasks" lay-filter="classify_tasks"></table>
+            <script type="text/html" id="classify_tasks_tool">
+                <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+            </script>
+        </div>
+    </div>
+    </div>
+    <script src="../../lib/laydate/laydate.js"></script>
+    <script type="text/javascript" src="../../lib/laydate/laydate.js"></script>
+    <script type="text/javascript" src="../../lib/layui/layui.js"></script>
+    <script>
+        layui.use(['table'], function() {
+            var table = layui.table;
+            table.render({
+                elem: '#classify_tasks',
+                height: 'auto',
+                url: '../../config/table.js', //数据接口
+                page: true, //开启分页
+                cols: [
+                    [ //表头
+                        {
+                            field: 'group_id',
+                            title: '类别名称',
+                        }, {
+                            field: 'score',
+                            title: '类别状态',
+                        }, {
+                            field: 'classify',
+                            title: '创建人',
+                        }, {
+                            field: 'wealth',
+                            title: '最后修改人',
+                        }, {
+                            fixed: 'right',
+                            width: 160,
+                            align: 'center',
+                            toolbar: '#classify_tasks_tool'
+                        }
+                    ]
+                ]
+            });
+            table.on('tool(classify_tasks)', function(obj) {
+                var data = obj.data;
+                if (obj.event === 'detail') {
+                    layer.msg('ID：' + data.group_id + ' 的查看操作');
+                } else if (obj.event === 'del') {
+                    layer.confirm('真的删除行么', function(index) {
+                        obj.del();
+                        layer.close(index);
+                    });
+                } else if (obj.event === 'edit') {
+                    layer.alert('编辑行：<br>' + JSON.stringify(data))
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

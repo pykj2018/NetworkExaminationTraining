@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>创建试卷</title>
+    <link rel="stylesheet" href="../../lib/layui/css/layui.css">
+</head>
+
+<body>
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <a href="../questionbank/classify_paper.html" class="layui-btn">试卷分类</a>
+                <a href="javascript:;" class="layui-btn layui-btn-primary">新增试卷分类</a>
+            </div>
+        </div>
+        <div class="layui-card layui-form">
+            <div class="layui-card-header">试卷管理</div>
+            <div class="layui-card-body">
+                <div class="layui-row layui-form-item">
+                    <div class="layui-col-md8">
+                        <label class="layui-form-label">类别名称 :</label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input" placeholder="名称">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-row layui-form-item">
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label">类别状态:</label>
+                        <div class="layui-input-block">
+                            <select>
+                                <option value="">选个系统</option>
+                                <option value="0">单选题</option>
+                                <option value="1">多选题</option>
+                                <option value="2">判断题</option>
+                                <option value="3">填空题</option>
+                                <option value="4">问答题</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-row layui-form-item">
+                    <div class="layui-col-md8">
+                        <label class="layui-form-label">类别备注:</label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input" placeholder="说明">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-row layui-form-item">
+                    <div class="layui-col-md6">
+                        <label class="layui-form-label"></label>
+                        <div class="layui-input-inline">
+                            <button id="formSubmitBtn" class="layui-btn" lay-submit="" lay-filter="form">立即提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="../../lib/laydate/laydate.js"></script>
+    <script type="text/javascript" src="../../lib/laydate/laydate.js"></script>
+    <script type="text/javascript" src="../../lib/layui/layui.js"></script>
+    <script>
+        layui.use(['form'], function() {
+
+        });
+        //日期范围
+        laydate.render({
+            elem: '#StartTime',
+            type: 'datetime'
+        });
+        laydate.render({
+            elem: '#EndTime',
+            type: 'datetime'
+        });
+        laydate.render({
+            elem: '#PublishTime',
+            type: 'datetime'
+        });
+    </script>
+</body>
+
+</html>
