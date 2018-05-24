@@ -11,15 +11,15 @@
 
 <body>
     <div class="layui-fluid">
-        <div class="layui-card">
+        <!-- <div class="layui-card">
             <div class="layui-card-body">
                 <a href="../questionbank/creat_paper.html" class="layui-btn">创建试卷</a>
                 <a href="javascript:;" class="layui-btn layui-btn-primary">快速创建试卷</a>
                 <a href="../questionbank/manage_paper.html" class="layui-btn">试卷管理</a>
             </div>
-        </div>
+        </div> -->
         <div class="layui-card layui-form">
-            <div class="layui-card-header">试卷管理</div>
+            <div class="layui-card-header">快速创建试卷</div>
             <div class="layui-card-body">
                 <div class="layui-row layui-form-item">
                     <div class="layui-col-md8">
@@ -166,10 +166,10 @@
                     <div class="layui-col-md12">
                         <label class="layui-form-label">目标部门</label>
                         <div class="layui-input-block">
-                            <input type="button" class="layui-btn" id='addDepartment' value="选择部门">
+                            <input type="button" class="layui-btn" id='choiceDepartment' value="选择部门">
                             <input type="button" class="layui-btn" id='clearDepartment' value="清空">
                             <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px; ">
-                                <div id="parentIframeDepartment" style="margin: 0 auto;width: 90%">
+                                <div id="parentIframeChoiceDepartment" style="margin: 0 auto;width: 90%">
                                 </div>
                             </blockquote>
                         </div>
@@ -180,10 +180,10 @@
                     <div class="layui-col-md12">
                         <label class="layui-form-label">目标用户</label>
                         <div class="layui-input-block">
-                            <input type="button" class="layui-btn" id='addDepartment' value="选择用户">
-                            <input type="button" class="layui-btn" id='clearDepartment' value="清空">
+                            <input type="button" class="layui-btn" id='choiceUsers' value="选择用户">
+                            <input type="button" class="layui-btn" id='clearUsers' value="清空">
                             <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px; ">
-                                <div id="parentIframeDepartment" style="margin: 0 auto;width: 90%">
+                                <div id="parentIframeUsersDepartment" style="margin: 0 auto;width: 90%">
                                 </div>
                             </blockquote>
                         </div>
@@ -205,15 +205,76 @@
     </div>
     </div>
 </body>
-<script src="../../lib/laydate/laydate.js"></script>
+<script src="../../lib/jQuery.js"></script>
 <script type="text/javascript" src="../../lib/laydate/laydate.js"></script>
 <script type="text/javascript" src="../../lib/layui/layui.js"></script>
 <script src="../../lib/layui/lay/modules/laytpl.js"></script>
+<script src="../../js/index.js"></script>
+
 <script>
     layui.use(['form', 'laytpl'], function() {
         var $ = layui.jquery;
         var form = layui.form;
         var laytpl = layui.laytpl;
+
+        var allInputBtn = $(':button');
+        var parentIframeChoiceDepartment = $("#parentIframeChoiceDepartment")
+        var parentIframeUsersDepartment = $("#parentIframeUsersDepartment")
+
+        allInputBtn.on('click', function() {
+            var btnId = $(this).attr('id');
+            switch (btnId) {
+                case 'choiceDepartment':
+                    openIframe('../others/choiceDepartment.html');
+                    break;
+                case 'choiceUsers':
+                    openIframe('../others/choiceUsers.html');
+                    break;
+                case 'clearDepartment':
+                    var departmentContent = getFatherIframeContent.init({
+                        parentIframe: '#parentIframeChoiceDepartment',
+                    }).getAllContentArr();
+                    clearPrecinct(departmentContent, parentIframeChoiceDepartment, 'choiceDepartment');
+                    break;
+                case 'clearUsers':
+                    var courserInfoContent = getFatherIframeContent.init({
+                        parentIframe: '#parentIframeUsersDepartment',
+                    }).getAllContentArr();
+                    clearPrecinct(courserInfoContent, parentIframeUsersDepartment, 'choiceUsers');
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        $(document).on('click', '#delBtn_cdt', function() {
+            $(this).parent('.userItm').remove();
+            var itemId = $(this).siblings('.itemId').text();
+            removeItem(object.userArr, itemId);
+        });
+        $(document).on('click', '#delBtn_cu', function() {
+            $(this).parent('.userItm').remove();
+            var itemId = $(this).siblings('.itemId').text();
+            removeItem(object.departmentArr, itemId);
+        });
+
+        function clearPrecinct(arr, precinct, data) {
+            if (arr.length > 0) {
+                layer.confirm('确认清空?', {
+                    btn: ['确认', '取消'] //按钮
+                }, function() {
+                    layer.msg('清除成功', {
+                        icon: 1
+                    });
+                    precinct.children().remove();
+                    object[data] = [];
+                }, function() {
+                    layer.close();
+                });
+            } else {
+                layer.msg('内容为空');
+            }
+        }
     });
     //日期范围
     laydate.render({

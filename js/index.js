@@ -8,24 +8,28 @@ var m_util = {
 
 /******************************************
  * @description 添加表格内容到父级ifram的对象
- * @param clickBtn 事件触发按钮(必填)
+ * @param clickBtn 确定按钮(必填)
  * @param tableName 操作的表(必填)
  * @param fatherIframe 父级iframe(必填)
- * @param table 全局table(必填)
- * @param parent 全局parent(必填)
+ * @param table 全局layui下table(必填)
+ * @param parent 全局layui下parent(必填)
  * @param dId 绑定的删除按钮id
  * @param arr 操作的数组名称，需跟数组名称一样，不可以自定义
  * @param $ layui内的jq对象 如果没有则在调用页面引入jq即可
+ * @param arrId 数组内对象属性 需要预设好
+ * @param arrName 数组内对象属性 需要预设好
  * @method removeItem
  * @method unique
  * @method bind 事件触发方法
  *******************************************/
 //数组存在object对象里 方便多页面的数组管理和调用 成!
 var object = {
-    userArr: [],
-    departmentArr: [],
-    charger: [],
-    librarylist: []
+    userArr: [], //train/push_train.html
+    departmentArr: [], //train/push_train.html
+    charger: [], //others/charger.html
+    librarylist: [], //others/librarylist.html
+    choiceDepartment: [], //others/choiceDepartment.html
+    choiceUsers: [], //others/choiceUsers.html
 }
 
 var addInfoFromTableToIframe = {
