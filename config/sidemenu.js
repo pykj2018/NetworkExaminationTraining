@@ -99,9 +99,6 @@ var dataArray = [
             'xitem': '创建试卷',
             'xhref': 'pages/questionbank/creat_paper.html',
         }, {
-            'xitem': '快速创建试卷',
-            'xhref': 'pages/questionbank/fast_creat_paper.html',
-        }, {
             'xitem': '试卷管理',
             'xhref': 'pages/questionbank/manage_paper.html',
         }, {
