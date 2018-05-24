@@ -52,6 +52,10 @@
             margin-bottom: 5px;
             margin-right: 10px;
         }
+        
+        .view-container {
+            margin-bottom: 30px;
+        }
     </style>
 </head>
 
@@ -93,14 +97,14 @@
         </div>
         <form class="layui-form" action="">
             <div class="layui-card" style="padding: 10px;">
-                <div class="layui-form-item">
+                <div class="layui-form-item view-title">
                     <h1 class="h1">使用培训调查问卷</h1>
                     <hr class="layui-bg-green">
                 </div>
 
                 <div class="view-container"></div>
 
-                <div class="layui-row progress layui-row">
+                <!-- <div class="layui-row progress layui-row">
                     <div class="layui-col-md2 layui-col-md-offset1 layui-col-sm10">请选择调查比例</div>
 
                     <div class="layui-col-md5 layui-col-md-offset1 layui-col-sm10 layui-progress" lay-filter="cent" lay-showpercent="true">
@@ -111,11 +115,11 @@
                         <input type="button" class="layui-btn site-active" value="+" data-type="plus">
                         <input type="button" class="layui-btn site-active" value="-" data-type="subtract">
                     </div>
-                </div>
+                </div> -->
 
                 <div class="layui-form-item">
                     <div class="layui-input-block layui-col-md6 button">
-                        <button class="layui-btn" lay-submit lay-filter="formDemo">生成</button>
+                        <button class="layui-btn" lay-submit lay-filter="generate">生成</button>
                         <button type="reset" class="layui-btn layui-btn-primary">修改</button>
                     </div>
                 </div>
@@ -127,7 +131,7 @@
 <script src="../../lib/layui/lay/modules/laytpl.js"></script>
 
 <script>
-    layui.use('element', function() {
+    layui.use(['element'], function() {
         var $ = layui.jquery;
         var element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
         //触发事件
@@ -171,115 +175,118 @@
     });
 
 
-    layui.use('form', function() {
+    layui.use(['form', 'laytpl'], function() {
         var $ = layui.jquery;
         var form = layui.form;
+        var laytpl = layui.laytpl;
+        form.on("submit(generate)", function(data) {
+            var view_html = $('.view-title').html() + $('.view-container').html();
+            data.field.view_html = view_html;
+            console.log(data.field);
+            return false;
+        })
 
-        layui.use('laytpl', function() {
-            var laytpl = layui.laytpl;
-
-            // laytpl(site.innerHTML).render(data[0], function(html) {
-            //     document.getElementById('view1').innerHTML = html;
-            // });
-            var data = [{
-                "name": "view_1",
-                "order": 1,
-                "sub_title": '教学评价',
-                "list": [{
-                    "title": "内容设计",
-                    "item": ["好", "较好", "一般", "需改进"]
-                }, {
-                    "title": "教学方法",
-                    "item": ["好", "较好", "一般", "需改进"]
-                }, {
-                    "title": "表达能力",
-                    "item": ["好", "较好", "一般", "需改进"]
-                }]
+        // laytpl(site.innerHTML).render(data[0], function(html) {
+        //     document.getElementById('view1').innerHTML = html;
+        // });
+        var data = [{
+            "name": "view_1",
+            "order": 1,
+            "sub_title": '教学评价',
+            "list": [{
+                "title": "内容设计",
+                "item": ["好", "较好", "一般", "需改进"]
             }, {
-                "name": "view_2",
-                "order": 2,
-                "sub_title": "培训质量调查",
-                "list": [{
-                    "title": "您认为培训课程的安排",
-                    "item": ["很合理", "合理", "较合理", "一般", "不合理"]
-                }, {
-                    "title": "您认为培训课程的安排",
-                    "item": ["很合理", "合理", "较合理", "一般", "不合理"]
-                }, {
-                    "title": "您认为培训课程的安排",
-                    "item": ["很合理", "合理", "较合理", "一般", "不合理"]
-                }]
+                "title": "教学方法",
+                "item": ["好", "较好", "一般", "需改进"]
+            }, {
+                "title": "表达能力",
+                "item": ["好", "较好", "一般", "需改进"]
             }]
+        }, {
+            "name": "view_2",
+            "order": 2,
+            "sub_title": "培训质量调查",
+            "list": [{
+                "title": "您认为培训课程的安排",
+                "item": ["很合理", "合理", "较合理", "一般", "不合理"]
+            }, {
+                "title": "您认为培训课程的安排",
+                "item": ["很合理", "合理", "较合理", "一般", "不合理"]
+            }, {
+                "title": "您认为培训课程的安排",
+                "item": ["很合理", "合理", "较合理", "一般", "不合理"]
+            }]
+        }]
 
-            //渲染
-            var renderTpl = function(data, domId) {
-                laytpl(site.innerHTML).render(data, function(html) {
-                    document.getElementById(domId).innerHTML = html;
-                });
+        //渲染
+        var renderTpl = function(data, domId) {
+            laytpl(site.innerHTML).render(data, function(html) {
+                document.getElementById(domId).innerHTML = html;
+            });
+            form.render();
+        };
+        var renderFor = function() {
+            $('.view-container').empty();
+            for (let i = 0; i < data.length; i++) {
+                var view_container = "<div id=" + data[i].name + " class='view' name=" + data[i]
+                    .name + "></div>";
+                $('.view-container').append(view_container);
+                renderTpl(data[i], data[i].name);
                 form.render();
-            };
-            var renderFor = function() {
-                $('.view-container').empty();
-                for (let i = 0; i < data.length; i++) {
-                    var view_container = "<div id=" + data[i].name + " class='view' name=" + data[i]
-                        .name + "></div>";
-                    $('.view-container').append(view_container);
-                    renderTpl(data[i], data[i].name);
-                    form.render();
+            }
+        }
+        renderFor();
+
+        // $('.addCategory').click(function() {})
+        // $('.addSubject').click(function() {})
+        $('.addComplete').click(function() {
+            var switchs = false;
+            var subject_item = $('.subject_item').val().split('/');
+            // 长度限制
+            if (subject_item.length > 5) {
+                subject_item.splice(5);
+            }
+            data.forEach((item, index) => {
+                if (item.sub_title === $('.category').val()) {
+                    item.list.push({
+                        "title": $('.subject').val(),
+                        "item": subject_item
+                    })
+                    switchs = true;
                 }
+                return;
+            });
+            if (!switchs) {
+                var prevIndex;
+                if (data.length == 0) {
+                    prevIndex = 1;
+                } else {
+                    prevIndex = data[data.length - 1].order;
+                }
+
+                data.push({
+                    'name': 'view_' + (prevIndex + 1),
+                    'order': prevIndex + 1,
+                    'sub_title': $('.category').val(),
+                    'list': [{
+                        "title": $('.subject').val(),
+                        "item": subject_item
+                    }]
+                })
+                console.log(data)
             }
             renderFor();
-
-            // $('.addCategory').click(function() {})
-            // $('.addSubject').click(function() {})
-            $('.addComplete').click(function() {
-                var switchs = false;
-                var subject_item = $('.subject_item').val().split('/');
-                // 长度限制
-                if (subject_item.length > 5) {
-                    subject_item.splice(5);
-                }
-                data.forEach((item, index) => {
-                    if (item.sub_title === $('.category').val()) {
-                        item.list.push({
-                            "title": $('.subject').val(),
-                            "item": subject_item
-                        })
-                        switchs = true;
-                    }
-                    return;
-                });
-                if (!switchs) {
-                    var prevIndex;
-                    if (data.length == 0) {
-                        prevIndex = 1;
-                    } else {
-                        prevIndex = data[data.length - 1].order;
-                    }
-
-                    data.push({
-                        'name': 'view_' + (prevIndex + 1),
-                        'order': prevIndex + 1,
-                        'sub_title': $('.category').val(),
-                        'list': [{
-                            "title": $('.subject').val(),
-                            "item": subject_item
-                        }]
-                    })
-                    console.log(data)
-                }
-                renderFor();
-            })
-            $(document).on('click', '#subTitle', function() {
-                data.splice($(this).parents('.view').index(), 1);
-                renderFor();
-            });
-            $(document).on('click', '#listItem', function() {
-                var parent = $(this).parents('.view').index();
-                var index = $(this).parents('.ly-form-item').index() - 1;
-                data[parent].list.splice(index, 1);
-                renderFor();
-            })
+        });
+        $(document).on('click', '#subTitle', function() {
+            data.splice($(this).parents('.view').index(), 1);
+            renderFor();
+        });
+        $(document).on('click', '#listItem', function() {
+            var parent = $(this).parents('.view').index();
+            var index = $(this).parents('.ly-form-item').index() - 1;
+            data[parent].list.splice(index, 1);
+            renderFor();
         })
     });
 </script>
@@ -309,6 +316,7 @@
         </div>
     </div>
     {{# }); }} {{# if(d.list.length === 0){ }} 无数据 {{# } }}
+    <hr class="layui-bg-green">
 </script>
 
 </html>
