@@ -132,6 +132,12 @@
                 var data = obj.data;
                 if (obj.event === 'detail') {
                     layer.msg('ID：' + data.group_id + ' 的查看操作');
+                    //********
+                    //在这里进行对应试卷跳转参数配置
+                    //后面参数加到url中
+                    //名称与后面configure_paper对应即可
+                    //********
+                    // window.location.href = '../questionbank/configure_paper.html?id=' + data.group_id;
                 } else if (obj.event === 'del') {
                     layer.confirm('真的删除行么', function(index) {
                         obj.del();

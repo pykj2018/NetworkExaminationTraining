@@ -108,7 +108,7 @@ var dataArray = [
     }],
     [{
         'item': '替代',
-        'href': 'pages/questionbank/add_bank.html',
+        'href': 'pages/questionbank/configure_paper.html',
         'submenu': []
     }],
     [{

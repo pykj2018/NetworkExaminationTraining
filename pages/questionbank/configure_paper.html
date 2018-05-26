@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>题库列表</title>
+    <link rel="stylesheet" href="../../lib/layui/css/layui.css">
+</head>
+
+<body>
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                考试试卷题目
+            </div>
+            <div class="layui-card-body">
+                <p>试卷时间</p>
+                <p>试卷分数</p>
+            </div>
+        </div>
+        <div class="layui-card">
+            <div class="layui-card-header">题目配置</div>
+            <div class="layui-card-body">
+                <div class="layui-collapse" lay-filter="configure">
+                    <div class="layui-colla-item">
+                        <h2 class="layui-colla-title">单选题</h2>
+                        <div class="layui-colla-content">
+                            <table class="layui-table" id="bankList" lay-data="{height: 313, url:'../../config/table3.js'}" lay-filter='bankList'>
+                                <thead>
+                                    <tr>
+                                        <th lay-data="{field:'id', width:150,event: 'setSign', style:'cursor: pointer;'}">ID</th>
+                                        <th lay-data="{field:'username', width:150,event: 'setSign', style:'cursor: pointer;'}">用户名</th>
+                                        <th lay-data="{field:'sign', event: 'setSign', style:'cursor: pointer;'}">签名</th>
+                                        <th lay-data="{field:'sex',event: 'setSign', style:'cursor: pointer;'}">积分</th>
+                                        <th lay-data="{field:'sign',event: 'setSign', style:'cursor: pointer;'}">评分</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h2 class="layui-colla-title">多选题</h2>
+                        <div class="layui-colla-content">
+                            <table class="layui-table" lay-data="{height: 313, url:'../../config/table3.js'}" lay-filter="demoEvent">
+                                <thead>
+                                    <tr>
+                                        <th lay-data="{field:'id', width:80,event: 'setSign', style:'cursor: pointer;'}">ID</th>
+                                        <th lay-data="{field:'username', width:80,event: 'setSign', style:'cursor: pointer;'}">用户名</th>
+                                        <th lay-data="{field:'sign', width:'50%', event: 'setSign', style:'cursor: pointer;'}">签名</th>
+                                        <th lay-data="{field:'experience',event: 'setSign', style:'cursor: pointer;'}">积分</th>
+                                        <th lay-data="{field:'score',event: 'setSign', style:'cursor: pointer;'}">评分</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h2 class="layui-colla-title">判断题</h2>
+                        <div class="layui-colla-content">
+                            判断题
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h2 class="layui-colla-title">填空题</h2>
+                        <div class="layui-colla-content">
+                            填空题
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h2 class="layui-colla-title">问答题</h2>
+                        <div class="layui-colla-content">
+                            问答题
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../../lib/jQuery.js"></script>
+    <script type="text/javascript" src="../../lib/layui/layui.js"></script>
+    <script src="../../js/index.js"></script>
+    <script>
+        //********
+        //在这里获取参数。存下来，下面用
+        //可以多个参数，对应字段相同就行
+        //参数用于获取对应试卷的数据
+        //********
+        window.onload = function() {
+            console.log(getQueryString('id'));
+            //********
+            //这里根据上面获取的id，查询相应试卷，进行显示--ajax
+            //********
+        }
+        layui.use(['table', 'form', 'element'], function() {
+            var $ = layui.$;
+            var table = layui.table,
+                form = layui.form,
+                element = layui.element;
+
+            element.on('collapse(configure)', function(data) {
+                layer.msg('展开状态：' + data.show);
+            });
+
+            //监听单元格事件
+            table.on('tool(bankList)', function(obj) {
+                var data = obj.data;
+                if (obj.event === 'setSign') {
+                    console.log(data.id);
+
+                    //********
+                    //传参的id或者什么参数这里设置，用于下面ajax发送后头获取数据定位
+                    //********
+                    // 在这里来ajax获取数据，然后放到下面的content中展示，样式不对去传的页面找，复制过来
+                    //********
+
+                    //上面带*的注释调试完毕，可以删除掉，方便记忆的话可以改一改
+
+                    //页面层
+                    // layer.open({
+                    //     type: 1,
+                    //     skin: 'layui-layer-rim', //加上边框
+                    //     area: ['600px', '800px'], //宽高
+                    //     content: '题目内容,返回的html'
+                    // });
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>
